@@ -1,0 +1,36 @@
+---
+title: "Medicare Provider and Utilization Data"
+output: html_document
+---
+
+##Introduction
+
+The [Centers for Medicare & Medicaid Services](http://www.cms.gov/) has published several datasets that contain information regarding the procedures and services that Medicare benificiaries receive from various healthcare providers. 
+
+These datasets are divided by into three main categories, according to the type of healthcare provider:
+<ul>
+  <li>[Physician and Other Supplier](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Physician-and-Other-Supplier.html) (this is by far the largest dataset, with the main database containing over 9 million records)</li>
+
+  <li>[Inpatient](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient.html)</li>
+
+  <li>[Outpatient](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Outpatient.html)</li>
+</ul>
+
+The compiled data for each of these categories is organized by year. So far, the CMS has published data for 2011 and 2012. The data is then further subdivided into a large database that contains data on individual providers and the procedures they offered, followed by 2 summary tables, one for states and another for the whole nation which aggregate the data by specific procedure. When you download the data from the above links and unzip the file, there is an accompanying pdf file that will contain even more detailed information.
+
+Generally speaking, all these databases are organized as follows:
+<ul>
+  <li>Name of the healthcare provider (hospital name, physician name, etc.)</li>
+
+  <li>Geographic information on the healthcare provider</li>
+
+  <li>Procedure/service provided to the Medicare beneficiary</li>
+
+  <li>Provider's average charge for this particular type of service</li>
+
+  <li>Medicare's average payment for this particular type of service</li>
+</ul> 
+
+
+
+
