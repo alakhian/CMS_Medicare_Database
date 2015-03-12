@@ -31,6 +31,60 @@ Generally speaking, all these databases are organized as follows:
   <li>Medicare's average payment for this particular type of service</li>
 </ul> 
 
+##Inpatient Databases
+
+These databases contain Medicare information on inpatient providers and the procedures that they offered within a fiscal year period.
+
+<blockquote cite="http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient.html">
+The Inpatient PUF contains hospital-specific charges for the more than 3,000 U.S. hospitals that receive Medicare Inpatient Prospective Payment System (IPPS) payments for the top 100 most frequently billed discharges, paid under Medicare based on a rate per discharge using the Medicare Severity Diagnosis Related Group (MS-DRG). This PUF is based on information from CMS's Medicare Provider Analysis and Review (MEDPAR) inpatient data. The data in the Inpatient PUF contains 100% final-action (i.e., all claim adjustments have been resolved) IPPS discharges for the Medicare fee-for-service (FFS) population. The Inpatient PUF is available for calendar years 2011 and 2012.
+</blockquote>
 
 
+There are a total of 6 databases related to Inpatient Medicare data:
+<ul>
+  <li>INPATIENT_2011_DATA - Aggregated by individual healthcare providers and MS-DRG for 2011
+  <li>INPATIENT_2011_NATIONAL_DATA - Aggregated by state and MS-DRG for 2011
+  <li>INPATIENT_2011_STATE_DATA - Aggregated by MS-DRG for 2011
+  <li>INPATIENT_2012_DATA - Aggregated by individual healthcare providers and MS-DRG for 2012
+  <li>INPATIENT_2012_NATIONAL_DATA - Aggregated by state and MS-DRG for 2012
+  <li>INPATIENT_2012_STATE_DATA - Aggregated by MS-DRG for 2012
+</ul>
 
+###INPATIENT_2012_DATA
+This database consists of the following columns:
+<ul>
+  <li>ID - Unique Row ID
+  <li>DRG_DEFINITION - The code and description identifying the MS-DRG. MS-DRGs are a classification system that groups similar clinical conditions (diagnoses) and the procedures furnished by the hospital during the stay.
+  <li>PROVIDER_ID - The provider identifier assigned to the Medicare certified hospital facility.
+  <li>PROVIDER_NAME - The name of the provider.
+  <li>PROVIDER_STREET_ADDRESS - The provider's street address.
+  <li>PROVIDER_CITY - The city where the provider is located.
+  <li>PROVIDER_STATE - The state where the provider is located.
+  <li>PROVIDER_ZIP_CODE - The provider's zip code.
+  <li>HRR_DESCRIPTION - The Hospital Referral Region (HRR) where the provider is located.
+  <li>TOTAL_DISCHARGES - The number of discharges billed by the provider for inpatient hospital services.
+  <li>AVERAGE_COVERED_CHARGES - The provider's average charge for services covered by Medicare for all discharges in the DRG. These will vary from hospital to hospital because of differences in hospital charge structures.
+  <li>AVERAGE_TOTAL_PAYMENTS - The average total payments to all providers for the MS-DRG including the MS-DRG amount, teaching, disproportionate share, capital, and outlier payments for all cases. Also included in average total payments are co-payment and deductible amounts that the patient is responsible for and any additional payments by third parties for coordination of benefits.
+  <li>AVERAGE_MEDICARE_PAYMENTS - The average amount that Medicare pays to the provider for Medicare's share of the MS-DRG. Average Medicare payment amounts include the MS-DRG amount, teaching, disproportionate share, capital, and outlier payments for all cases. Medicare payments DO NOT include beneficiary co-payments and deductible amounts nor any additional payments from third parties for coordination of benefits.
+  <li>MCPAYMENT_CHARGEDAMT_RATIO - Ratio of Medicare payment(AVERAGE_MEDICARE_PAYMENTS) to the amount charged by the provider (AVERAGE_COVERED_CHARGES)
+  <li>MCPAYMENT_CHARGE_RATIO_LEVEL - Description of MCPAYMENT_CHARGEDAMT_RATIO. Falls into one of 3 categories:
+  <ul>
+    <li>Less than 25%
+    <li>Between 25% and 50%
+    <li>Greater than 50%
+  </ul>
+  <li>TOT_PAYMENT_CHARGEDAMT_RATIO - Ratio of Total payment(AVERAGE_TOTAL_PAYMENTS) to the amount charged by the provider (AVERAGE_COVERED_CHARGES)
+  <li>TOTPAYMENT_CHARGE_RATIO_LVL - Description of TOT_PAYMENT_CHARGEDAMT_RATIO. Falls into one of 3 categories:
+  <ul>
+    <li>Less than 25%
+    <li>Between 25% and 50%
+    <li>Greater than 50%
+  </ul>
+  <li>MCPAYMENT_TOTALPAY_RATIO - Ratio of Medicare payment(AVERAGE_MEDICARE_PAYMENTS) to total payment (AVERAGE_COVERED_CHARGES)
+  <li>MCPAY_TOTPAYMENT_RATIO_LVL - Description of the ratio of Medicare payment to the amount charged by the provider. Falls into one of 3 categories:
+  <ul>
+    <li>Less than 80%
+    <li>Between 80% and 90%
+    <li>Greater than 90%
+  </ul>
+</ul>
