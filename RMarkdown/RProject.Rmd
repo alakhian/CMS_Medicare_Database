@@ -186,3 +186,23 @@ This database consists of the following columns:
     <li>Greater than 90%
   </ul>
 </ul>
+
+###Inpatient Anomaly Detection
+
+####Medicare Payment Versus Provider Charge Anomalies
+
+The Inpatient 2011 and 2012 databases were the only ones from the entire Medicare data set in which there were instances of Medicare paying more than what a provider charged them. This is very unusual because Medicare will almost always reimburse providers less than what the provider charged. 
+
+First let us look at the overall distribution of Medicare Payment to Charged Amount ratios across the entire database.
+![](./images/DistributionofMedicarePaymentstoChargeAmtRatio.jpg)
+We can clearly see just how anomalous it is for the ratio be greater than 1. In fact, there were 340 cases in which this occurred out of a total of 157747 (roughly 0.22%).
+
+In order to analyze this further, the distribution of these anomalies was examined on a geographics level.
+![](./images/Map_of_Zip_Codes_where_Medicare_Payment_Charge.jpg)
+
+![](./images/Boston_and_NYC.jpg)
+
+The above two figures display the geographic distribution of these particular anomalies. We can see that New York City and Boston have the most amount of procedures where Medicare overpaid.
+
+
+
