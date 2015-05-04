@@ -29,7 +29,105 @@ Generally speaking, all these databases are organized as follows:
   <li>Provider's average charge for this particular type of service</li>
 
   <li>Medicare's average payment for this particular type of service</li>
-</ul> 
+</ul>
+
+##Purpose
+
+The purpose of this research is to analyze anomalous payment information in these datasets. According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". By identifying anomalous data points in these databases, we can point to potential cases of fraud. 
+
+##Physician and Other Supplier
+
+The Physician and Other Supplier databases contain Medicare information on physicians and other healthcare providers, along with the procedures they offered during the year 2012.
+
+<blockquote cite = "http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Physician-and-Other-Supplier.html">The Physician and Other Supplier PUF contains information on utilization, payment (allowed amount and Medicare payment), and submitted charges organized by National Provider Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS) code, and place of service. This PUF is based on information from CMS's National Claims History Standard Analytic Files. The data in the Physician and Other Supplier PUF covers calendar year 2012 and contains 100% final-action physician/supplier Part B non-institutional line items for the Medicare fee-for-service population.
+</blockquote>
+
+There are a total of 3 databases related to Physician and Other Supplier Medicare data:
+<ul>
+  <li>PHYSICIAN_AND_OTHER_SUPPLIER - Data for individual healthcare providers and the corresponding procedure (given by HCPCS code) they provided for 2012
+</ul>
+
+###PHYSICIAN_AND_OTHER_SUPPLIER
+This database consists of the following columns:
+<ul>
+  <li>ID - Unique Row ID
+  <li>NPI - National Provider Identifier (NPI) for the performing provider on the claim.
+  <li>NPPES_PROVIDER_LAST_ORG_NAME- When the provider is registered in NPPES as an individual (entity type code='I'), this is the provider's last name. When the provider is registered as an organization (entity type code = 'O'), this is the organization name.
+  <li>NPPES_PROVIDER_FIRST_NAME- When the provider is registered in NPPES as an individual (entity type code='I'), this is the provider's first name. When the provider is registered as an organization (entity type code = 'O'), this will be blank.
+  <li>NPPES_PROVIDER_MI- When the provider is registered in NPPES as an individual (entity type code='I'), this is the provider's middle initial. When the provider is registered as an organization (entity type code = 'O'), this will be blank.
+  <li>NPPES_CREDENTIALS- When the provider is registered in NPPES as an individual (entity type code='I'), these are the provider's credentials. When the provider is registered as an organization (entity type code = 'O'), this will be blank.
+  <li>NPPES_PROVIDER_GENDER- When the provider is registered in NPPES as an individual (entity type code='I'), this is the provider's gender. When the provider is registered as an organization (entity type code = 'O'), this will be blank.
+  <li>NPPES_ENTITY_CODE- Type of entity reported in NPPES. An entity code of 'I' identifies providers registered as individuals and an entity type code of 'O' identifies providers registered as organizations.
+  <li>NPPES_PROVIDER_STREET1 - The first line of the provider's street address, as reported in NPPES.
+  <li>NPPES_PROVIDER_STREET2 - The second line of the provider's street address, as reported in NPPES.
+  <li>NPPES_PROVIDER_CITY - The city where the provider is located, as reported in NPPES.
+  <li>NPPES_PROVIDER_ZIP - The provider's zip code, as reported in NPPES.
+  <li>NPPES_PROVIDER_STATE - The state where the provider is located, as reported in NPPES. The fifty U.S. states and the District of Columbia are reported by the state postal abbreviation. The following values are used for other areas:
+  <ul>
+    <li>XX = Unknown
+    <li>AA = Armed Forces Central/South America
+    <li>AE = Armed Forces Europe
+    <li>AP = Armed Forces Pacific
+    <li>AS = American Samoa
+    <li>GU = Guam
+    <li>MP = North Mariana Islands
+    <li>PR = Puerto Rico
+    <li>VI = Virgin Islands
+    <li>ZZ = Foreign Country
+  </ul>
+  <li>NPPES_PROVIDER_COUNTRY - The country where the provider is located, as reported in NPPES. The country code will be 'US' for any state or U.S possession. For foreign countries (i.e., state values of 'ZZ'), the provider country values include the following:
+  <ul>
+    <li>AE = United Arab Emirates
+    <li>AR = Argentina
+    <li>AU = Australia
+    <li>BR = Brazil
+    <li>CA = Canada
+    <li>CH = Switzerland
+    <li>CN = China
+    <li>CO = Colombia
+    <li>DE = Germany
+    <li>ES = Spain
+    <li>FR = France
+    <li>GB = Great Britain
+    <li>HU = Hungary
+    <li>IL = Israel
+    <li>IN = India
+    <li>IS = Iceland
+    <li>IT = Italy
+    <li>JP = Japan
+    <li>KR = Korea
+    <li>NL = Netherlands
+    <li>PK = Pakistan
+    <li>SA = Saudi Arabia
+    <li>SY = Syria
+    <li>TR = Turkey
+    <li>VE = Venezuela
+  </ul>
+  <li>PROVIDER_TYPE - Derived from the provider specialty code reported on the claim. For providers that reported more than one specialty code on their claims, this is the specialty code associated with the largest number of services.
+  <li>MEDICARE_PARTICIPATION_INDICAT - Identifies whether the provider participates in Medicare and/or accepts assignment of Medicare allowed amounts. The value will be 'Y' for any provider that had at least one claim identifying the provider as participating in Medicare or accepting assignment of Medicare allowed amounts.
+  <li>PLACE_OF_SERVICE - Identifies whether the place of service submitted on the claims is a facility (value of 'F') or non-facility (value of 'O'). Non-facility is generally an office setting; however other entities are included in non-facility.
+  <li>HCPCS_CODE - HCPCS code for the specific medical service furnished by the provider.
+  <li>HCPCS_DESCRIPTION - Description of the HCPCS code for the specific medical service furnished by the provider.
+  <li>LINE_SRVC_CNT - Number of services provided; note that the metrics used to count the number provided can vary from service to service.
+  <li>BENE_UNIQUE_CNT - Number of distinct Medicare beneficiaries receiving the service.
+  <li>BENE_DAY_SRVC_CNT - Number of distinct Medicare beneficiary/per day services. Since a given beneficiary may receive multiple services of the same type (e.g., single vs. multiple cardiac stents) on a single day, this metric removes double-counting from the line service count to identify whether a unique service occurred.
+  <li>AVERAGE_MEDICARE_ALLOWED_AMT - Average of the Medicare allowed amount for the service; this figure is the sum of the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.
+  <li>STDEV_MEDICARE_ALLOWED_AMT - Standard deviation of the Medicare allowed amounts. The standard deviation indicates the amount of variation from the average Medicare allowed amount that exists within a single provider, HCPCS service, and place of service.
+  <li>AVERAGE_SUBMITTED_CHRG_AMT - Average of the charges that the provider submitted for the service.
+  <li>STDEV_SUBMITTED_CHRG_AMT - Standard deviation of the charge amounts submitted by the provider. The standard deviation indicates the amount of variation from the average submitted charge amount that exists within a single provider, HCPCS service, and place of service.
+  <li>AVERAGE_MEDICARE_PAYMENT_AMT - Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service.
+  <li>STDEV_MEDICARE_PAYMENT_AMT - Standard deviation of the Medicare payment amount. The standard deviation indicates the amount of variation from the average Medicare payment amount that exists within a single provider, HCPCS service, and place of service.
+</ul>
+
+###Anomaly Detection for Physician and Other Supplier Databases
+The first point of interest is to determine whether Medicare is consistent with how they reimburse healthcare providers. In order to do this, we take the ratio of the amount Medicare pays (AVERAGE_MEDICARE_PAYMENT_AMT) to the amount allowed by Medicare for a procedure (AVERAGE_MEDICARE_ALLOWED_AMT).
+
+![](./images/Average_Medicare_Payment_Amount_vs_Average_Medicare_Allowed_Amount.jpg)
+
+As can be seen from Figure 1, there is a very strong linear correlation between the Medicare paid amount and the Medicare allowed amount, with virtually no outliers based on a visual inspection. This indicates that Medicare is very consistent with how they reimburse healthcare providers based on the allowed amount for a particular procedure (which is based on the HCPCS code and location).
+
+Therefore, in order to analyze anomalous data, we must look at the average submitted charge amount from the healthcare provider. Frequently, healthcare providers will overbill for procedures. Also, we must look at distribution of procedures (HCPCS codes) amongst physicians. It is possible that certain healthcare providers are 
+
 
 ##Inpatient Databases
 

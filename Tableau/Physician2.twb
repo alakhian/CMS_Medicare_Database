@@ -1,0 +1,3190 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<workbook source-platform='win' version='8.3' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <!-- build 8300.15.0120.2048                                -->
+  <preferences>
+  </preferences>
+  <datasources>
+    <datasource caption='PHYSICIAN_ANOMALY (CS370_ASL456)' inline='true' name='oracle.42126.676319710648' version='8.3'>
+      <connection authentication='RDBMS' class='oracle' port='1521' schema='CS370_ASL456' server='129.152.144.84' service='PDB1.usuniversi01134.oraclecloud.internal' username='cs370_asl456'>
+        <relation name='PHYSICIAN_ANOMALY' table='[CS370_ASL456].[PHYSICIAN_ANOMALY]' type='table' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>ANOM_SVM_2_18_PRED</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[ANOM_SVM_2_18_PRED]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>ANOM_SVM_2_18_PRED</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ANOM_SVM_2_18_PROB</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ANOM_SVM_2_18_PROB]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>ANOM_SVM_2_18_PROB</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_IBDOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STREET2</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STREET2]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STREET2</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>55</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PLACE_OF_SERVICE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PLACE_OF_SERVICE]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>PLACE_OF_SERVICE</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>LINE_SRVC_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[LINE_SRVC_CNT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>LINE_SRVC_CNT</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STREET1</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STREET1]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STREET1</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>55</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MEDICARE_PARTICIPATION_INDICAT</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[MEDICARE_PARTICIPATION_INDICAT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>MEDICARE_PARTICIPATION_INDICAT</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_MEDICARE_ALLOWED_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_MEDICARE_ALLOWED_AMT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>AVERAGE_MEDICARE_ALLOWED_AMT</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_MI</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_MI]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_MI</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_MEDICARE_PAYMENT_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_MEDICARE_PAYMENT_AMT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>AVERAGE_MEDICARE_PAYMENT_AMT</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_SUBMITTED_CHRG_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_SUBMITTED_CHRG_AMT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>AVERAGE_SUBMITTED_CHRG_AMT</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_GENDER</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_GENDER]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_GENDER</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_CREDENTIALS</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_CREDENTIALS]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_CREDENTIALS</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_LAST_ORG_NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_LAST_ORG_NAME]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_LAST_ORG_NAME</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>70</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PAYMENT_CHARGEDAMT_RATIO</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[PAYMENT_CHARGEDAMT_RATIO]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>PAYMENT_CHARGEDAMT_RATIO</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_MEDICARE_ALLOWED_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_MEDICARE_ALLOWED_AMT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>STDEV_MEDICARE_ALLOWED_AMT</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_ENTITY_CODE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_ENTITY_CODE]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_ENTITY_CODE</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_MEDICARE_PAYMENT_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_MEDICARE_PAYMENT_AMT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>STDEV_MEDICARE_PAYMENT_AMT</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HCPCS_CODE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HCPCS_CODE]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>HCPCS_CODE</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>5</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_COUNTRY</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_COUNTRY]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_COUNTRY</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ID</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[ID]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>ID</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>BENE_DAY_SRVC_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[BENE_DAY_SRVC_CNT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>BENE_DAY_SRVC_CNT</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPI</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPI]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPI</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>10</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STATE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STATE]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STATE</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>BENE_UNIQUE_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[BENE_UNIQUE_CNT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>BENE_UNIQUE_CNT</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PROVIDER_TYPE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PROVIDER_TYPE]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>PROVIDER_TYPE</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>43</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_CITY</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_CITY]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_CITY</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>40</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_FIRST_NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_FIRST_NAME]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_FIRST_NAME</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_ZIP</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_ZIP]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_ZIP</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_SUBMITTED_CHRG_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_SUBMITTED_CHRG_AMT]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>STDEV_SUBMITTED_CHRG_AMT</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HCPCS_DESCRIPTION</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HCPCS_DESCRIPTION]</local-name>
+            <parent-name>[PHYSICIAN_ANOMALY]</parent-name>
+            <remote-alias>HCPCS_DESCRIPTION</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>30</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Anom Svm 2 18 Pred' datatype='real' name='[ANOM_SVM_2_18_PRED]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Anom Svm 2 18 Prob' datatype='real' name='[ANOM_SVM_2_18_PROB]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Average Medicare Allowed Amt' datatype='real' name='[AVERAGE_MEDICARE_ALLOWED_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Average Medicare Payment Amt' datatype='real' name='[AVERAGE_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Average Submitted Chrg Amt' datatype='real' name='[AVERAGE_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Bene Day Srvc Cnt' datatype='real' name='[BENE_DAY_SRVC_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Bene Unique Cnt' datatype='real' name='[BENE_UNIQUE_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Hcpcs Code' datatype='string' name='[HCPCS_CODE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Hcpcs Description' datatype='string' name='[HCPCS_DESCRIPTION]' role='dimension' type='nominal'>
+      </column>
+      <column datatype='real' name='[ID]' role='dimension' type='ordinal'>
+      </column>
+      <column caption='Line Srvc Cnt' datatype='real' name='[LINE_SRVC_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Medicare Participation Indicat' datatype='string' name='[MEDICARE_PARTICIPATION_INDICAT]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Credentials' datatype='string' name='[NPPES_CREDENTIALS]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Entity Code' datatype='string' name='[NPPES_ENTITY_CODE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider City' datatype='string' name='[NPPES_PROVIDER_CITY]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Country' datatype='string' name='[NPPES_PROVIDER_COUNTRY]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider First Name' datatype='string' name='[NPPES_PROVIDER_FIRST_NAME]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Gender' datatype='string' name='[NPPES_PROVIDER_GENDER]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Last Org Name' datatype='string' name='[NPPES_PROVIDER_LAST_ORG_NAME]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Mi' datatype='string' name='[NPPES_PROVIDER_MI]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider State' datatype='string' name='[NPPES_PROVIDER_STATE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Street1' datatype='string' name='[NPPES_PROVIDER_STREET1]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Street2' datatype='string' name='[NPPES_PROVIDER_STREET2]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Zip' datatype='string' name='[NPPES_PROVIDER_ZIP]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Payment Chargedamt Ratio' datatype='real' name='[PAYMENT_CHARGEDAMT_RATIO]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Place Of Service' datatype='string' name='[PLACE_OF_SERVICE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Provider Type' datatype='string' name='[PROVIDER_TYPE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Stdev Medicare Allowed Amt' datatype='real' name='[STDEV_MEDICARE_ALLOWED_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Stdev Medicare Payment Amt' datatype='real' name='[STDEV_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Stdev Submitted Chrg Amt' datatype='real' name='[STDEV_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column-instance column='[ANOM_SVM_2_18_PRED]' derivation='Sum' name='[sum:ANOM_SVM_2_18_PRED:ok]' pivot='key' type='ordinal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[sum:ANOM_SVM_2_18_PRED:ok]' type='palette'>
+            <map to='#1f77b4'>
+              <bucket>0.0</bucket>
+            </map>
+            <map to='#ff7f0e'>
+              <bucket>1.0</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='PHYSICIAN_AND_OTHER_SUPPLIER (CS370_ASL456)' inline='true' name='oracle.42126.939235960650' version='8.3'>
+      <connection authentication='RDBMS' class='oracle' port='1521' schema='CS370_ASL456' server='129.152.144.84' service='PDB1.usuniversi01134.oraclecloud.internal' username='cs370_asl456'>
+        <relation name='PHYSICIAN_AND_OTHER_SUPPLIER' table='[CS370_ASL456].[PHYSICIAN_AND_OTHER_SUPPLIER]' type='table' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>ID</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[ID]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>ID</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPI</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPI]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPI</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>10</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_LAST_ORG_NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_LAST_ORG_NAME]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_LAST_ORG_NAME</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>70</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_FIRST_NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_FIRST_NAME]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_FIRST_NAME</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_MI</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_MI]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_MI</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_CREDENTIALS</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_CREDENTIALS]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_CREDENTIALS</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_GENDER</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_GENDER]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_GENDER</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_ENTITY_CODE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_ENTITY_CODE]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_ENTITY_CODE</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STREET1</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STREET1]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STREET1</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>55</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STREET2</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STREET2]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STREET2</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>55</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_CITY</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_CITY]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_CITY</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>40</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_ZIP</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_ZIP]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_ZIP</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STATE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STATE]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STATE</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_COUNTRY</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_COUNTRY]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>NPPES_PROVIDER_COUNTRY</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PROVIDER_TYPE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PROVIDER_TYPE]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>PROVIDER_TYPE</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>43</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MEDICARE_PARTICIPATION_INDICAT</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[MEDICARE_PARTICIPATION_INDICAT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>MEDICARE_PARTICIPATION_INDICAT</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PLACE_OF_SERVICE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PLACE_OF_SERVICE]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>PLACE_OF_SERVICE</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HCPCS_CODE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HCPCS_CODE]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>HCPCS_CODE</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>5</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HCPCS_DESCRIPTION</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HCPCS_DESCRIPTION]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>HCPCS_DESCRIPTION</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>30</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>LINE_SRVC_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[LINE_SRVC_CNT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>LINE_SRVC_CNT</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>BENE_UNIQUE_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[BENE_UNIQUE_CNT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>BENE_UNIQUE_CNT</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>BENE_DAY_SRVC_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[BENE_DAY_SRVC_CNT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>BENE_DAY_SRVC_CNT</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_MEDICARE_ALLOWED_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_MEDICARE_ALLOWED_AMT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>AVERAGE_MEDICARE_ALLOWED_AMT</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_MEDICARE_ALLOWED_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_MEDICARE_ALLOWED_AMT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>STDEV_MEDICARE_ALLOWED_AMT</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_SUBMITTED_CHRG_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_SUBMITTED_CHRG_AMT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>AVERAGE_SUBMITTED_CHRG_AMT</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_SUBMITTED_CHRG_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_SUBMITTED_CHRG_AMT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>STDEV_SUBMITTED_CHRG_AMT</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_MEDICARE_PAYMENT_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_MEDICARE_PAYMENT_AMT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>AVERAGE_MEDICARE_PAYMENT_AMT</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_MEDICARE_PAYMENT_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_MEDICARE_PAYMENT_AMT]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>STDEV_MEDICARE_PAYMENT_AMT</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PAYMENT_CHARGEDAMT_RATIO</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[PAYMENT_CHARGEDAMT_RATIO]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>PAYMENT_CHARGEDAMT_RATIO</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PAYMENT_CHARGE_RATIO_LEVEL</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PAYMENT_CHARGE_RATIO_LEVEL]</local-name>
+            <parent-name>[PHYSICIAN_AND_OTHER_SUPPLIER]</parent-name>
+            <remote-alias>PAYMENT_CHARGE_RATIO_LEVEL</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>19</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Average Medicare Allowed Amt' datatype='real' name='[AVERAGE_MEDICARE_ALLOWED_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Average Medicare Payment Amt' datatype='real' name='[AVERAGE_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Average Submitted Chrg Amt' datatype='real' name='[AVERAGE_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Bene Day Srvc Cnt' datatype='real' name='[BENE_DAY_SRVC_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Bene Unique Cnt' datatype='real' name='[BENE_UNIQUE_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Hcpcs Code' datatype='string' name='[HCPCS_CODE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Hcpcs Description' datatype='string' name='[HCPCS_DESCRIPTION]' role='dimension' type='nominal'>
+      </column>
+      <column datatype='real' name='[ID]' role='dimension' type='ordinal'>
+      </column>
+      <column caption='Line Srvc Cnt' datatype='real' name='[LINE_SRVC_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Medicare Participation Indicat' datatype='string' name='[MEDICARE_PARTICIPATION_INDICAT]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Credentials' datatype='string' name='[NPPES_CREDENTIALS]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Entity Code' datatype='string' name='[NPPES_ENTITY_CODE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider City' datatype='string' name='[NPPES_PROVIDER_CITY]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Country' datatype='string' name='[NPPES_PROVIDER_COUNTRY]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider First Name' datatype='string' name='[NPPES_PROVIDER_FIRST_NAME]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Gender' datatype='string' name='[NPPES_PROVIDER_GENDER]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Last Org Name' datatype='string' name='[NPPES_PROVIDER_LAST_ORG_NAME]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Mi' datatype='string' name='[NPPES_PROVIDER_MI]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider State' datatype='string' name='[NPPES_PROVIDER_STATE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Street1' datatype='string' name='[NPPES_PROVIDER_STREET1]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Street2' datatype='string' name='[NPPES_PROVIDER_STREET2]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Zip' datatype='string' name='[NPPES_PROVIDER_ZIP]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Payment Chargedamt Ratio' datatype='real' name='[PAYMENT_CHARGEDAMT_RATIO]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Payment Charge Ratio Level' datatype='string' name='[PAYMENT_CHARGE_RATIO_LEVEL]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Place Of Service' datatype='string' name='[PLACE_OF_SERVICE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Provider Type' datatype='string' name='[PROVIDER_TYPE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Stdev Medicare Allowed Amt' datatype='real' name='[STDEV_MEDICARE_ALLOWED_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Stdev Medicare Payment Amt' datatype='real' name='[STDEV_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Stdev Submitted Chrg Amt' datatype='real' name='[STDEV_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+      </column>
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='PHYSICIAN_CARDIAC_SURGERY (CS370_ASL456)' inline='true' name='oracle.42126.885494351853' version='8.3'>
+      <connection authentication='RDBMS' class='oracle' port='1521' schema='CS370_ASL456' server='129.152.144.84' service='PDB1.usuniversi01134.oraclecloud.internal' username='cs370_asl456'>
+        <relation name='PHYSICIAN_CARDIAC_SURGERY' table='[CS370_ASL456].[PHYSICIAN_CARDIAC_SURGERY]' type='table' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>ANOM_SVM_1_19_PRED</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[ANOM_SVM_1_19_PRED]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>ANOM_SVM_1_19_PRED</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ANOM_SVM_1_19_PROB</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ANOM_SVM_1_19_PROB]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>ANOM_SVM_1_19_PROB</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_IBDOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STREET2</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STREET2]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STREET2</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>55</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PLACE_OF_SERVICE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PLACE_OF_SERVICE]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>PLACE_OF_SERVICE</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>LINE_SRVC_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[LINE_SRVC_CNT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>LINE_SRVC_CNT</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STREET1</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STREET1]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STREET1</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>55</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MEDICARE_PARTICIPATION_INDICAT</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[MEDICARE_PARTICIPATION_INDICAT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>MEDICARE_PARTICIPATION_INDICAT</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_MEDICARE_ALLOWED_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_MEDICARE_ALLOWED_AMT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>AVERAGE_MEDICARE_ALLOWED_AMT</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_MI</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_MI]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_MI</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_MEDICARE_PAYMENT_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_MEDICARE_PAYMENT_AMT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>AVERAGE_MEDICARE_PAYMENT_AMT</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AVERAGE_SUBMITTED_CHRG_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[AVERAGE_SUBMITTED_CHRG_AMT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>AVERAGE_SUBMITTED_CHRG_AMT</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_GENDER</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_GENDER]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_GENDER</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_CREDENTIALS</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_CREDENTIALS]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_CREDENTIALS</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_LAST_ORG_NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_LAST_ORG_NAME]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_LAST_ORG_NAME</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>70</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PAYMENT_CHARGEDAMT_RATIO</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[PAYMENT_CHARGEDAMT_RATIO]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>PAYMENT_CHARGEDAMT_RATIO</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_MEDICARE_ALLOWED_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_MEDICARE_ALLOWED_AMT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>STDEV_MEDICARE_ALLOWED_AMT</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_ENTITY_CODE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_ENTITY_CODE]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_ENTITY_CODE</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>1</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_MEDICARE_PAYMENT_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_MEDICARE_PAYMENT_AMT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>STDEV_MEDICARE_PAYMENT_AMT</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HCPCS_CODE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HCPCS_CODE]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>HCPCS_CODE</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>5</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_COUNTRY</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_COUNTRY]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_COUNTRY</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ID</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[ID]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>ID</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>BENE_DAY_SRVC_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[BENE_DAY_SRVC_CNT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>BENE_DAY_SRVC_CNT</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPI</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPI]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPI</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>10</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_STATE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_STATE]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_STATE</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PAYMENT_CHARGE_RATIO_LEVEL</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PAYMENT_CHARGE_RATIO_LEVEL]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>PAYMENT_CHARGE_RATIO_LEVEL</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>19</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>BENE_UNIQUE_CNT</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[BENE_UNIQUE_CNT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>BENE_UNIQUE_CNT</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>38</precision>
+            <scale>0</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PROVIDER_TYPE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PROVIDER_TYPE]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>PROVIDER_TYPE</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>43</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_CITY</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_CITY]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_CITY</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>40</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_FIRST_NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_FIRST_NAME]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_FIRST_NAME</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NPPES_PROVIDER_ZIP</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NPPES_PROVIDER_ZIP]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>NPPES_PROVIDER_ZIP</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>STDEV_SUBMITTED_CHRG_AMT</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[STDEV_SUBMITTED_CHRG_AMT]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>STDEV_SUBMITTED_CHRG_AMT</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>126</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_NUM&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HCPCS_DESCRIPTION</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HCPCS_DESCRIPTION]</local-name>
+            <parent-name>[PHYSICIAN_CARDIAC_SURGERY]</parent-name>
+            <remote-alias>HCPCS_DESCRIPTION</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>0</scale>
+            <width>30</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation charset='1' flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQLT_CHR{charset=873,charform=1}&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Anom Svm 1 19 Pred' datatype='real' name='[ANOM_SVM_1_19_PRED]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Anom Svm 1 19 Prob' datatype='real' name='[ANOM_SVM_1_19_PROB]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Average Medicare Allowed Amt' datatype='real' name='[AVERAGE_MEDICARE_ALLOWED_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Average Medicare Payment Amt' datatype='real' name='[AVERAGE_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Average Submitted Chrg Amt' datatype='real' name='[AVERAGE_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Bene Day Srvc Cnt' datatype='real' name='[BENE_DAY_SRVC_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Bene Unique Cnt' datatype='real' name='[BENE_UNIQUE_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Hcpcs Code' datatype='string' name='[HCPCS_CODE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Hcpcs Description' datatype='string' name='[HCPCS_DESCRIPTION]' role='dimension' type='nominal'>
+      </column>
+      <column datatype='real' name='[ID]' role='dimension' type='ordinal'>
+      </column>
+      <column caption='Line Srvc Cnt' datatype='real' name='[LINE_SRVC_CNT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Medicare Participation Indicat' datatype='string' name='[MEDICARE_PARTICIPATION_INDICAT]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Credentials' datatype='string' name='[NPPES_CREDENTIALS]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Entity Code' datatype='string' name='[NPPES_ENTITY_CODE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider City' datatype='string' name='[NPPES_PROVIDER_CITY]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Country' datatype='string' name='[NPPES_PROVIDER_COUNTRY]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider First Name' datatype='string' name='[NPPES_PROVIDER_FIRST_NAME]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Gender' datatype='string' name='[NPPES_PROVIDER_GENDER]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Last Org Name' datatype='string' name='[NPPES_PROVIDER_LAST_ORG_NAME]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Mi' datatype='string' name='[NPPES_PROVIDER_MI]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider State' datatype='string' name='[NPPES_PROVIDER_STATE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Street1' datatype='string' name='[NPPES_PROVIDER_STREET1]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Street2' datatype='string' name='[NPPES_PROVIDER_STREET2]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Nppes Provider Zip' datatype='string' name='[NPPES_PROVIDER_ZIP]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Payment Chargedamt Ratio' datatype='real' name='[PAYMENT_CHARGEDAMT_RATIO]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Payment Charge Ratio Level' datatype='string' name='[PAYMENT_CHARGE_RATIO_LEVEL]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Place Of Service' datatype='string' name='[PLACE_OF_SERVICE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Provider Type' datatype='string' name='[PROVIDER_TYPE]' role='dimension' type='nominal'>
+      </column>
+      <column caption='Stdev Medicare Allowed Amt' datatype='real' name='[STDEV_MEDICARE_ALLOWED_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Stdev Medicare Payment Amt' datatype='real' name='[STDEV_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column caption='Stdev Submitted Chrg Amt' datatype='real' name='[STDEV_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+      </column>
+      <column-instance column='[ANOM_SVM_1_19_PRED]' derivation='Sum' name='[sum:ANOM_SVM_1_19_PRED:ok]' pivot='key' type='ordinal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[sum:ANOM_SVM_1_19_PRED:ok]' type='palette'>
+            <map to='#1f77b4'>
+              <bucket>0.0</bucket>
+            </map>
+            <map to='#ff7f0e'>
+              <bucket>1.0</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Average Medicare Payment Amount vs Average Medicare Allowed Amount'>
+      <layout-options>
+        <caption>
+          <formatted-text>
+            <run>Figure 1: &#10;Avg Medicare Payment Amt = 0.790938*Avg Medicare Allowed Amt - 1.25715&#10;P-value &lt; 0.0001&#10;</run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='PHYSICIAN_AND_OTHER_SUPPLIER (CS370_ASL456)' name='oracle.42126.939235960650' />
+          </datasources>
+          <datasource-dependencies datasource='oracle.42126.939235960650'>
+            <column caption='Average Medicare Allowed Amt' datatype='real' name='[AVERAGE_MEDICARE_ALLOWED_AMT]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Average Medicare Payment Amt' datatype='real' name='[AVERAGE_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+            </column>
+            <column-instance column='[AVERAGE_MEDICARE_ALLOWED_AMT]' derivation='Sum' name='[sum:AVERAGE_MEDICARE_ALLOWED_AMT:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[AVERAGE_MEDICARE_PAYMENT_AMT]' derivation='Sum' name='[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='false' />
+        </view>
+        <style>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <trendline enable-confidence-bands='false' enabled='true' exclude-color='false' exclude-intercept='false' exclude-panes='false' fit='linear'>
+            </trendline>
+          </pane>
+        </panes>
+        <rows>[oracle.42126.939235960650].[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk]</rows>
+        <cols>[oracle.42126.939235960650].[sum:AVERAGE_MEDICARE_ALLOWED_AMT:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Cardiac Surgery'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='PHYSICIAN_CARDIAC_SURGERY (CS370_ASL456)' name='oracle.42126.885494351853' />
+          </datasources>
+          <datasource-dependencies datasource='oracle.42126.885494351853'>
+            <column caption='Anom Svm 1 19 Pred' datatype='real' name='[ANOM_SVM_1_19_PRED]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Average Medicare Payment Amt' datatype='real' name='[AVERAGE_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Average Submitted Chrg Amt' datatype='real' name='[AVERAGE_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+            </column>
+            <column-instance column='[ANOM_SVM_1_19_PRED]' derivation='Sum' name='[sum:ANOM_SVM_1_19_PRED:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[AVERAGE_MEDICARE_PAYMENT_AMT]' derivation='Sum' name='[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[AVERAGE_SUBMITTED_CHRG_AMT]' derivation='Sum' name='[sum:AVERAGE_SUBMITTED_CHRG_AMT:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='false' />
+        </view>
+        <style>
+        </style>
+        <panes>
+          <pane id='2'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PRED:ok]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[oracle.42126.885494351853].[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk]</rows>
+        <cols>[oracle.42126.885494351853].[sum:AVERAGE_SUBMITTED_CHRG_AMT:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='PHYSICIAN_ANOMALY (CS370_ASL456)' name='oracle.42126.676319710648' />
+          </datasources>
+          <datasource-dependencies datasource='oracle.42126.676319710648'>
+            <column caption='Anom Svm 2 18 Pred' datatype='real' name='[ANOM_SVM_2_18_PRED]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Average Medicare Payment Amt' datatype='real' name='[AVERAGE_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Average Submitted Chrg Amt' datatype='real' name='[AVERAGE_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Hcpcs Description' datatype='string' name='[HCPCS_DESCRIPTION]' role='dimension' type='nominal'>
+            </column>
+            <column datatype='real' name='[ID]' role='dimension' type='ordinal'>
+            </column>
+            <column caption='Provider Type' datatype='string' name='[PROVIDER_TYPE]' role='dimension' type='nominal'>
+            </column>
+            <column-instance column='[HCPCS_DESCRIPTION]' derivation='None' name='[none:HCPCS_DESCRIPTION:nk]' pivot='key' type='nominal' />
+            <column-instance column='[ID]' derivation='None' name='[none:ID:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[PROVIDER_TYPE]' derivation='None' name='[none:PROVIDER_TYPE:nk]' pivot='key' type='nominal' />
+            <column-instance column='[ANOM_SVM_2_18_PRED]' derivation='Sum' name='[sum:ANOM_SVM_2_18_PRED:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[AVERAGE_MEDICARE_PAYMENT_AMT]' derivation='Sum' name='[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[AVERAGE_SUBMITTED_CHRG_AMT]' derivation='Sum' name='[sum:AVERAGE_SUBMITTED_CHRG_AMT:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='false' />
+        </view>
+        <style>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[oracle.42126.676319710648].[sum:ANOM_SVM_2_18_PRED:ok]' />
+              <text column='[oracle.42126.676319710648].[none:ID:ok]' />
+              <text column='[oracle.42126.676319710648].[none:HCPCS_DESCRIPTION:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[oracle.42126.676319710648].[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk]</rows>
+        <cols>[oracle.42126.676319710648].[sum:AVERAGE_SUBMITTED_CHRG_AMT:qk]</cols>
+        <pages>
+          <column>[oracle.42126.676319710648].[none:PROVIDER_TYPE:nk]</column>
+        </pages>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 4'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='PHYSICIAN_CARDIAC_SURGERY (CS370_ASL456)' name='oracle.42126.885494351853' />
+          </datasources>
+          <datasource-dependencies datasource='oracle.42126.885494351853'>
+            <column caption='Anom Svm 1 19 Pred' datatype='real' name='[ANOM_SVM_1_19_PRED]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Anom Svm 1 19 Prob' datatype='real' name='[ANOM_SVM_1_19_PROB]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Average Medicare Payment Amt' datatype='real' name='[AVERAGE_MEDICARE_PAYMENT_AMT]' role='measure' type='quantitative'>
+            </column>
+            <column caption='Average Submitted Chrg Amt' datatype='real' name='[AVERAGE_SUBMITTED_CHRG_AMT]' role='measure' type='quantitative'>
+            </column>
+            <column-instance column='[ANOM_SVM_1_19_PRED]' derivation='Sum' name='[sum:ANOM_SVM_1_19_PRED:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[ANOM_SVM_1_19_PROB]' derivation='Sum' name='[sum:ANOM_SVM_1_19_PROB:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[AVERAGE_MEDICARE_PAYMENT_AMT]' derivation='Sum' name='[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[AVERAGE_SUBMITTED_CHRG_AMT]' derivation='Sum' name='[sum:AVERAGE_SUBMITTED_CHRG_AMT:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='false' />
+        </view>
+        <style>
+        </style>
+        <panes>
+          <pane id='2'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PRED:ok]' />
+            </encodings>
+          </pane>
+          <pane id='3' y-axis-name='[oracle.42126.885494351853].[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PRED:ok]' />
+            </encodings>
+          </pane>
+          <pane id='4' y-axis-name='[oracle.42126.885494351853].[sum:AVERAGE_SUBMITTED_CHRG_AMT:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PRED:ok]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([oracle.42126.885494351853].[sum:AVERAGE_MEDICARE_PAYMENT_AMT:qk] + [oracle.42126.885494351853].[sum:AVERAGE_SUBMITTED_CHRG_AMT:qk])</rows>
+        <cols>[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PROB:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 5'>
+      <table>
+        <view>
+          <datasources>
+          </datasources>
+          <aggregation value='true' />
+        </view>
+        <style>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows></rows>
+        <cols></cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows>
+    <window class='schema' source-height='-1' />
+    <window auto-hidden='0' class='worksheet' maximized='0' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='currpage' />
+            <card type='filters' />
+            <card type='marks' />
+            <card pane-specification-id='0' param='[oracle.42126.676319710648].[sum:ANOM_SVM_2_18_PRED:ok]' type='color' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[oracle.42126.676319710648].[none:ANOM_SVM_2_18_PRED:qk]</field>
+          <field>[oracle.42126.676319710648].[none:HCPCS_DESCRIPTION:nk]</field>
+          <field>[oracle.42126.676319710648].[none:ID:ok]</field>
+          <field>[oracle.42126.676319710648].[none:PROVIDER_TYPE:nk]</field>
+          <field>[oracle.42126.676319710648].[sum:ANOM_SVM_2_18_PRED:ok]</field>
+        </color-one-way>
+      </highlight>
+      <viewpoint>
+        <current-page>
+          <multibucket>
+            <bucket>&quot;Vascular Surgery&quot;</bucket>
+          </multibucket>
+        </current-page>
+      </viewpoint>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='0' name='Cardiac Surgery'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card pane-specification-id='2' param='[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PRED:ok]' type='color' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[oracle.42126.885494351853].[none:ANOM_SVM_1_19_PROB:qk]</field>
+          <field>[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PRED:ok]</field>
+        </color-one-way>
+      </highlight>
+      <viewpoint>
+      </viewpoint>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='0' name='Sheet 4'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card pane-specification-id='3' param='[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PRED:ok]' type='color' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[oracle.42126.885494351853].[none:ANOM_SVM_1_19_PROB:qk]</field>
+          <field>[oracle.42126.885494351853].[sum:ANOM_SVM_1_19_PRED:ok]</field>
+        </color-one-way>
+      </highlight>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='0' name='Average Medicare Payment Amount vs Average Medicare Allowed Amount'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='56'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='1' name='Sheet 5'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+    </thumbnail>
+    <thumbnail height='192' name='Cardiac Surgery' width='192'>
+      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
+      JxVIEgNjdQAAAABJRU5ErkJggg==
+    </thumbnail>
+    <thumbnail height='192' name='Sheet 4' width='192'>
+      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
+    </thumbnail>
+    <thumbnail height='192' name='Average Medicare Payment Amount vs Average Medicare Allowed Amount' width='192'>
+      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
+      ps/rCQAAAABJRU5ErkJggg==
+    </thumbnail>
+    <thumbnail height='144' name='Sheet 5' width='174'>
+      iVBORw0KGgoAAAANSUhEUgAAAK4AAACQCAYAAACRfFAzAAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAABmUlEQVR4nO3SQQ0AIBDAMMC/58MDH7KkVbDH9szMgpjzOwBeGJck45JkXJKMS5JxSTIu
+      ScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45Jk
+      XJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYl
+      ybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKM
+      S5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgk
+      GZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5Jx
+      STIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck
+      45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuSRePYgUc7kJNEQAAAABJRU5ErkJg
+      gg==
+    </thumbnail>
+  </thumbnails>
+</workbook>
