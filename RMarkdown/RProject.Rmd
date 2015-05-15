@@ -3,7 +3,7 @@ title: "Medicare Provider and Utilization Data"
 output: html_document
 ---
 
-##Introduction
+#Introduction
 
 The [Centers for Medicare & Medicaid Services](http://www.cms.gov/) has published several datasets that contain information regarding the procedures and services that Medicare benificiaries receive from various healthcare providers. 
 
@@ -16,7 +16,6 @@ These datasets are divided by into three main categories, according to the type 
   <li>[Outpatient](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Outpatient.html)</li>
 </ul>
 
-The compiled data for each of these categories is organized by year. So far, the CMS has published data for 2011 and 2012. The data is then further subdivided into a large database that contains data on individual providers and the procedures they offered, followed by 2 summary tables, one for states and another for the whole nation which aggregate the data by specific procedure. When you download the data from the above links and unzip the file, there is an accompanying pdf file that will contain even more detailed information.
 
 Generally speaking, all these databases are organized as follows:
 <ul>
@@ -31,23 +30,81 @@ Generally speaking, all these databases are organized as follows:
   <li>Medicare's average payment for this particular type of service</li>
 </ul>
 
-##Purpose
+#Purpose
 
 The purpose of this research is to analyze anomalous payment information in these datasets. According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". By identifying anomalous data points in these databases, we can point to potential cases of fraud. 
 
-##Physician and Other Supplier
+#Physician and Other Supplier Databases
 
 The Physician and Other Supplier databases contain Medicare information on physicians and other healthcare providers, along with the procedures they offered during the year 2012.
 
 <blockquote cite = "http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Physician-and-Other-Supplier.html">The Physician and Other Supplier PUF contains information on utilization, payment (allowed amount and Medicare payment), and submitted charges organized by National Provider Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS) code, and place of service. This PUF is based on information from CMS's National Claims History Standard Analytic Files. The data in the Physician and Other Supplier PUF covers calendar year 2012 and contains 100% final-action physician/supplier Part B non-institutional line items for the Medicare fee-for-service population.
 </blockquote>
 
-There are a total of 3 databases related to Physician and Other Supplier Medicare data:
-<ul>
-  <li>PHYSICIAN_AND_OTHER_SUPPLIER - Data for individual healthcare providers and the corresponding procedure (given by HCPCS code) they provided for 2012
-</ul>
+##Importing and Preprocessing the Databases
+There are 2 databases related to Physician and Other Supplier Medicare data that we will be using. Below are detailed instructions for importing and preprocessing the databases into Oracle SQL Developer.
+
+###1. PHYSICIAN_AND_OTHER_SUPPLIER
+This is the primary database related to Physician and Other Supplier information. As a warning, this database contains over 9 million records, and is stored in a 1.7 GB .txt file. Importing this database can take up to several hours, so be sure to have a stable Internet connection.
+
+To download this database, click on the following [link](http://www.cms.gov/apps/ama/license-2011.asp?file=http://download.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Medicare-Physician-and-Other-Supplier-PUF-CY2012.zip), and click "Accept". If this does not work, go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Physician-and-Other-Supplier.html and click on the link that says "Medicare Physician and Other Supplier PUF, CY2012, Tab Delimited format". 
+
+Extract the contents of the .zip file. The "Medicare-Physician-and-Other-Supplier-PUF-Methodology.pdf" document contains more detailed information on this database and the methodology used to aggregate the data. Rename the extension of the "Medicare-Physician-and-Other-Supplier-PUF-CY2012.txt" to  "Medicare-Physician-and-Other-Supplier-PUF-CY2012.csv". This will allow the text file to be in a format that can be imported into your Oracle database.
+
+Now, open up Oracle SQL Developer and connect. Go to the directory sql/ddl/ and open the "PHYSICIAN_AND_OTHER_SUPPLIER_B.sql" DDL script, and run it in Oracle. This will create a table called PHYSICIAN_AND_OTHER_SUPPLIER_B. Find that table in your connection, right click, and click on "Import Data" as seen in the screenshot below. 
+![](./images/data_importing/01_phys_other_supplier_orcl.jpg)
+
+Find and open "Medicare-Physician-and-Other-Supplier-PUF-CY2012.csv". The Data Import Wizard window will come up. Set Format to "delimited" and set Delimiter to "tab". Click Next.
+![](./images/data_importing/02_phys_other_supplier_orcl.jpg)
+
+Click Next until you get to Step 4 of 5, and then set Match By to "Position". Click Next once more, and then click Finish.
+
+We will add some columns to this table later, but first we must import 1 more database.
+
+###2. PHYSICIAN_HCPCS_AGGREGATE
+To download this database, click on the following [link](http://www.cms.gov/apps/ama/license-2011.asp?file=http://download.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Medicare-National-and-State-HCPCS-Aggregate-CY2012.zip), and click "Accept". If this does not work, go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Physician-and-Other-Supplier.html and click on the link that says "Medicare National and State/HCPCS Aggregate table, CY2012, Microsoft Excel (.xlsx)".
+
+Extract the contents of the .zip file. Open the "Medicare-National-and-State-HCPCS-Aggregate-CY2012.xlsx" Excel file. Go to the third page called "data", select the first row and delete it.
+![](./images/data_importing/03_hcpcs_aggregate_excel.jpg)
+
+Now, it is possible that Oracle can import this Excel file as is, but Oracle SQL Developer was only able to import csv files on the computer that this research was conducted on. So, additional preprocessing is required. 
+
+First, highlight columns E-H and click Format Cells. For Category, select "Number". Uncheck the box that says "Use 1000 Separator (,)". Select the top row for the section that says "Negative numbers:". Click OK. Use the screenshot below if necessary.
+![](./images/data_importing/04_hcpcs_aggregate_excel.jpg)
+
+Now, select columns I-AC (all the columns with '$' signs), and go to Format Cells. Select "Number" for Category, and uncheck the box that says "Use 1000 Separator (,)", as shown in the screenshot below. Click OK and save the file.
+![](./images/data_importing/05_hcpcs_aggregate_excel.jpg)
+
+Make sure that you are still on the "data" page in the Excel workbook, and click Save As, and save this file as a .csv file. There will be 2 messages that come up. Click 'OK' then click 'Yes'. You can ignore the second warning message because the data does not get corrupted.
+![](./images/data_importing/06_hcpcs_aggregate_excel.jpg)
+![](./images/data_importing/07_hcpcs_aggregate_excel.jpg)
+
+Now that we have our .csv file, we can import the data into Oracle. Go to the directory sql/ddl/ and open the "PHYSICIAN_HCPCS_AGGREGATE.sql" DDL script, and run it in Oracle. This will create the PHYSICIAN_HCPCS_AGGREGATE table. Right click on this table in Oracle and select Import, as you did in the previous section. Find and open the .csv file that you just created. When the Data Import Wizard window comes up, you can keep clicking Next, and then Finish. You don't need to change any settings here.
+
+After the table has finished importing, go to the directory sql/ and open the "state abbrev.sql" SQL script, and run that in Oracle as well. This will change the NPPES_PROVIDER_STATE_DESC column in PHYSICIAN_HCPCS_AGGREGATE to be state abbreviations instead of the full name of the state (i.e. 'Texas' becomes 'TX'), so that it matches up with the PHYSICIAN_AND_OTHER_SUPPLIER table. 
+
+
+###Adding Calculated Columns to PHYSICIAN_AND_OTHER_SUPPLIER
+
+This section shows how to add the BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR columns to what will ultimately be the PHYSICIAN_AND_OTHER_SUPPLIER database. This involves some complicated SQL queries, and there is no easy way to do this except for creating and dropping two more tables.
+
+So run the following SQL scripts in succession:
+<ol>
+  <li>sql/ddl/PHYSICIAN_AND_OTHER_SUPPLIER_C.sql</li>
+  <li>sql/physicians - bene_day_srvc_pct.sql</li>
+  <li>sql/ddl/PHYSICIAN_AND_OTHER_SUPPLIER.sql</li>
+  <li>sql/physicians - submitted_chrg_vs_hcpcs_aggr.sql</li>
+</ol>
+
+Finally, we have our 2 final databases pertaining to physician data, PHYSICIAN_AND_OTHER_SUPPLIER and PHYSICIAN_HCPCS_AGGREGATE.
+
+
+##Physician Tables Description
 
 ###PHYSICIAN_AND_OTHER_SUPPLIER
+
+
+
 This database consists of the following columns:
 <ul>
   <li>ID - Unique Row ID
