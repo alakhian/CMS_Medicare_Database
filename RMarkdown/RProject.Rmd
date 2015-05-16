@@ -32,7 +32,9 @@ Generally speaking, all these databases are organized as follows:
 
 #Purpose
 
-The purpose of this research is to analyze anomalous payment information in these datasets. According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". By identifying anomalous data points in these databases, we can point to potential cases of fraud. 
+The purpose of this research is to analyze anomalous payment information in these datasets. 
+
+According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". The purpose of this research is to develop a set of models that can be run on these datasets and point out anomalous data points for the purposes of fraud detection. Ideally, these anomaly detection models can be applied to future releases of Medicare datasets as well.
 
 #Physician and Other Supplier Databases
 
@@ -99,11 +101,10 @@ So run the following SQL scripts in succession:
 Finally, we have our 2 final databases pertaining to physician data, PHYSICIAN_AND_OTHER_SUPPLIER and PHYSICIAN_HCPCS_AGGREGATE.
 
 
-##Physician Tables Description
+##Physician Tables Column Descriptions
 
 ###PHYSICIAN_AND_OTHER_SUPPLIER
-
-
+The following descriptions are taken from Medicare-Physician-and-Other-Supplier-PUF-Methodology.pdf (except for the last 2 columns, which were manually added). 
 
 This database consists of the following columns:
 <ul>
@@ -174,16 +175,99 @@ This database consists of the following columns:
   <li>STDEV_SUBMITTED_CHRG_AMT - Standard deviation of the charge amounts submitted by the provider. The standard deviation indicates the amount of variation from the average submitted charge amount that exists within a single provider, HCPCS service, and place of service.
   <li>AVERAGE_MEDICARE_PAYMENT_AMT - Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service.
   <li>STDEV_MEDICARE_PAYMENT_AMT - Standard deviation of the Medicare payment amount. The standard deviation indicates the amount of variation from the average Medicare payment amount that exists within a single provider, HCPCS service, and place of service.
+  <li>BENE_DAY_SRVC_PCT - The percentage of distinct Medicare beneficiary per day services that the provider conducted for this particular HCPCS service out of all beneficiary per day services for this particular HCPCS service. This is one of the calculated columns that was added to the table to check for outliers. If this value is high, that means that the provider did this HCPCS procedure in a much higher proportion relative to other providers.
+  <li>SUBMITTED_CHRG_VS_HCPCS_AGGR - The ratio of the submitted charge for this HCPCS procedure to the average amount charged for this HCPCS procedure aggregated by state, so as to adjust for cost of living differences. Ideally, this value should be close to 1. If the ratio is much greater than 1, then this provider could be overbilling for this procedure compared to other providers in the same area.
 </ul>
 
-###Anomaly Detection for Physician and Other Supplier Databases
+
+###PHYSICIAN_HCPCS_AGGREGATE
+The following descriptions are taken from Medicare-National-and-State-HCPCS-Aggregate-CY2012.xlsx on page 2 (Documentation).
+
+This database consists of the following columns:
+<ul>
+  <li>NPPES_PROVIDER_STATE_DESC -  The state where the provider is located, as reported in NPPES. The values include the 50 United States, District of Columbia, U.S. territories, Armed Forces areas, Unknown and Foreign Country.
+  <li>HCPCS_CODE - HCPCS code for the specific medical service furnished by the provider.
+  <li>HCPCS_DESCRIPTION - Description of the HCPCS code for the specific medical service furnished by the provider.
+  <li>PLACE_OF_SERVICE - Identifies whether the place of service submitted on the claims is a facility (value of 'F') or non-facility (value of 'O').  Non-facility is generally an office setting; however other entities are included in non-facility. 
+  <li>NUMBER_OF_PROVIDERS - Number of providers within state, hcpcs code and place of service.
+  <li>LINE_SRVC_CNT - Number of services provided; note that the metrics used to count the number provided can vary from service to service.
+  <li>UNIQUE_BENE_DOCTOR_CNT - Number of unique beneficiary/doctor interactions (e.g., if a single beneficiary sees two different doctors for a given HCPCS code this value would be two).  
+  <li>BENE_DAY_SRVC_CNT - Number of distinct Medicare beneficiary/per day services. Since a given beneficiary may receive multiple services of the same type (e.g., single vs. multiple cardiac stents) on a single day, this metric removes double-counting from the line service count to identify whether a unique service occurred. 
+  <li>AVERAGE_MEDICARE_ALLOWED_AMT - Average of the Medicare allowed amount for the service. Medicare allowed amounts includes the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.
+  <li>MIN_MEDICARE_ALLOWED_AMT - The minimum Medicare allowed amount for the service.
+  <li>P25_MEDICARE_ALLOWED_AMT - The 25th percentile Medicare allowed amount for the service.
+  <li>P50_MEDICARE_ALLOWED_AMT - The median (50th percentile) Medicare allowed amount for the service.
+  <li>P75_MEDICARE_ALLOWED_AMT - The 75th percentile Medicare allowed amount for the service.
+  <li>MAX_MEDICARE_ALLOWED_AMT - The maximum Medicare allowed amount for the service.
+  <li>STD_MEDICARE_ALLOWED_AMT - Standard deviation of the Medicare allowed amount. The standard deviation indicates the amount of variation from the average Medicare allowed amount that exists within state, HCPCS service, and place of service.
+  <li>AVERAGE_SUBMITTED_CHRG_AMT - Average of the charges that providers submit for the service.
+  <li>MIN_SUBMITTED_CHRG_AMT - The minimum submitted charges for the service.
+  <li>P25_SUBMITTED_CHRG_AMT - The 25th percentile of submitted charges for the service.
+  <li>P50_SUBMITTED_CHRG_AMT - The median (50th percentile) of submitted charges for the service.
+  <li>P75_SUBMITTED_CHRG_AMT - The 75th percentile of submitted charges for the service.
+  <li>MAX_SUBMITTED_CHRG_AMT - The maximum submitted charge for the service.
+  <li>STD_SUBMITTED_CHRG_AMT - Standard deviation of the charge amounts submitted by providers. The standard deviation indicates the amount of variation from the average submitted charge amount that exists within state, HCPCS service, and place of service.
+  <li>AVERAGE_MEDICARE_PAYMENT_AMT - Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service.
+  <li>MIN_MEDICARE_PAYMENT_AMT - The minimum Medicare payment amount for the service.
+  <li>P25_MEDICARE_PAYMENT_AMT - The 25th percentile Medicare payment amount for the service.
+  <li>P50_MEDICARE_PAYMENT_AMT - The median (50th percentile) Medicare payment amount for the service.
+  <li>P75_MEDICARE_PAYMENT_AMT - The 75th percentile Medicare payment amount for the service.
+  <li>MAX_MEDICARE_PAYMENT_AMT - The maximum Medicare payment amount for the service.
+  <li>STD_MEDICARE_PAYMENT_AMT - Standard deviation of the Medicare payment amount. The standard deviation indicates the amount of variation from the average Medicare payment amount that exists within state, HCPCS service, and place of service.
+
+
+##Anomaly Detection Model
+
 The first point of interest is to determine whether Medicare is consistent with how they reimburse healthcare providers. In order to do this, we take the ratio of the amount Medicare pays (AVERAGE_MEDICARE_PAYMENT_AMT) to the amount allowed by Medicare for a procedure (AVERAGE_MEDICARE_ALLOWED_AMT).
 
 ![](./images/Average_Medicare_Payment_Amount_vs_Average_Medicare_Allowed_Amount.jpg)
 
-As can be seen from Figure 1, there is a very strong linear correlation between the Medicare paid amount and the Medicare allowed amount, with virtually no outliers based on a visual inspection. This indicates that Medicare is very consistent with how they reimburse healthcare providers based on the allowed amount for a particular procedure (which is based on the HCPCS code and location).
+As can be seen from the above figure, there is a very strong linear correlation between the Medicare paid amount and the Medicare allowed amount for each procedure, with virtually no outliers based on both the extremely low p-value as well as simple visual inspection. This indicates that Medicare is very consistent with how they reimburse healthcare providers based on the allowed amount for a particular procedure (which is based on the HCPCS code and location).
 
-Therefore, in order to analyze anomalous data, we must look at the average submitted charge amount from the healthcare provider. Frequently, healthcare providers will overbill for procedures. Also, we must look at distribution of procedures (HCPCS codes) amongst physicians. It is possible that certain healthcare providers are 
+Since Medicare is very consistent with how they reimburse providers, it is possible that a healthcare provider will purposely bill Medicare for procedures that are known to be expensive. Also, it's possible that a healthcare provider can commit fraud by billing Medicare a much higher amount compared to other providers conducting the same procedure in the same geographic area (aggregated by state in our databases).
+
+###Physician Anomaly Workflow
+
+This section describe the workflow that was used for anomaly detection. Below is a screenshot of the entire workflow.
+![](./images/odm_workflows/01_physician_anom_workflow.jpg)
+
+The data source is the PHYSICIAN_AND_OTHER_SUPPLIER_TABLE. Next, is a Filter Rows node called "50 States + DC", which will filter out U.S. territories (Guam, Puerto Rico) because those contain too few data points to be useful. The filter can be replicated by copying the below text:
+<blockquote>
+"NPPES_PROVIDER_STATE"  != 'XX'  Or
+"NPPES_PROVIDER_STATE"  != 'AA'  Or
+"NPPES_PROVIDER_STATE"  != 'AE'  Or
+"NPPES_PROVIDER_STATE"  != 'AP'  Or
+"NPPES_PROVIDER_STATE"  != 'AS'  Or
+"NPPES_PROVIDER_STATE"  != 'GU'  Or
+"NPPES_PROVIDER_STATE"  != 'MP'  Or
+"NPPES_PROVIDER_STATE"  != 'PR'  Or
+"NPPES_PROVIDER_STATE"  != 'VI'  Or
+"NPPES_PROVIDER_STATE"  != 'ZZ'
+</blockquote>
+
+After that, there is another Filter Rows node called "HCPCS Filters", which will filter out procedures that have were conducted by at least 100 providers and had a median Medicare Allowed Amount of $1000. Recall the linear relationship between Medicare Payment and Medicare Allowed Amount. The reason Medicare Allowed Amount is chosen for the filter is because it is extremely predictable. A healthcare provider that is potentially committing fraud is going to bill Medicare for procedures that are known to have a high Medicare Allowed Amount. This node can be re-created by copying the text from hcpcs_filter.txt in the HCPCS_Filter/ directory.
+
+####Customizing Filter for HCPCS Codes
+
+Read this section ONLY if you wish to change the parameters for filtering out certain procedures. As mentioned in the previous section, the filter is set for procedures that have a median Medicare allowed amount of at least $1000 and were conducted by at least 100 providers. Otherwise, skip to the next section to continue reading about the anomaly detection workflow.
+
+First, go to the sql/ directory and run "hcpcs filters.sql". This will print out a list of HCPCS Codes that match with at least 100 providers and have a median Medicare Allowed Payment Amount that is at least $1000. Basically, this query is filtering out the most expensive procedures that were still conducted by enough providers so as not to end up with false positives in the anomaly detection. You can change these parameters in the SQL script as desired. If you do change the parameters, copy and paste the output into a .txt file.
+![](./images/data_importing/hcpcs_filter.jpg)
+
+Next, go to the HCPCS_Filter/src directory and open FilterHCPCS.java. Make sure to change the input path in line 17 to be the .txt file that you just created. Set the output path in line 19 to wherever you want. Compile and run the program. Copy and paste the text in the output file from the path that you specified into the "HCPCS Filters" node in the Physician Anomaly workflow.
+********************************************************************************
+
+For the Filter Columns node, the below setting were used. 
+![](./images/odm_workflows/02_physician_anom_filter_column.jpg)
+This is where the importance of the two calculated columns, BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR comes into play. These are the two main attributes used by the Anomaly Detection node. The NPPES geographic information is filtered out because the state has already been accounted for in SUBMITTED_CHRG_VS_HCPCS_AGGR. The rest of the geographic information and other columns that were filtered out cause too much noise, and throw off the anomaly detection.
+
+For the Anomaly Detection node, Case ID is set to "ID". Also, the outlier rate should was changed to 0.01 in Advanced Settings as seen below. The original setting of 0.10 is far too high.
+![](./images/odm_workflows/03_physician_anom_settings.jpg)
+
+In the Apply node, all the columns from the source table were added in the Additional Output tab. Finally, this was exported into the table called PHYSICIAN_ANOMALY, which holds the results of this particular anomaly detection model.
+
+
+
 
 
 ##Inpatient Databases
