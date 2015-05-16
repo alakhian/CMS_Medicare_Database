@@ -266,9 +266,36 @@ For the Anomaly Detection node, Case ID is set to "ID". Also, the outlier rate s
 
 In the Apply node, all the columns from the source table were added in the Additional Output tab. Finally, this was exported into the table called PHYSICIAN_ANOMALY, which holds the results of this particular anomaly detection model.
 
+##Anomaly Detection Results
 
+Before showing the results, it is important to understand the two columns BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR. Also, keep in mind that this database aggregated by provider (NPI), HCPCS code (procedure), and place of service (facility or non-facility). This will help in understanding the methodology for these two columns.
 
+###BENE_DAY_SRVC_PCT - Beneficiary Per Day Services Percentage
+For a given type of procedure and place of service, this is the percentage of all procedures that one provider conducted. For example, suppose that we wish to look at HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O'). Assume that in there were a total of 1000 beneficiary per day services (basically, the number of procedures). Now assume that a provider with NPI (identification number) 1003000522 conducted 100 beneficiary per day services for this particular procedure in a non-facility. Then, the BENE_DAY_SRVC_PCT for this particular record will be 100/1000 = 10%. 
+Anytime, the BENE_DAY_SRVC_PCT for a certain procedure is unusually high, it will be flagged as an anomaly because it means that this provider conducted an usually high amount of services for this procedure relative to other providers. This does not necessarily mean that it is a case of fraud; it could just be an unusually large practice that sees lots of patients. However, it is worth inspecting, because the provider could billing Medicare for this procedure when it is not necessary because it is known to have a high reimbursement.
 
+###SUBMITTED_CHRG_VS_HCPCS_AGGR - Provider Submitted Charge vs HCPCS Aggregated Submitted Charge
+For a given procedure and place of service, this is the ratio of the Medicare submitted charge from one provider versus the median submitted charge for all providers in that same state that conducted this same procedure. Basically, it is designed to tell us whether a provider is overbilling (or underbilling) for a procedure relative to other providers.
+For example, suppose provider 1003000522 charged Medicare $1000 for HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O') setting. Assume that he is based in Florida. Also, assume that for all providers in Florida that conducted this same procedure in a non-facility setting, their median submitted charge to Medicare was $100. Then, the SUBMITTED_CHRG_VS_HCPCS_AGGR for this particular record will be $1000/$100 = 10.
+To adjust for cost of living differences across the United States, this column was aggregated by state. 
+
+###Results in Tableau
+
+The following graphs display BENE_DAY_SRVC_PCT along the x-axis and SUBMITTED_CHRG_VS_HCPCS_AGGR along the y-axis. The anomaly predictions ('0' for anomaly, '1' for normal) are color coded. So anything that is high up on either axis should be flagged as an outlier and merits inspection.
+
+The below graph maps out every record that was in PHYSICIAN_ANOMALY. As mentioned previously, it contains records for HCPCS Code-Place of Service combinations that matched up with more than 100 providers and had a Medicare allowed payment amount of at least $1000. Some of the NPI labels can be seen. This is from page 2 in Physicians.twb in the Tableau/ directory.
+![](./images/SubmittedChargeOutliersandHCPCSBeneficiaryDayPercentageOutliers-ALL.jpg)
+
+The above graph is meant just to illustrate the general distribution of results. Below are several graphs that show results for specific procedures according to the HCPCS code and place of service. Only the procedures containing significant outliers are displayed. These visualizations are from page 3 in Physicians.twb in the Tableau/ directory. The NPI and state are labeled next to some of the outlying points
+![](./images/hcpcs/01.jpg)
+![](./images/hcpcs/02.jpg)
+![](./images/hcpcs/03.jpg)
+![](./images/hcpcs/04.jpg)
+![](./images/hcpcs/05.jpg)
+![](./images/hcpcs/06.jpg)
+
+There are a total of 77 different graphs, but these were the ones with the most notable outliers. The first two graphs show providers that charge an unusually high amount for a procedure, and the last four show providers that conduct an unusually high number of a certain type of procedure. At this point, this is all the information that can be gleaned from public records. We have developed the model for finding anomalous data points. 
+However, more information would be needed to actually check why these providers show up as anomalous, such as financial documents for the individual providers. Unfortunately, that information is not available to the public at this point. So, while these data points are anomalous and merit inspection, it would be premature to say that they are definitely cases of fraud. As stated in the purpose statement, this goal of this project is to develop a model for pointing anomalies that could then be analyzed and audited by an agency such as the CMS or the OIG (https://oig.hhs.gov/fraud/strike-force/). 
 
 ##Inpatient Databases
 
