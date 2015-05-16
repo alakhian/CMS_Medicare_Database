@@ -32,7 +32,7 @@ Generally speaking, all these databases are organized as follows:
 
 #Purpose
 
-The purpose of this research is to analyze anomalous payment information in these datasets. 
+The purpose of this research is to analyze anomalous payment information in these datasets, with a primary focus on Inpatient and the Physician and Other Supplier databases since they are the 2 largest ones.
 
 According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". The purpose of this research is to develop a set of models that can be run on these datasets and point out anomalous data points for the purposes of fraud detection. Ideally, these anomaly detection models can be applied to future releases of Medicare datasets as well.
 
@@ -297,7 +297,7 @@ The above graph is meant just to illustrate the general distribution of results.
 There are a total of 77 different graphs, but these were the ones with the most notable outliers. The first two graphs show providers that charge an unusually high amount for a procedure, and the last four show providers that conduct an unusually high number of a certain type of procedure. At this point, this is all the information that can be gleaned from public records. We have developed the model for finding anomalous data points. 
 However, more information would be needed to actually check why these providers show up as anomalous, such as financial documents for the individual providers. Unfortunately, that information is not available to the public at this point. So, while these data points are anomalous and merit inspection, it would be premature to say that they are definitely cases of fraud. As stated in the purpose statement, this goal of this project is to develop a model for pointing anomalies that could then be analyzed and audited by an agency such as the CMS or the OIG (https://oig.hhs.gov/fraud/strike-force/). 
 
-##Inpatient Databases
+#Inpatient Databases
 
 These databases contain Medicare information on inpatient providers and the procedures that they offered within a fiscal year period.
 
@@ -306,17 +306,27 @@ The Inpatient PUF contains hospital-specific charges for the more than 3,000 U.S
 </blockquote>
 
 
-There are a total of 6 databases related to Inpatient Medicare data:
+There are a total of 3 databases related to Inpatient Medicare data:
 <ul>
-  <li>INPATIENT_2011_DATA - Aggregated by individual healthcare providers and MS-DRG for 2011
-  <li>INPATIENT_2011_NATIONAL_DATA - Aggregated by state and MS-DRG for 2011
-  <li>INPATIENT_2011_STATE_DATA - Aggregated by MS-DRG for 2011
   <li>INPATIENT_2012_DATA - Aggregated by individual healthcare providers and MS-DRG for 2012
   <li>INPATIENT_2012_NATIONAL_DATA - Aggregated by state and MS-DRG for 2012
   <li>INPATIENT_2012_STATE_DATA - Aggregated by MS-DRG for 2012
 </ul>
 
-###INPATIENT_2012_DATA
+##Importing and Preprocessing the Databases
+
+There are 3 databases related to Physician and Other Supplier Medicare data that we will be using. Below are detailed instructions for importing and preprocessing the databases into Oracle SQL Developer.
+
+###Importing Inpatient .csv files
+First, go to sql/ddl/ and run the INPATIENT_2012_DATA_B.sql DDL script. Then, click on the following [http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Inpatient_Data_2012_CSV.zip](link) or go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient2012.html and click the link that says "Inpatient Charge Data, FY2012, Comma Separated Values (CSV) version". Extract the contents of that zip file. Right click on your INPATIENT_2012_DATA and click Import and select the .csv file you just downloaded. On Step 4 of the Import Wizard and select "Position" on the Match By section. Click Next and then Finish.
+
+Next, go to sql/ddl/ and run the INPATIENT_AGGREGATE.sql DDL script. Then, click on the following [link](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Inpatient_Summary_2012_CSV.zip) or go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient2012.html and click the link that says "National and State Summaries of Inpatient Charge Data, FY2012, Comma Separated Values (CSV) version". Extract the contents. Go to Oracle, and right click on the INPATIENT_2012_NATIONAL_DATA table and select Import. Select Medicare_Charge_Inpatient_DRG100_DRG_Summary_by_DRG_FY2012.csv and keep clicking Next on the Import Wizard. After this table is finished, right click on INPATIENT_2012_STATE_DATA, select Import, and Medicare_Charge_Inpatient_DRG100_DRG_Summary_by_DRGState_FY2012.csv. Keep clicking Next on the Import Wizard and allow the table to finish Importing.
+
+To add the calculated columns, simply run the DDL script INPATIENT_2012_DATA.sql in sql/ddl/. This will create the INPATIENT_2012_DATA table.
+
+##Inpatient Database Column Descriptions
+
+###INPATIENT_2012_DATA Column Descriptions
 This database consists of the following columns:
 <ul>
   <li>ID - Unique Row ID
@@ -333,33 +343,17 @@ This database consists of the following columns:
   <li>AVERAGE_TOTAL_PAYMENTS - The average total payments to all providers for the MS-DRG including the MS-DRG amount, teaching, disproportionate share, capital, and outlier payments for all cases. Also included in average total payments are co-payment and deductible amounts that the patient is responsible for and any additional payments by third parties for coordination of benefits.
   <li>AVERAGE_MEDICARE_PAYMENTS - The average amount that Medicare pays to the provider for Medicare's share of the MS-DRG. Average Medicare payment amounts include the MS-DRG amount, teaching, disproportionate share, capital, and outlier payments for all cases. Medicare payments DO NOT include beneficiary co-payments and deductible amounts nor any additional payments from third parties for coordination of benefits.
   <li>MCPAYMENT_CHARGEDAMT_RATIO - Ratio of Medicare payment(AVERAGE_MEDICARE_PAYMENTS) to the amount charged by the provider (AVERAGE_COVERED_CHARGES)
-  <li>MCPAYMENT_CHARGE_RATIO_LEVEL - Description of MCPAYMENT_CHARGEDAMT_RATIO. Falls into one of 3 categories:
-  <ul>
-    <li>Less than 25%
-    <li>Between 25% and 50%
-    <li>Greater than 50%
-  </ul>
   <li>TOT_PAYMENT_CHARGEDAMT_RATIO - Ratio of Total payment(AVERAGE_TOTAL_PAYMENTS) to the amount charged by the provider (AVERAGE_COVERED_CHARGES)
-  <li>TOTPAYMENT_CHARGE_RATIO_LVL - Description of TOT_PAYMENT_CHARGEDAMT_RATIO. Falls into one of 3 categories:
-  <ul>
-    <li>Less than 25%
-    <li>Between 25% and 50%
-    <li>Greater than 50%
-  </ul>
   <li>MCPAYMENT_TOTALPAY_RATIO - Ratio of Medicare payment(AVERAGE_MEDICARE_PAYMENTS) to total payment (AVERAGE_COVERED_CHARGES)
-  <li>MCPAY_TOTPAYMENT_RATIO_LVL - Description of the ratio of Medicare payment to the amount charged by the provider. Falls into one of 3 categories:
-  <ul>
-    <li>Less than 80%
-    <li>Between 80% and 90%
-    <li>Greater than 90%
-  </ul>
+  <li>DISCHARGE_PCT - The percent of all discharges for a particular DRG that this individual provider is responsible for.
+  <li>SUBMITTED_CHRG_VS_DRG_AGGR - The ratio of this provider's Medicare charged amount for the particular procedure versus the average amount charged to Medicare by all other providers that conducted the same procedure in the same state.
 </ul>
 
-###Inpatient Anomaly Detection
+##Inpatient Anomaly Detection
 
-####Medicare Payment Versus Provider Charge Anomalies
+###Medicare Payment Versus Provider Charge Anomalies
 
-The Inpatient 2011 and 2012 databases were the only ones from the entire Medicare data set in which there were instances of Medicare paying more than what a provider charged them. This is very unusual because Medicare will almost always reimburse providers less than what the provider charged. 
+The Inpatient databases were the only ones from the entire Medicare data set in which there were instances of Medicare paying more than what a provider charged them. This is very unusual because Medicare will almost always reimburse providers less than what the provider charged. 
 
 First let us look at the overall distribution of Medicare Payment to Charged Amount ratios across the entire database.
 ![](./images/DistributionofMedicarePaymentstoChargeAmtRatio.jpg)
