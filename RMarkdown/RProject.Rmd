@@ -351,7 +351,7 @@ This database consists of the following columns:
 
 ##Inpatient Anomaly Detection
 
-###Medicare Payment Versus Provider Charge Anomalies
+###Medicare Paying More Than Charged Amount
 
 The Inpatient databases were the only ones from the entire Medicare data set in which there were instances of Medicare paying more than what a provider charged them. This is very unusual because Medicare will almost always reimburse providers less than what the provider charged. 
 
@@ -359,12 +359,34 @@ First let us look at the overall distribution of Medicare Payment to Charged Amo
 ![](./images/DistributionofMedicarePaymentstoChargeAmtRatio.jpg)
 We can clearly see just how anomalous it is for the ratio be greater than 1. In fact, there were 340 cases in which this occurred out of a total of 157747 (roughly 0.22%).
 
-In order to analyze this further, the distribution of these anomalies was examined on a geographics level.
+In order to analyze this further, the distribution of these anomalies was examined on a geographic level.
 ![](./images/Map_of_Zip_Codes_where_Medicare_Payment_Charge.jpg)
 
 ![](./images/Boston_and_NYC.jpg)
 
 The above two figures display the geographic distribution of these particular anomalies. We can see that New York City and Boston have the most amount of procedures where Medicare overpaid.
+
+####Anomaly Detection Workflows
+
+Below is a screenshot of the workflow that was used for Medicare overpayment data:
+![](./images/odm_workflows/04_inpatient_overpayment_anom_workflow.jpg)
+
+To replicate this workflow, select INPATIENT_2012_DATA as the source node. Then add a Filter Column node, and name it Payment Ratios. Below are the settings that should be used for this node:
+![](./images/odm_workflows/05_inpatient_overpayment_anom_filter1.jpg)
+The above node filters out everything except the Medicare Payment to Charged Amount Ratio, Total Payment to Charged Amount Ratio, and Number of Discharges.
+
+Then, add another Filter Column node, and name it "Medicare Payment to Charged Amt Ratio". This node will filter out everything except the Medicare to Charged Amount Ratio, as seen below:
+![](./images/odm_workflows/05_inpatient_overpayment_anom_filter1.jpg)
+
+Finally, add the Apply and Create Table node. Name the Tables as seen in the first screenshot for this workflow.
+
+####Anomaly Detection Results
+![](./images/OverpaymentAnomalies-RatiosDischargesIncluded.jpg)
+![](./images/OverpaymentAnomalies-MedicarePaytoChargeRatioOnly.jpg)
+![](./images/OverpaymentAnomalies-BX.jpg)
+![](./images/OverpaymentAnomalies-Linc.jpg)
+
+
 
 
 
