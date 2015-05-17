@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<WorkflowProcess Version="12.1.0.1.4" DBVersion="12.1.0.2.0" xmlns="http://xmlns.oracle.com/odmr11">
+    <Nodes>
+        <DataSource Id="10001" Name="INPATIENT_2012_DATA" Status="Complete">
+            <Icon XCOORD="87" YCOORD="229"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10001" as (select /*+ inline */ "INPATIENT_2012_DATA"."TOTAL_DISCHARGES", 
+"INPATIENT_2012_DATA"."PROVIDER_CITY", 
+"INPATIENT_2012_DATA"."AVERAGE_MEDICARE_PAYMENTS", 
+"INPATIENT_2012_DATA"."PROVIDER_STREET_ADDRESS", 
+"INPATIENT_2012_DATA"."AVERAGE_TOTAL_PAYMENTS", 
+"INPATIENT_2012_DATA"."PROVIDER_STATE", 
+"INPATIENT_2012_DATA"."PROVIDER_ID", 
+"INPATIENT_2012_DATA"."TOT_PAYMENT_CHARGEDAMT_RATIO", 
+"INPATIENT_2012_DATA"."PROVIDER_NAME", 
+"INPATIENT_2012_DATA"."HRR_DESCRIPTION", 
+"INPATIENT_2012_DATA"."MCPAYMENT_CHARGEDAMT_RATIO", 
+"INPATIENT_2012_DATA"."DRG_DEFINITION", 
+"INPATIENT_2012_DATA"."PROVIDER_ZIP_CODE", 
+"INPATIENT_2012_DATA"."ID", 
+"INPATIENT_2012_DATA"."SUBMITTED_CHRG_VS_DRG_AGGR", 
+"INPATIENT_2012_DATA"."MCPAYMENT_TOTALPAY_RATIO", 
+"INPATIENT_2012_DATA"."DISCHARGE_PCT", 
+"INPATIENT_2012_DATA"."AVERAGE_COVERED_CHARGES" 
+from "CS370_ASL456"."INPATIENT_2012_DATA"  )</SQLExpression>
+            <Attributes>
+                <Attribute Name="TOTAL_DISCHARGES" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="PROVIDER_CITY" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="AVERAGE_MEDICARE_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_STREET_ADDRESS" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="AVERAGE_TOTAL_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_STATE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="PROVIDER_ID" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="TOT_PAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="HRR_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="MCPAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="DRG_DEFINITION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="PROVIDER_ZIP_CODE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="SUBMITTED_CHRG_VS_DRG_AGGR" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="MCPAYMENT_TOTALPAY_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="DISCHARGE_PCT" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="AVERAGE_COVERED_CHARGES" DataType="FLOAT" Status="Valid"/>
+            </Attributes>
+            <SourceTable Schema="" Name="INPATIENT_2012_DATA"/>
+        </DataSource>
+        <CreateTable TableName="INPATIENT" Table="true" Id="10012" Name="INPATIENT_2012_ANOMALIES_SET_2" Status="Complete">
+            <Icon XCOORD="716" YCOORD="357"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10012" AS ( SELECT /*+ inline */  "ANOM_SVM_1_21_PRED" ,
+ "ANOM_SVM_1_21_PROB" ,
+ "TOTAL_DISCHARGES" ,
+ "PROVIDER_CITY" ,
+ "AVERAGE_MEDICARE_PAYMENTS" ,
+ "PROVIDER_STREET_ADDRESS" ,
+ "AVERAGE_TOTAL_PAYMENTS" ,
+ "PROVIDER_STATE" ,
+ "PROVIDER_ID" ,
+ "TOT_PAYMENT_CHARGEDAMT_RATIO" ,
+ "PROVIDER_NAME" ,
+ "HRR_DESCRIPTION" ,
+ "MCPAYMENT_CHARGEDAMT_RATIO" ,
+ "DRG_DEFINITION" ,
+ "PROVIDER_ZIP_CODE" ,
+ "ID" ,
+ "SUBMITTED_CHRG_VS_DRG_AGGR" ,
+ "MCPAYMENT_TOTALPAY_RATIO" ,
+ "DISCHARGE_PCT" ,
+ "AVERAGE_COVERED_CHARGES"  FROM "INPATIENT")</SQLExpression>
+            <DBAttributes>
+                <DBAttribute Key="No" Index="No" Name="ANOM_SVM_1_21_PRED" DataType="NUMBER" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="ANOM_SVM_1_21_PROB" DataType="BINARY_DOUBLE" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="TOTAL_DISCHARGES" DataType="NUMBER" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="PROVIDER_CITY" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="AVERAGE_MEDICARE_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="PROVIDER_STREET_ADDRESS" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="AVERAGE_TOTAL_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="PROVIDER_STATE" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="PROVIDER_ID" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="TOT_PAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="PROVIDER_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="HRR_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="MCPAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="DRG_DEFINITION" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="PROVIDER_ZIP_CODE" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="ID" DataType="NUMBER" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="SUBMITTED_CHRG_VS_DRG_AGGR" DataType="FLOAT" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="MCPAYMENT_TOTALPAY_RATIO" DataType="FLOAT" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="DISCHARGE_PCT" DataType="FLOAT" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="AVERAGE_COVERED_CHARGES" DataType="FLOAT" Status="Valid"/>
+            </DBAttributes>
+        </CreateTable>
+        <ColumnFilter Id="10004" Name="Filter Columns" Status="Complete">
+            <Icon XCOORD="400" YCOORD="226"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10004" as (SELECT /*+ inline */
+"DISCHARGE_PCT",
+"ID",
+"SUBMITTED_CHRG_VS_DRG_AGGR"
+FROM {INPUT_SOURCE}
+ )</SQLExpression>
+            <ColumnFilterSettings NumberOfRows="2000">
+                <DataQualitySettings NullsPercent="95.0" UniquePercent="95.0" ConstantPercent="95.0"/>
+                <AttrImportantSettings SamplingType="System" StratifiedCutoff="10"/>
+            </ColumnFilterSettings>
+            <ColumnFilterAttributes AutoSpec="No" AutomaticFilterEnable="No">
+                <Attribute AutomaticFiltering="false" Output="No" Name="AVERAGE_COVERED_CHARGES" DataType="FLOAT" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="AVERAGE_MEDICARE_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="AVERAGE_TOTAL_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="Yes" Name="DISCHARGE_PCT" DataType="FLOAT" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="DRG_DEFINITION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="HRR_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="Yes" Name="ID" DataType="NUMBER" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="MCPAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="MCPAYMENT_TOTALPAY_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="PROVIDER_CITY" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="PROVIDER_ID" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="PROVIDER_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="PROVIDER_STATE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="PROVIDER_STREET_ADDRESS" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="PROVIDER_ZIP_CODE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="Yes" Name="SUBMITTED_CHRG_VS_DRG_AGGR" DataType="FLOAT" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="TOTAL_DISCHARGES" DataType="NUMBER" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="TOT_PAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+            </ColumnFilterAttributes>
+            <ColumnFilterResults DataQualityOutput="ODMR$06_13_12_224816BKPDYZQ" GenerateImportanceOutput="false">
+                <Attribute Name="AVERAGE_COVERED_CHARGES">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
+                <Attribute Name="AVERAGE_MEDICARE_PAYMENTS">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
+                <Attribute Name="AVERAGE_TOTAL_PAYMENTS">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
+                <Attribute Name="DISCHARGE_PCT"/>
+                <Attribute Name="DRG_DEFINITION"/>
+                <Attribute Name="HRR_DESCRIPTION"/>
+                <Attribute Name="ID">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
+                <Attribute Name="MCPAYMENT_CHARGEDAMT_RATIO">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
+                <Attribute Name="MCPAYMENT_TOTALPAY_RATIO">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
+                <Attribute Name="PROVIDER_CITY"/>
+                <Attribute Name="PROVIDER_ID"/>
+                <Attribute Name="PROVIDER_NAME"/>
+                <Attribute Name="PROVIDER_STATE"/>
+                <Attribute Name="PROVIDER_STREET_ADDRESS"/>
+                <Attribute Name="PROVIDER_ZIP_CODE"/>
+                <Attribute Name="SUBMITTED_CHRG_VS_DRG_AGGR">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
+                <Attribute Name="TOTAL_DISCHARGES"/>
+                <Attribute Name="TOT_PAYMENT_CHARGEDAMT_RATIO">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
+            </ColumnFilterResults>
+        </ColumnFilter>
+        <RowFilter Id="10017" Name="Filter Rows" Status="Complete">
+            <Icon XCOORD="248" YCOORD="228"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10017" as (SELECT /*+ inline */
+"TOTAL_DISCHARGES"
+, "PROVIDER_CITY"
+, "AVERAGE_MEDICARE_PAYMENTS"
+, "PROVIDER_STREET_ADDRESS"
+, "AVERAGE_TOTAL_PAYMENTS"
+, "PROVIDER_STATE"
+, "PROVIDER_ID"
+, "TOT_PAYMENT_CHARGEDAMT_RATIO"
+, "PROVIDER_NAME"
+, "HRR_DESCRIPTION"
+, "MCPAYMENT_CHARGEDAMT_RATIO"
+, "DRG_DEFINITION"
+, "PROVIDER_ZIP_CODE"
+, "ID"
+, "SUBMITTED_CHRG_VS_DRG_AGGR"
+, "MCPAYMENT_TOTALPAY_RATIO"
+, "DISCHARGE_PCT"
+, "AVERAGE_COVERED_CHARGES"
+
+FROM
+{INPUT_SOURCE}
+WHERE
+"PROVIDER_STATE"  != 'XX'  Or
+"PROVIDER_STATE"  != 'AA'  Or
+"PROVIDER_STATE"  != 'AE'  Or
+"PROVIDER_STATE"  != 'AP'  Or
+"PROVIDER_STATE"  != 'AS'  Or
+"PROVIDER_STATE"  != 'GU'  Or
+"PROVIDER_STATE"  != 'MP'  Or
+"PROVIDER_STATE"  != 'PR'  Or
+"PROVIDER_STATE"  != 'VI'  Or
+"PROVIDER_STATE"  != 'ZZ' )</SQLExpression>
+            <OutputColumns>
+                <Attribute Name="TOTAL_DISCHARGES" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="PROVIDER_CITY" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="AVERAGE_MEDICARE_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_STREET_ADDRESS" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="AVERAGE_TOTAL_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_STATE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="PROVIDER_ID" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="TOT_PAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="HRR_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="MCPAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="DRG_DEFINITION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="PROVIDER_ZIP_CODE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="SUBMITTED_CHRG_VS_DRG_AGGR" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="MCPAYMENT_TOTALPAY_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="DISCHARGE_PCT" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="AVERAGE_COVERED_CHARGES" DataType="FLOAT" Status="Valid"/>
+            </OutputColumns>
+            <Filter>"PROVIDER_STATE"  != 'XX'  Or
+"PROVIDER_STATE"  != 'AA'  Or
+"PROVIDER_STATE"  != 'AE'  Or
+"PROVIDER_STATE"  != 'AP'  Or
+"PROVIDER_STATE"  != 'AS'  Or
+"PROVIDER_STATE"  != 'GU'  Or
+"PROVIDER_STATE"  != 'MP'  Or
+"PROVIDER_STATE"  != 'PR'  Or
+"PROVIDER_STATE"  != 'VI'  Or
+"PROVIDER_STATE"  != 'ZZ'</Filter>
+        </RowFilter>
+        <AnomalyDetectionBuild Id="10007" Name="Anomaly Build" Status="Complete">
+            <Icon XCOORD="529" YCOORD="226"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <BuildDataSource SourceId="10004"/>
+            <CaseAttributes>
+                <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
+            </CaseAttributes>
+            <MiningAttributes AutoSpec="Yes">
+                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="DISCHARGE_PCT" DataType="FLOAT" Status="Valid"/>
+                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="No" Name="ID" DataType="NUMBER" Status="Valid"/>
+                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="SUBMITTED_CHRG_VS_DRG_AGGR" DataType="FLOAT" Status="Valid"/>
+            </MiningAttributes>
+            <Stoplists>
+                <Stoplist Id="1" Name="Default" Type="Basic" Language="ENGLISH" DBName="">
+                    <StopTokens>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>Mr</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>Mrs</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>Ms</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>a</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>all</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>almost</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>also</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>although</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>an</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>and</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>any</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>are</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>as</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>at</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>be</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>because</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>been</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>both</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>but</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>by</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>can</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>could</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>d</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>did</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>do</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>does</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>either</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>for</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>from</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>had</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>has</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>have</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>having</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>he</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>her</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>here</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>hers</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>him</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>his</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>how</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>however</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>i</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>if</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>in</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>into</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>is</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>it</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>its</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>just</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>ll</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>me</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>might</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>my</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>no</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>non</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>nor</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>not</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>of</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>on</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>one</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>only</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>onto</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>or</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>our</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>ours</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>s</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>shall</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>she</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>should</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>since</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>so</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>some</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>still</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>such</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>t</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>than</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>that</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>the</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>their</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>them</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>then</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>there</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>therefore</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>these</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>they</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>this</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>those</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>though</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>through</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>thus</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>to</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>too</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>until</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>ve</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>very</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>was</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>we</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>were</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>what</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>when</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>where</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>whether</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>which</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>while</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>who</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>whose</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>why</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>will</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>with</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>would</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>yet</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>you</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>your</Item>
+                        </Token>
+                        <Token Type="Word" Language="ENGLISH">
+                            <Item>yours</Item>
+                        </Token>
+                    </StopTokens>
+                </Stoplist>
+            </Stoplists>
+            <TextSettings TransformType="Token" CategoricalCutOffValue="200">
+                <Token>
+                    <Token MaxNumberPerDoc="50" MaxNumberAllDocs="3000" Frequency="IDF" StoplistId="1" Policy="">
+                        <Lexer Name="" Type="Basic">
+                            <Settings/>
+                        </Lexer>
+                        <Languages>
+                            <Language Name="ENGLISH" Type="SingleByte"/>
+                        </Languages>
+                    </Token>
+                </Token>
+                <Theme Type="Single">
+                    <Token MaxNumberPerDoc="50" MaxNumberAllDocs="3000" Frequency="IDF" StoplistId="1" Policy="">
+                        <Lexer Type="Basic">
+                            <Settings>
+                                <Attribute Name="index_themes" ValueString="YES" Type="String"/>
+                                <Attribute Name="theme_language" ValueString="ENGLISH" Type="String"/>
+                            </Settings>
+                        </Lexer>
+                        <Languages>
+                            <Language Name="ENGLISH" Type="SingleByte"/>
+                        </Languages>
+                    </Token>
+                </Theme>
+            </TextSettings>
+            <TextAttributes/>
+            <HeuristicSummaryResult StatisticTable="ODMR$06_14_31_106208JGHCDLK">
+                <Attribute Name="ID">
+                    <Reason Type="INPUT_NONE"/>
+                </Attribute>
+            </HeuristicSummaryResult>
+            <Models>
+                <AnomalyDetectionModel Id="10006" Name="ANOM_SVM_1_21" Status="Complete" CreationDate="2015-05-17T06:14:37" Annotation="" UseForOutput="true">
+                    <InputMiningData DataUsage="AUTO" MiningUsage="AUTO">
+                        <MiningAttributes>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="DISCHARGE_PCT" DataType="FLOAT" Status="Valid"/>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="No" Name="ID" DataType="NUMBER" Status="Valid"/>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="SUBMITTED_CHRG_VS_DRG_AGGR" DataType="FLOAT" Status="Valid"/>
+                        </MiningAttributes>
+                        <HeuristicResult StatisticTable="ODMR$06_14_31_106208JGHCDLK"/>
+                    </InputMiningData>
+                    <AnomalyDetectionAlgo>
+                        <SVMS_ACTIVE_LEARNING>SVMS_AL_ENABLE</SVMS_ACTIVE_LEARNING>
+                        <SVMS_CONV_TOLERANCE>0.001</SVMS_CONV_TOLERANCE>
+                        <SVMS_OUTLIER_RATE>0.01</SVMS_OUTLIER_RATE>
+                    </AnomalyDetectionAlgo>
+                </AnomalyDetectionModel>
+            </Models>
+        </AnomalyDetectionBuild>
+        <Apply ColumnOutputOrder="OutputColumns" Id="10009" Name="Apply" Status="Complete">
+            <Icon XCOORD="531" YCOORD="358"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10009" as (SELECT /*+ inline */
+PREDICTION("CS370_ASL456"."ANOM_SVM_1_21" USING *) "ANOM_SVM_1_21_PRED", 
+PREDICTION_PROBABILITY("CS370_ASL456"."ANOM_SVM_1_21" USING *) "ANOM_SVM_1_21_PROB", 
+"TOTAL_DISCHARGES", 
+"PROVIDER_CITY", 
+"AVERAGE_MEDICARE_PAYMENTS", 
+"PROVIDER_STREET_ADDRESS", 
+"AVERAGE_TOTAL_PAYMENTS", 
+"PROVIDER_STATE", 
+"PROVIDER_ID", 
+"TOT_PAYMENT_CHARGEDAMT_RATIO", 
+"PROVIDER_NAME", 
+"HRR_DESCRIPTION", 
+"MCPAYMENT_CHARGEDAMT_RATIO", 
+"DRG_DEFINITION", 
+"PROVIDER_ZIP_CODE", 
+"ID", 
+"SUBMITTED_CHRG_VS_DRG_AGGR", 
+"MCPAYMENT_TOTALPAY_RATIO", 
+"DISCHARGE_PCT", 
+"AVERAGE_COVERED_CHARGES"
+FROM {INPUT_SOURCE} )</SQLExpression>
+            <SupplementalAttributes AutoSpec="No">
+                <Attribute Name="TOTAL_DISCHARGES" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="PROVIDER_CITY" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="AVERAGE_MEDICARE_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_STREET_ADDRESS" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="AVERAGE_TOTAL_PAYMENTS" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_STATE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="PROVIDER_ID" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="TOT_PAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="PROVIDER_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="HRR_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="MCPAYMENT_CHARGEDAMT_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="DRG_DEFINITION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="PROVIDER_ZIP_CODE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="SUBMITTED_CHRG_VS_DRG_AGGR" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="MCPAYMENT_TOTALPAY_RATIO" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="DISCHARGE_PCT" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="AVERAGE_COVERED_CHARGES" DataType="FLOAT" Status="Valid"/>
+            </SupplementalAttributes>
+            <OutputColumns AutoSpec="Yes">
+                <OutputColumn>
+                    <Model IsModelBuilt="false" NodeId="10007" Schema="" Name="ANOM_SVM_1_21" MiningFunction="ANOMALY_DETECTION" MiningAlgorithm="SUPPORT_VECTOR_MACHINES" Status="Valid" UseForOutput="true" ModelId="10006"/>
+                    <Prediction>
+                        <CostOption>
+                            <None/>
+                        </CostOption>
+                        <Column Name="ANOM_SVM_1_21_PRED"/>
+                    </Prediction>
+                </OutputColumn>
+                <OutputColumn>
+                    <Model IsModelBuilt="false" NodeId="10007" Schema="" Name="ANOM_SVM_1_21" MiningFunction="ANOMALY_DETECTION" MiningAlgorithm="SUPPORT_VECTOR_MACHINES" Status="Valid" UseForOutput="true" ModelId="10006"/>
+                    <PredictionProbability>
+                        <Column Name="ANOM_SVM_1_21_PROB"/>
+                    </PredictionProbability>
+                </OutputColumn>
+            </OutputColumns>
+        </Apply>
+    </Nodes>
+    <Links>
+        <Link Id="10008" From="10004" To="10007" Name="Link" Label="From &quot;Filter Columns&quot; to &quot;Anomaly Build&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10010" From="10007" To="10009" Name="Link" Label="From &quot;Anomaly Build&quot; to &quot;Apply&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10013" From="10009" To="10012" Name="Link" Label="From &quot;Apply&quot; to &quot;INPATIENT_2012_ANOMALIES_SET_2&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10018" From="10001" To="10017" Name="Link" Label="From &quot;INPATIENT_2012_DATA&quot; to &quot;Filter Rows&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10019" From="10017" To="10004" Name="Link" Label="From &quot;Filter Rows&quot; to &quot;Filter Columns&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10020" From="10017" To="10009" Name="Link" Label="From &quot;Filter Rows&quot; to &quot;Apply&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+    </Links>
+</WorkflowProcess>

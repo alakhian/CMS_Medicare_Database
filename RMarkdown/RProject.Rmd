@@ -1,5 +1,5 @@
 ---
-title: "Medicare Provider and Utilization Data"
+title: "MEDICARE PROVIDER AND UTILIZATION DATA"
 output: html_document
 ---
 
@@ -34,7 +34,7 @@ Generally speaking, all these databases are organized as follows:
 
 The purpose of this research is to analyze anomalous payment information in these datasets, with a primary focus on Inpatient and the Physician and Other Supplier databases since they are the 2 largest ones.
 
-According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". The purpose of this research is to develop a set of models that can be run on these datasets and point out anomalous data points for the purposes of fraud detection. Ideally, these anomaly detection models can be applied to future releases of Medicare datasets as well.
+According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". We hope to develop a set of models that can be run on these datasets and point out anomalous data points for the purposes of fraud detection. Ideally, these anomaly detection models can be applied to future releases of Medicare datasets as well.
 
 #Physician and Other Supplier Databases
 
@@ -376,17 +376,80 @@ To replicate this workflow, select INPATIENT_2012_DATA as the source node. Then 
 The above node filters out everything except the Medicare Payment to Charged Amount Ratio, Total Payment to Charged Amount Ratio, and Number of Discharges.
 
 Then, add another Filter Column node, and name it "Medicare Payment to Charged Amt Ratio". This node will filter out everything except the Medicare to Charged Amount Ratio, as seen below:
-![](./images/odm_workflows/05_inpatient_overpayment_anom_filter1.jpg)
+![](./images/odm_workflows/06_inpatient_overpayment_anom_filter2.jpg)
 
-Finally, add the Apply and Create Table node. Name the Tables as seen in the first screenshot for this workflow.
+Finally, add the Anomaly Detection, Apply, and Create Table nodes. Remeber to set Case ID to "ID" and the rate of outliers to 0.01 for the Anomaly Detection. Add all the columns from the original table to the Apply node in the Additional Output section. Name the tables as seen in the first screenshot for this workflow.
 
 ####Anomaly Detection Results
+Below are the results of this workflow. All graphs show the Medicare Payment to Charged Amount Ratio on the y-axis and the Anomaly SVM Probability on the x-axis. The first two graphs map out all records in the Inpatient database. The rest of the graphs show the most anomalous hospitals, several of which had no normal data points.
 ![](./images/OverpaymentAnomalies-RatiosDischargesIncluded.jpg)
 ![](./images/OverpaymentAnomalies-MedicarePaytoChargeRatioOnly.jpg)
+
+The below graphs are for specific hospitals and they will use the results of the first anomaly detection model from this section, which included all the payment ratios and the number of total discharges. We want our models to be as multidimensional as possible.
 ![](./images/OverpaymentAnomalies-BX.jpg)
 ![](./images/OverpaymentAnomalies-Linc.jpg)
+![](./images/OverpaymentAnomalies-Carney.jpg)
+![](./images/OverpaymentAnomalies-Boston.jpg)
 
+There are many more hospitals that contain anomalous data points, but the above ones contained by far the most outliers. All of the results can be seen in the Inpatient.twb Tableau workbook on the page titled "Overpayment Anomalies by Provider - Ratios + Discharges Included".
 
+If you wish to see every single hospital that had an instance of Medicare overpayment, run the following SQL query: "select provider_name,count(*) as "Count" from inpatient_2012_data where MCPAYMENT_CHARGEDAMT_RATIO >= 1
+group by provider_name order by "Count" desc;".
 
+###Anomaly Detection - Provider Side
 
+Now, we examine the anomalies in the Inpatient database from the provider side, where a provider is either overbilling for procedures or conducting unnecessarily expensive procedures. This is very similar to the anomaly detection model that was run on the Physician databases.
 
+####Workflow
+This is is the screenshot of the workflow that was used.
+![](./images/odm_workflows/07_inpatient_anom_workflow.jpg)
+
+For the Filter Rows, copy and paste the below text. This will allow us to look at only the 50 states and Washington DC.
+<blockquote>
+"PROVIDER_STATE"  != 'XX'  Or
+"PROVIDER_STATE"  != 'AA'  Or
+"PROVIDER_STATE"  != 'AE'  Or
+"PROVIDER_STATE"  != 'AP'  Or
+"PROVIDER_STATE"  != 'AS'  Or
+"PROVIDER_STATE"  != 'GU'  Or
+"PROVIDER_STATE"  != 'MP'  Or
+"PROVIDER_STATE"  != 'PR'  Or
+"PROVIDER_STATE"  != 'VI'  Or
+"PROVIDER_STATE"  != 'ZZ'
+</blockquote>
+
+Set the Filter Columns settings as seen below.
+![](./images/odm_workflows/08_inpatient_anom_filter.jpg)
+
+Then, add the Anomaly Detection, Apply, and Create Table nodes with the same settings we've been using for all the previous sections.
+
+Also, note that here there was no need to filter out the expensive procedures the way we did in the Physician table. This is because there are only types of procedures included in the database, and the national average covered charge for the least expensive one is still more than $15,000. So, all these procedures are extremely expensive.
+
+###Anomaly Detection Results
+
+The following graphs display DISCHARGE_PCT along the x-axis and SUBMITTED_CHRG_VS_DRG_AGGR along the y-axis. The anomaly predictions ('0' for anomaly, '1' for normal) are color coded. We are most interested in anything that is high up on either axis, which should merit inspection.
+
+DISCHARGE_PCT is analagous to the BENE_DAY_SRVC_PCT from the Physician database. Suppose a there were 1000 discharges across the nation for a particular DRG procedure "638 - DIABETES W CC". Then suppose a provider with ID 220024 had 100 discharges for this same procedure. The DISCHARGE_PCT for this record would then be 100/1000 = 0.1.
+
+SUBMITTED_CHRG_VS_DRG_AGGR is analagous to the SUBMITTED_CHRG_VS_HCPCS_AGGR from the Physician database. The charged amount for a procedure done by an individual provider is compared to the average charged amount for all occurrences of that same procedure in the same state as the provider.
+
+Below is the graph for all the records in the Inpatient database. This is taken from Inpatient.twb on the page title "Submitted Charge Outliers and DRG Discharge Percentage Outliers"
+![](./images/SubmittedChargeOutliersandDRGDischargePercentageOutliers.jpg)
+
+Finally, here are graphs pertaining to particularly anomalous procedures. The provider ID and HRR Description (geographic region) are labeled for some of the points. This is taken from the page titled "Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure" in Inpatient.twb.
+
+![](./images/drg/01.jpg)
+![](./images/drg/02.jpg)
+![](./images/drg/03.jpg)
+![](./images/drg/04.jpg)
+![](./images/drg/05.jpg)
+
+There are a total of 100 different graphs here, but these were the ones with the most notable outliers. One of the limitations here is that for the Submitted Charge vs. DRG Aggregate calculations, the CMS aggregated by state instead of by metro area. For example, several of the outliers on the y-axis are for hospitals in Philadelphia. This may partially be attributed to the fact that Philadelphia is the most expensive city in the state of Pennsylvania. However, there are some metro areas that are very sparsely populated that have only a few discharges for a particular procedure, so it wouldn't make sense to use that data because it'd be so susceptible to any outlier. 
+As stated before, more information would be needed to actually check why these providers show up as anomalous. 
+
+#Conclusion
+We have analyzed several different kinds of anomalies here. For both the Inpatient and Physician datasets, the possibility of healthcare providers overbilling was examined, along with the possibility of a provider billing Medicare for unnecessary procedures that are known to be expensive. In addition, we looked at cases where Medicare paid out more than what they were charged.
+
+As stated several times, these anomalies are not necessarily going to be fraud cases. The purpose of this research was to develop models that would point to particularly anomalous cases that could then be used by a Medicare fraud detection agency, such as the CMS or OIG.
+
+Lastly, the importance of data preprocessing cannot be understated. You may notice that the actual workflows in Oracle Data Miner were relatively simple. This is because so much time was spent filtering out certain rows and columns that added unnecessary noise. Additionally, adding the calculated columns was also necessary. For example, it was not enough to send in the AVERAGE_COVERED_CHARGES and AVERAGE_MEDICARE_PAYMENTS on their own into the anomaly detection. Without taking the ratio of those 2 columns and placing it in the the MCPAYMENT_TOTALPAY_RATIO column in the Inpatient databases, the instances of overpayment would not have been flagged as anomalous. There are several other examples of this throughout this project, and that is why so much time and attention was given to properly importing and preprocessing the databases.
