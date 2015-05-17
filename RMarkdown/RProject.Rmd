@@ -32,7 +32,7 @@ Generally speaking, all these databases are organized as follows:
 
 #Purpose
 
-The purpose of this research is to analyze anomalous payment information in these datasets, with a primary focus on Inpatient and the Physician and Other Supplier databases since they are the 2 largest ones.
+The purpose of this research is to analyze anomalous payment information in these datasets, with a primary focus on the Inpatient and the Physician and Other Supplier databases since they are the 2 largest ones.
 
 According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". We hope to develop a set of models that can be run on these datasets and point out anomalous data points for the purposes of fraud detection. Ideally, these anomaly detection models can be applied to future releases of Medicare datasets as well.
 
@@ -247,6 +247,8 @@ The data source is the PHYSICIAN_AND_OTHER_SUPPLIER_TABLE. Next, is a Filter Row
 
 After that, there is another Filter Rows node called "HCPCS Filters", which will filter out procedures that have were conducted by at least 100 providers and had a median Medicare Allowed Amount of $1000. Recall the linear relationship between Medicare Payment and Medicare Allowed Amount. The reason Medicare Allowed Amount is chosen for the filter is because it is extremely predictable. A healthcare provider that is potentially committing fraud is going to bill Medicare for procedures that are known to have a high Medicare Allowed Amount. This node can be re-created by copying the text from hcpcs_filter.txt in the HCPCS_Filter/ directory.
 
+*******************************************************************************************************************
+
 ####Customizing Filter for HCPCS Codes
 
 Read this section ONLY if you wish to change the parameters for filtering out certain procedures. As mentioned in the previous section, the filter is set for procedures that have a median Medicare allowed amount of at least $1000 and were conducted by at least 100 providers. Otherwise, skip to the next section to continue reading about the anomaly detection workflow.
@@ -255,7 +257,8 @@ First, go to the sql/ directory and run "hcpcs filters.sql". This will print out
 ![](./images/data_importing/hcpcs_filter.jpg)
 
 Next, go to the HCPCS_Filter/src directory and open FilterHCPCS.java. Make sure to change the input path in line 17 to be the .txt file that you just created. Set the output path in line 19 to wherever you want. Compile and run the program. Copy and paste the text in the output file from the path that you specified into the "HCPCS Filters" node in the Physician Anomaly workflow.
-********************************************************************************
+
+*******************************************************************************************************************
 
 For the Filter Columns node, the below setting were used. 
 ![](./images/odm_workflows/02_physician_anom_filter_column.jpg)
@@ -264,24 +267,24 @@ This is where the importance of the two calculated columns, BENE_DAY_SRVC_PCT an
 For the Anomaly Detection node, Case ID is set to "ID". Also, the outlier rate should was changed to 0.01 in Advanced Settings as seen below. The original setting of 0.10 is far too high.
 ![](./images/odm_workflows/03_physician_anom_settings.jpg)
 
-In the Apply node, all the columns from the source table were added in the Additional Output tab. Finally, this was exported into the table called PHYSICIAN_ANOMALY, which holds the results of this particular anomaly detection model.
+In the Additional Output tab of the Apply node, all the columns from the source table are added. Finally, this is exported into the table called PHYSICIAN_ANOMALY, which holds the results of this particular anomaly detection model.
 
 ##Anomaly Detection Results
 
-Before showing the results, it is important to understand the two columns BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR. Also, keep in mind that this database aggregated by provider (NPI), HCPCS code (procedure), and place of service (facility or non-facility). This will help in understanding the methodology for these two columns.
+Before showing the results, it is important to understand the two columns BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR. Also, keep in mind that each row in the Physician database is aggregated by provider (NPI), procedure (HCPCS code), and place of service (facility or non-facility). This will help in understanding the methodology for these two columns.
 
 ###BENE_DAY_SRVC_PCT - Beneficiary Per Day Services Percentage
-For a given type of procedure and place of service, this is the percentage of all procedures that one provider conducted. For example, suppose that we wish to look at HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O'). Assume that in there were a total of 1000 beneficiary per day services (basically, the number of procedures). Now assume that a provider with NPI (identification number) 1003000522 conducted 100 beneficiary per day services for this particular procedure in a non-facility. Then, the BENE_DAY_SRVC_PCT for this particular record will be 100/1000 = 10%. 
-Anytime, the BENE_DAY_SRVC_PCT for a certain procedure is unusually high, it will be flagged as an anomaly because it means that this provider conducted an usually high amount of services for this procedure relative to other providers. This does not necessarily mean that it is a case of fraud; it could just be an unusually large practice that sees lots of patients. However, it is worth inspecting, because the provider could billing Medicare for this procedure when it is not necessary because it is known to have a high reimbursement.
+For a given type of procedure and place of service, this is the percentage of all procedures that one provider conducted. For example, suppose that we wish to look at HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O'). Assume that in there were a total of 1000 beneficiary per day services (basically, the number of procedures). Now assume that a provider with NPI (identification number) 1003000522 conducted 100 beneficiary per day services for this particular procedure in a non-facility. Then, the BENE_DAY_SRVC_PCT for this particular record will be 100/1000 = 0.1. 
+Anytime, the BENE_DAY_SRVC_PCT for a certain procedure is unusually high, it will be flagged as an anomaly because it means that this provider conducted an usually high amount of services for this procedure relative to other providers. This does not necessarily mean that it is a case of fraud; it could just be an unusually large practice that sees lots of patients. However, it is worth inspecting, since the provider could billing Medicare for this procedure when it is not necessary because it is known to have a high reimbursement.
 
 ###SUBMITTED_CHRG_VS_HCPCS_AGGR - Provider Submitted Charge vs HCPCS Aggregated Submitted Charge
 For a given procedure and place of service, this is the ratio of the Medicare submitted charge from one provider versus the median submitted charge for all providers in that same state that conducted this same procedure. Basically, it is designed to tell us whether a provider is overbilling (or underbilling) for a procedure relative to other providers.
 For example, suppose provider 1003000522 charged Medicare $1000 for HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O') setting. Assume that he is based in Florida. Also, assume that for all providers in Florida that conducted this same procedure in a non-facility setting, their median submitted charge to Medicare was $100. Then, the SUBMITTED_CHRG_VS_HCPCS_AGGR for this particular record will be $1000/$100 = 10.
 To adjust for cost of living differences across the United States, this column was aggregated by state. 
 
-###Results in Tableau
+###Anomaly Detection Results
 
-The following graphs display BENE_DAY_SRVC_PCT along the x-axis and SUBMITTED_CHRG_VS_HCPCS_AGGR along the y-axis. The anomaly predictions ('0' for anomaly, '1' for normal) are color coded. So anything that is high up on either axis should be flagged as an outlier and merits inspection.
+The following graphs display BENE_DAY_SRVC_PCT along the x-axis and SUBMITTED_CHRG_VS_HCPCS_AGGR along the y-axis. The anomaly predictions ('0' for anomaly, '1' for normal) are color coded. So anything that is high up on either axis should be flagged as an outlier and merits inspection. It was important to display both of these columns on each visualization because they are both accounted for in anomaly detection.
 
 The below graph maps out every record that was in PHYSICIAN_ANOMALY. As mentioned previously, it contains records for HCPCS Code-Place of Service combinations that matched up with more than 100 providers and had a Medicare allowed payment amount of at least $1000. Some of the NPI labels can be seen. This is from page 2 in Physicians.twb in the Tableau/ directory.
 ![](./images/SubmittedChargeOutliersandHCPCSBeneficiaryDayPercentageOutliers-ALL.jpg)
@@ -295,7 +298,7 @@ The above graph is meant just to illustrate the general distribution of results.
 ![](./images/hcpcs/06.jpg)
 
 There are a total of 77 different graphs, but these were the ones with the most notable outliers. The first two graphs show providers that charge an unusually high amount for a procedure, and the last four show providers that conduct an unusually high number of a certain type of procedure. At this point, this is all the information that can be gleaned from public records. We have developed the model for finding anomalous data points. 
-However, more information would be needed to actually check why these providers show up as anomalous, such as financial documents for the individual providers. Unfortunately, that information is not available to the public at this point. So, while these data points are anomalous and merit inspection, it would be premature to say that they are definitely cases of fraud. As stated in the purpose statement, this goal of this project is to develop a model for pointing anomalies that could then be analyzed and audited by an agency such as the CMS or the OIG (https://oig.hhs.gov/fraud/strike-force/). 
+However, more information would be needed to actually check why these providers show up as anomalous, such as financial documents for the individual providers. Unfortunately, that information is not available to the public at this point. So, while these data points are anomalous and merit inspection, it would be premature to say that they are definitely cases of fraud. As stated in the purpose statement, this goal of this project is to develop a model for pointing out anomalies that could then be analyzed and audited by an agency such as the CMS or the OIG (https://oig.hhs.gov/fraud/strike-force/). 
 
 #Inpatient Databases
 
@@ -318,9 +321,9 @@ There are a total of 3 databases related to Inpatient Medicare data:
 There are 3 databases related to Physician and Other Supplier Medicare data that we will be using. Below are detailed instructions for importing and preprocessing the databases into Oracle SQL Developer.
 
 ###Importing Inpatient .csv files
-First, go to sql/ddl/ and run the INPATIENT_2012_DATA_B.sql DDL script. Then, click on the following [http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Inpatient_Data_2012_CSV.zip](link) or go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient2012.html and click the link that says "Inpatient Charge Data, FY2012, Comma Separated Values (CSV) version". Extract the contents of that zip file. Right click on your INPATIENT_2012_DATA and click Import and select the .csv file you just downloaded. On Step 4 of the Import Wizard and select "Position" on the Match By section. Click Next and then Finish.
+First, go to sql/ddl/ and run the INPATIENT_2012_DATA_B.sql DDL script. To download the database, click on the following [link](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Inpatient_Data_2012_CSV.zip), or go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient2012.html and click the link that says "Inpatient Charge Data, FY2012, Comma Separated Values (CSV) version". Extract the contents of that zip file. Right click on your INPATIENT_2012_DATA and click Import and select the .csv file you just downloaded. On Step 4 of the Import Wizard and select "Position" on the Match By section. Click Next and then Finish.
 
-Next, go to sql/ddl/ and run the INPATIENT_AGGREGATE.sql DDL script. Then, click on the following [link](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Inpatient_Summary_2012_CSV.zip) or go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient2012.html and click the link that says "National and State Summaries of Inpatient Charge Data, FY2012, Comma Separated Values (CSV) version". Extract the contents. Go to Oracle, and right click on the INPATIENT_2012_NATIONAL_DATA table and select Import. Select Medicare_Charge_Inpatient_DRG100_DRG_Summary_by_DRG_FY2012.csv and keep clicking Next on the Import Wizard. After this table is finished, right click on INPATIENT_2012_STATE_DATA, select Import, and Medicare_Charge_Inpatient_DRG100_DRG_Summary_by_DRGState_FY2012.csv. Keep clicking Next on the Import Wizard and allow the table to finish Importing.
+Next, go to sql/ddl/ and run the INPATIENT_AGGREGATE.sql DDL script. Then, click on the following [link](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Inpatient_Summary_2012_CSV.zip), or go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient2012.html and click the link that says "National and State Summaries of Inpatient Charge Data, FY2012, Comma Separated Values (CSV) version". Extract the contents. Go to Oracle, and right click on the INPATIENT_2012_NATIONAL_DATA table and select Import. Select Medicare_Charge_Inpatient_DRG100_DRG_Summary_by_DRG_FY2012.csv and keep clicking Next on the Import Wizard. After this table is finished, right click on INPATIENT_2012_STATE_DATA, select Import, and Medicare_Charge_Inpatient_DRG100_DRG_Summary_by_DRGState_FY2012.csv. Keep clicking Next on the Import Wizard and allow the table to finish Importing.
 
 To add the calculated columns, simply run the DDL script INPATIENT_2012_DATA.sql in sql/ddl/. This will create the INPATIENT_2012_DATA table.
 
@@ -349,6 +352,27 @@ This database consists of the following columns:
   <li>SUBMITTED_CHRG_VS_DRG_AGGR - The ratio of this provider's Medicare charged amount for the particular procedure versus the average amount charged to Medicare by all other providers that conducted the same procedure in the same state.
 </ul>
 
+###INPATIENT_2012_STATE_DATA Column Descriptions
+This database consists of the following columns:
+<ul>
+  <li>DRG_DEFINITION - Classification system that groups similar clinical conditions (diagnoses) and the procedures furnished by the hospital during the stay.
+  <li>PROVIDER_STATE - State in which the providers are physically located.
+  <li>TOTAL_DISCHARGES - The number of discharges billed by all providers for inpatient hospital services.
+  <li>AVERAGE_COVERED_CHARGES - The average charge of all provider's services covered by Medicare for discharges in the DRG. These will vary from hospital to hospital because of differences in hospital charge structures.
+  <li>AVERAGE_TOTAL_PAYMENTS - The average total payments to all providers for the DRG including the MS-DRG amount, teaching, disproportionate share, capital, and outlier payments for all cases.  Also included in average total  payments are co-payment and deductible amounts that the patient is responsible for and any additional payments by third parties for coordination of benefits.
+  <li>AVERAGE_MEDICARE_PAYMENTS - The average amount that Medicare pays to the provider for Medicare's share of the MS-DRG. Medicare payment amounts include the MS-DRG amount, teaching, disproportionate share, capital, and outlier payments for all cases.  Medicare payments DO NOT include beneficiary co-payments and deductible amounts nor any additional payments from third parties for coordination of benefits.
+</ul>
+
+###INPATIENT_2012_NATIONAL_DATA Column Descriptions
+This database consists of the following columns:
+<ul>
+  <li>DRG_DEFINITION - Classification system that groups similar clinical conditions (diagnoses) and the procedures furnished by the hospital during the stay.
+  <li>TOTAL_DISCHARGES - The number of discharges billed by all providers for inpatient hospital services.
+  <li>AVERAGE_COVERED_CHARGES - The average charge of all provider's services covered by Medicare for discharges in the DRG. These will vary from hospital to hospital because of differences in hospital charge structures.
+  <li>AVERAGE_TOTAL_PAYMENTS - The average total payments to all providers for the DRG including the MS-DRG amount, teaching, disproportionate share, capital, and outlier payments for all cases.  Also included in average total  payments are co-payment and deductible amounts that the patient is responsible for and any additional payments by third parties for coordination of benefits.
+  <li>AVERAGE_MEDICARE_PAYMENTS - The average amount that Medicare pays to the provider for Medicare's share of the MS-DRG. Medicare payment amounts include the MS-DRG amount, teaching, disproportionate share, capital, and outlier payments for all cases.  Medicare payments DO NOT include beneficiary co-payments and deductible amounts nor any additional payments from third parties for coordination of benefits.
+</ul>
+
 ##Inpatient Anomaly Detection
 
 ###Medicare Paying More Than Charged Amount
@@ -357,6 +381,7 @@ The Inpatient databases were the only ones from the entire Medicare data set in 
 
 First let us look at the overall distribution of Medicare Payment to Charged Amount ratios across the entire database.
 ![](./images/DistributionofMedicarePaymentstoChargeAmtRatio.jpg)
+
 We can clearly see just how anomalous it is for the ratio be greater than 1. In fact, there were 340 cases in which this occurred out of a total of 157747 (roughly 0.22%).
 
 In order to analyze this further, the distribution of these anomalies was examined on a geographic level.
@@ -382,6 +407,7 @@ Finally, add the Anomaly Detection, Apply, and Create Table nodes. Remeber to se
 
 ####Anomaly Detection Results
 Below are the results of this workflow. All graphs show the Medicare Payment to Charged Amount Ratio on the y-axis and the Anomaly SVM Probability on the x-axis. The first two graphs map out all records in the Inpatient database. The rest of the graphs show the most anomalous hospitals, several of which had no normal data points.
+
 ![](./images/OverpaymentAnomalies-RatiosDischargesIncluded.jpg)
 ![](./images/OverpaymentAnomalies-MedicarePaytoChargeRatioOnly.jpg)
 
@@ -423,7 +449,7 @@ Set the Filter Columns settings as seen below.
 
 Then, add the Anomaly Detection, Apply, and Create Table nodes with the same settings we've been using for all the previous sections.
 
-Also, note that here there was no need to filter out the expensive procedures the way we did in the Physician table. This is because there are only types of procedures included in the database, and the national average covered charge for the least expensive one is still more than $15,000. So, all these procedures are extremely expensive.
+Also, note that here there was no need to filter out the expensive procedures the way we did in the Physician table. This is because there are only 100 types of procedures included in the database, and the national average covered charge for the least expensive one is still more than $15,000. So, all these procedures are extremely expensive.
 
 ###Anomaly Detection Results
 
@@ -434,6 +460,7 @@ DISCHARGE_PCT is analagous to the BENE_DAY_SRVC_PCT from the Physician database.
 SUBMITTED_CHRG_VS_DRG_AGGR is analagous to the SUBMITTED_CHRG_VS_HCPCS_AGGR from the Physician database. The charged amount for a procedure done by an individual provider is compared to the average charged amount for all occurrences of that same procedure in the same state as the provider.
 
 Below is the graph for all the records in the Inpatient database. This is taken from Inpatient.twb on the page title "Submitted Charge Outliers and DRG Discharge Percentage Outliers"
+
 ![](./images/SubmittedChargeOutliersandDRGDischargePercentageOutliers.jpg)
 
 Finally, here are graphs pertaining to particularly anomalous procedures. The provider ID and HRR Description (geographic region) are labeled for some of the points. This is taken from the page titled "Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure" in Inpatient.twb.
@@ -444,7 +471,8 @@ Finally, here are graphs pertaining to particularly anomalous procedures. The pr
 ![](./images/drg/04.jpg)
 ![](./images/drg/05.jpg)
 
-There are a total of 100 different graphs here, but these were the ones with the most notable outliers. One of the limitations here is that for the Submitted Charge vs. DRG Aggregate calculations, the CMS aggregated by state instead of by metro area. For example, several of the outliers on the y-axis are for hospitals in Philadelphia. This may partially be attributed to the fact that Philadelphia is the most expensive city in the state of Pennsylvania. However, there are some metro areas that are very sparsely populated that have only a few discharges for a particular procedure, so it wouldn't make sense to use that data because it'd be so susceptible to any outlier. 
+There are a total of 100 different graphs here, but these were the ones with the most notable outliers. One of the limitations here is that for the Submitted Charge vs. DRG Aggregate calculations, the CMS aggregated by state instead of by metro area. For example, several of the outliers on the y-axis are for hospitals in Philadelphia. This may partially be attributed to the fact that Philadelphia is the most expensive city in the state of Pennsylvania. However, there are some metro areas that are very sparsely populated that have only a few discharges for a particular procedure, so it wouldn't make sense to use that data because it'd be so vulnerable to any outlier. 
+
 As stated before, more information would be needed to actually check why these providers show up as anomalous. 
 
 #Conclusion

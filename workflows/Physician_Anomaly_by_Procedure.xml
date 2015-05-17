@@ -170,7 +170,6 @@ from "CS370_ASL456"."PHYSICIAN_AND_OTHER_SUPPLIER"  )</SQLExpression>
                 </Method>
             </CacheSettings>
             <SQLExpression>"N$10054" as (SELECT /*+ inline */
-"AVERAGE_MEDICARE_ALLOWED_AMT",
 "BENE_DAY_SRVC_PCT",
 "ID",
 "SUBMITTED_CHRG_VS_HCPCS_AGGR"
@@ -181,7 +180,7 @@ FROM {INPUT_SOURCE}
                 <AttrImportantSettings SamplingType="System" StratifiedCutoff="10"/>
             </ColumnFilterSettings>
             <ColumnFilterAttributes AutoSpec="No" AutomaticFilterEnable="No">
-                <Attribute AutomaticFiltering="false" Output="Yes" Name="AVERAGE_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="No" Name="AVERAGE_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="AVERAGE_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="AVERAGE_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="BENE_DAY_SRVC_CNT" DataType="NUMBER" Status="Valid"/>
@@ -212,7 +211,7 @@ FROM {INPUT_SOURCE}
                 <Attribute AutomaticFiltering="false" Output="No" Name="STDEV_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="Yes" Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
             </ColumnFilterAttributes>
-            <ColumnFilterResults DataQualityOutput="ODMR$03_33_29_539376NEQGTHV" GenerateImportanceOutput="false">
+            <ColumnFilterResults DataQualityOutput="ODMR$16_07_37_593892YDGZMRD" GenerateImportanceOutput="false">
                 <Attribute Name="AVERAGE_MEDICARE_ALLOWED_AMT"/>
                 <Attribute Name="AVERAGE_MEDICARE_PAYMENT_AMT">
                     <Reason Type="UNIQUE_LIMIT"/>
@@ -450,7 +449,6 @@ WHERE
                 <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
             </CaseAttributes>
             <MiningAttributes AutoSpec="No">
-                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="AVERAGE_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
                 <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="No" Name="ID" DataType="NUMBER" Status="Valid"/>
                 <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
@@ -833,13 +831,12 @@ WHERE
                 <Attribute Name="ID"/>
             </HeuristicSummaryResult>
             <Models>
-                <AnomalyDetectionModel Id="10047" Name="ANOM_SVM_2_20" Status="Complete" CreationDate="2015-05-16T03:35:01" Annotation="" UseForOutput="true">
+                <AnomalyDetectionModel Id="10047" Name="ANOM_SVM_2_20" Status="Complete" CreationDate="2015-05-16T16:07:57" Annotation="" UseForOutput="true">
                     <InputMiningData DataUsage="AUTO" MiningUsage="AUTO">
                         <MiningAttributes>
                             <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                             <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="No" Name="ID" DataType="NUMBER" Status="Valid"/>
                             <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
-                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="AVERAGE_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
                         </MiningAttributes>
                         <HeuristicResult StatisticTable="ODMR$23_21_30_609212XTHQZVV"/>
                     </InputMiningData>

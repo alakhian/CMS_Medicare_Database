@@ -54,7 +54,7 @@ from "CS370_ASL456"."INPATIENT_2012_DATA"  )</SQLExpression>
             </Attributes>
             <SourceTable Schema="" Name="INPATIENT_2012_DATA"/>
         </DataSource>
-        <CreateTable TableName="INPATIENT" Table="true" Id="10012" Name="INPATIENT_2012_ANOMALIES_SET_2" Status="Complete">
+        <CreateTable TableName="INPATIENT_ANOM_PROVIDER_SIDE" Table="true" Id="10012" Name="INPATIENT_2012_ANOMALIES_SET_2" Status="Complete">
             <Icon XCOORD="716" YCOORD="357"></Icon>
             <Messages/>
             <Parallelism Enable="false">
@@ -85,7 +85,7 @@ from "CS370_ASL456"."INPATIENT_2012_DATA"  )</SQLExpression>
  "SUBMITTED_CHRG_VS_DRG_AGGR" ,
  "MCPAYMENT_TOTALPAY_RATIO" ,
  "DISCHARGE_PCT" ,
- "AVERAGE_COVERED_CHARGES"  FROM "INPATIENT")</SQLExpression>
+ "AVERAGE_COVERED_CHARGES"  FROM "INPATIENT_ANOM_PROVIDER_SIDE")</SQLExpression>
             <DBAttributes>
                 <DBAttribute Key="No" Index="No" Name="ANOM_SVM_1_21_PRED" DataType="NUMBER" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="ANOM_SVM_1_21_PROB" DataType="BINARY_DOUBLE" Status="Valid"/>
