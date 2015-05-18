@@ -264,7 +264,7 @@ For the Filter Columns node, the below setting were used.
 ![](./images/odm_workflows/02_physician_anom_filter_column.jpg)
 This is where the importance of the two calculated columns, BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR comes into play. These are the two main attributes used by the Anomaly Detection node. The NPPES geographic information is filtered out because the state has already been accounted for in SUBMITTED_CHRG_VS_HCPCS_AGGR. The rest of the geographic information and other columns that were filtered out cause too much noise, and throw off the anomaly detection.
 
-For the Anomaly Detection node, Case ID is set to "ID". Also, the outlier rate should was changed to 0.01 in Advanced Settings as seen below. The original setting of 0.10 is far too high.
+For the Anomaly Detection node, Case ID is set to "ID". Also, the outlier rate should be changed to 0.01 in Advanced Settings as seen below. The original setting of 0.10 is far too high.
 ![](./images/odm_workflows/03_physician_anom_settings.jpg)
 
 In the Additional Output tab of the Apply node, all the columns from the source table are added. Finally, this is exported into the table called PHYSICIAN_ANOMALY, which holds the results of this particular anomaly detection model.
@@ -419,8 +419,8 @@ The below graphs are for specific hospitals and they will use the results of the
 
 There are many more hospitals that contain anomalous data points, but the above ones contained by far the most outliers. All of the results can be seen in the Inpatient.twb Tableau workbook on the page titled "Overpayment Anomalies by Provider - Ratios + Discharges Included".
 
-If you wish to see every single hospital that had an instance of Medicare overpayment, run the following SQL query: "select provider_name,count(*) as "Count" from inpatient_2012_data where MCPAYMENT_CHARGEDAMT_RATIO >= 1
-group by provider_name order by "Count" desc;".
+If you wish to see every single hospital that had an instance of Medicare overpayment, run the following SQL query: 
+  "select provider_name,count(*) as "Count",provider_city,provider_state from inpatient_2012_data where MCPAYMENT_CHARGEDAMT_RATIO > 1 group by provider_name,provider_city,provider_state order by "Count" desc;".
 
 ###Anomaly Detection - Provider Side
 
@@ -455,7 +455,7 @@ Also, note that here there was no need to filter out the expensive procedures th
 
 The following graphs display DISCHARGE_PCT along the x-axis and SUBMITTED_CHRG_VS_DRG_AGGR along the y-axis. The anomaly predictions ('0' for anomaly, '1' for normal) are color coded. We are most interested in anything that is high up on either axis, which should merit inspection.
 
-DISCHARGE_PCT is analagous to the BENE_DAY_SRVC_PCT from the Physician database. Suppose a there were 1000 discharges across the nation for a particular DRG procedure "638 - DIABETES W CC". Then suppose a provider with ID 220024 had 100 discharges for this same procedure. The DISCHARGE_PCT for this record would then be 100/1000 = 0.1.
+DISCHARGE_PCT is analagous to the BENE_DAY_SRVC_PCT from the Physician database. Suppose there were 1000 discharges across the nation for a particular DRG procedure "638 - DIABETES W CC". Then suppose a provider with ID 220024 had 100 discharges for this same procedure. The DISCHARGE_PCT for this record would then be 100/1000 = 0.1.
 
 SUBMITTED_CHRG_VS_DRG_AGGR is analagous to the SUBMITTED_CHRG_VS_HCPCS_AGGR from the Physician database. The charged amount for a procedure done by an individual provider is compared to the average charged amount for all occurrences of that same procedure in the same state as the provider.
 
@@ -471,12 +471,20 @@ Finally, here are graphs pertaining to particularly anomalous procedures. The pr
 ![](./images/drg/04.jpg)
 ![](./images/drg/05.jpg)
 
-There are a total of 100 different graphs here, but these were the ones with the most notable outliers. One of the limitations here is that for the Submitted Charge vs. DRG Aggregate calculations, the CMS aggregated by state instead of by metro area. For example, several of the outliers on the y-axis are for hospitals in Philadelphia. This may partially be attributed to the fact that Philadelphia is the most expensive city in the state of Pennsylvania. However, there are some metro areas that are very sparsely populated that have only a few discharges for a particular procedure, so it wouldn't make sense to use that data because it'd be so vulnerable to any outlier. 
+There are a total of 100 different graphs here, but these were the ones with the most notable outliers. One of the limitations here is that for the Submitted Charge vs. DRG Aggregate calculations, the CMS aggregated by state instead of by metro area. For example, several of the outliers on the y-axis are for hospitals in Philadelphia. This may partially be attributed to the fact that Philadelphia is the most expensive city in the state of Pennsylvania. However, there are some metro areas that are very sparsely populated that have only a few discharges for a particular procedure, so it wouldn't make sense to use that data because it'd be so vulnerable to any outlier.
 
-As stated before, more information would be needed to actually check why these providers show up as anomalous. 
+Lastly, if you wish to see how many providers conducted each procedure, run the following SQL query: "select drg_definition, count(provider_id) from inpatient_2012_data group by drg_definition order by count(provider_id) desc;" The least frequent procedure (Psychoses) is still conducted by 617 different providers, so that is why the threshold for Discharge Pct being considered anomalous is so low (roughly greater than 0.5%).
+
+As stated before, more information would be needed to actually check why these providers show up as anomalous.
 
 #Conclusion
 We have analyzed several different kinds of anomalies here. For both the Inpatient and Physician datasets, the possibility of healthcare providers overbilling was examined, along with the possibility of a provider billing Medicare for unnecessary procedures that are known to be expensive. In addition, we looked at cases where Medicare paid out more than what they were charged.
+
+For the Physician and Other Supplier dataset, Medicare was found to be extremely consistent with how they reimbursed physicians. They paid out 80% of the Medicare allowed amount for a given procedure. Since these payments were found to be very predictable, the next step was to analyze how the providers billed procedures. Only the relatively expensive (Medicare Allowed Amount >= $1000) and common (number of providers offering the procedure >= 100) procedures were looked at. Generally speaking, if a provider charged more than 6.5 times the median charged amount for a particular procedure in his or her state, it was almost guaranteed to be flagged as anomalous (from the graph titled "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - ALL"). From the same graph, if a provider was responsible for more than 1.8% of all the discharges in the nation for that particular procedure, then it was also flagged as anomalous. This model was meant to account for overbilling for procedures and conducting expensive procedures with high frequency. Note that there was still some middle ground between these two parameters (i.e. Bene_Day_Srvc_Pct = 0.5% and Submitted Chrg vs HCPCS Aggr = 5 was an anomalous data point). The procedures with HCPCS codes 67040, 67041, 37229, 78608, 78816, and 95951 had the most apparent cases of these outliers.
+
+Now, the Inpatient dataset was unique in that it was the only one that had instances of Medicare reimbursing hospitals with an amount greater than what they were charged. These cases were especially prominent in the New York City and Boston metro areas. Upon further examination, it was revealed that out of the 340 instances of reimbursement exceeding the charged amount, the top 4 hospitals were either from Boston or New York City, and those 4 hospitals alone (Lincoln Medical & Mental Health Ctr - NYC, Bronx-Lebanon - NYC, Carney - Boston, St. Elizabeth's - Boston) accounted for 1/3 of these cases. Beyond that, it was difficult to determine why these particular hospitals had so many anomalous procedures and why they were so concentrated in the Northeast just by looking at public records.
+
+Finally, for the Inpatient dataset, overbilling and high frequency for expensive procedures was examined in the same manner as the Physician data. If a hospital charged more than 3 times the average charged amount for a particular procedure in that same state, it was considered anomalous (from the graph titled "Submitted Charge Outliers and DRG Discharge Percentage Outliers"). From the same graph, if a provider was responsible for more than 0.5% of all the discharges in the nation for that particular procedure, then it was also flagged as anomalous. Although this seems like a low percentage, bear in mind that the least frequent procedure (Psychoses) was still conducted by 617 different hospitals. Also, there was still some middle ground between these two parameters (i.e. Discharge Pct = 0.4% and Submitted Chrg vs DRG Aggr = 2 was an anomalous data point). The procedures with DRG codes 057, 189, 251, 885, and 897 contained the most apparent anomalies.
 
 As stated several times, these anomalies are not necessarily going to be fraud cases. The purpose of this research was to develop models that would point to particularly anomalous cases that could then be used by a Medicare fraud detection agency, such as the CMS or OIG.
 
