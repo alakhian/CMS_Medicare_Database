@@ -1,0 +1,18 @@
+Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina
+Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67041, Vit for macular pucker
+Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 37229, Tib/per revasc w/ather
+Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 78608, Brain imaging (PET)
+Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 78816, Pet image w/ct full body
+Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 95951, EEG monitoring/video-record
+
+Overpayment Anomalies by Provider - Ratios + Discharges Included - BRONX-LEBANON HOSPITAL CENTER
+Overpayment Anomalies by Provider - Ratios + Discharges Included - LINCOLN MEDICAL & MENTAL HEALTH CENTER
+Overpayment Anomalies by Provider - Ratios + Discharges Included - CARNEY HOSPITAL
+Overpayment Anomalies by Provider - Ratios + Discharges Included - BOSTON MEDICAL CENTER CORPORATION
+
+
+Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 057 - DEGENERATIVE NERVOUS SYTEM DISORDERS W/O MCC
+Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 189 - PULMONARY EDEMA & RESPIRATORY FAILURE
+Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 251 - PERC CARDIOVASC PROC W/O CORONARY ARTERY STENT W/O MCC
+Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 885 - PSYCHOSES
+Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 897 - ALCOHOL/DRUG ABUSE OR DEPENDENCE W/O REHABILITATION THERAPY W/O MCC

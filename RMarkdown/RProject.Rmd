@@ -220,6 +220,7 @@ This database consists of the following columns:
 
 The first point of interest is to determine whether Medicare is consistent with how they reimburse healthcare providers. In order to do this, we take the ratio of the amount Medicare pays (AVERAGE_MEDICARE_PAYMENT_AMT) to the amount allowed by Medicare for a procedure (AVERAGE_MEDICARE_ALLOWED_AMT).
 
+<b>Average Medicare Payment Amount vs Average Medicare Allowed Amount</b>
 ![](./images/Average_Medicare_Payment_Amount_vs_Average_Medicare_Allowed_Amount.jpg)
 
 As can be seen from the above figure, there is a very strong linear correlation between the Medicare paid amount and the Medicare allowed amount for each procedure, with virtually no outliers based on both the extremely low p-value as well as simple visual inspection. This indicates that Medicare is very consistent with how they reimburse healthcare providers based on the allowed amount for a particular procedure (which is based on the HCPCS code and location).
@@ -287,17 +288,128 @@ To adjust for cost of living differences across the United States, this column w
 The following graphs display BENE_DAY_SRVC_PCT along the x-axis and SUBMITTED_CHRG_VS_HCPCS_AGGR along the y-axis. The anomaly predictions ('0' for anomaly, '1' for normal) are color coded. So anything that is high up on either axis should be flagged as an outlier and merits inspection. It was important to display both of these columns on each visualization because they are both accounted for in anomaly detection.
 
 The below graph maps out every record that was in PHYSICIAN_ANOMALY. As mentioned previously, it contains records for HCPCS Code-Place of Service combinations that matched up with more than 100 providers and had a Medicare allowed payment amount of at least $1000. Some of the NPI labels can be seen. This is from page 2 in Physicians.twb in the Tableau/ directory.
+
+<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - ALL</b>
 ![](./images/SubmittedChargeOutliersandHCPCSBeneficiaryDayPercentageOutliers-ALL.jpg)
 
 The above graph is meant just to illustrate the general distribution of results. Below are several graphs that show results for specific procedures according to the HCPCS code and place of service. Only the procedures containing significant outliers are displayed. These visualizations are from page 3 in Physicians.twb in the Tableau/ directory. The NPI and state are labeled next to some of the outlying points
+
+<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina</b>
+
 ![](./images/hcpcs/01.jpg)
+
+<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67041, Vit for macular pucker</b>
+
 ![](./images/hcpcs/02.jpg)
+
+<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 37229, Tib/per revasc w/ather</b>
+
 ![](./images/hcpcs/03.jpg)
+
+<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 78608, Brain imaging (PET)</b>
+
 ![](./images/hcpcs/04.jpg)
+
+<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 78816, Pet image w/ct full body</b>
+
 ![](./images/hcpcs/05.jpg)
+
+<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 95951, EEG monitoring/video-record</b>
+
 ![](./images/hcpcs/06.jpg)
 
-There are a total of 77 different graphs, but these were the ones with the most notable outliers. The first two graphs show providers that charge an unusually high amount for a procedure, and the last four show providers that conduct an unusually high number of a certain type of procedure. At this point, this is all the information that can be gleaned from public records. We have developed the model for finding anomalous data points. 
+There are a total of 77 different graphs, but these were the ones with the most notable outliers. The first two graphs show providers that charge an unusually high amount for a procedure, and the last four show providers that conduct an unusually high number of a certain type of procedure.
+
+The Physician Anomaly database's anomalous data points can be inspected in Oracle with the following SQL query: "select ANOM_SVM_2_20_PROB, NPI, NPPES_PROVIDER_CITY, NPPES_PROVIDER_STATE, PROVIDER_TYPE, PLACE_OF_SERVICE, HCPCS_CODE, HCPCS_DESCRIPTION, BENE_DAY_SRVC_PCT, SUBMITTED_CHRG_VS_HCPCS_AGGR from physician_anomaly where ANOM_SVM_2_20_PRED = 0 order by ANOM_SVM_2_20_PROB desc;"
+
+Below is a table of the physicans with the highest probability of being anomalous:
+
+<b>Top 5 Physician Anomalies</b>
+<table border="1" style="width:100%">                                                                       
+  <th>
+    <td>ANOM_SVM_2_20_PROB</td>
+    <td>NPI</td>
+    <td>NPPES_PROVIDER_CITY</td>
+    <td>NPPES_PROVIDER_STATE</td>
+    <td>PROVIDER_TYPE</td>
+    <td>PLACE_OF_SERVICE</td>
+    <td>HCPCS_CODE</td>
+    <td>HCPCS_DESCRIPTION</td>
+    <td>BENE_DAY_SRVC_PCT</td>
+    <td>SUBMITTED_CHRG_VS_HCPCS_AGGR</td>
+  </th>
+  <tr>
+    <td></td>
+    <td>0.9524943020928156</td>
+    <td>1669475281</td> 
+    <td>MERRILLVILLE</td>
+    <td>IN</td>
+    <td>Ophthalmology</td> 
+    <td>F</td>
+    <td>67040</td>
+    <td>Laser treatment of retina</td> 
+    <td>.0016373758</td>
+    <td>46.265706</td>
+  </tr>
+  <tr>                                                                                                                                      
+    <td></td>
+    <td>0.9524943020928156</td>
+    <td>1679579700</td> 
+    <td>SAN ANTONIO</td>
+    <td>TX</td>
+    <td>Vascular Surgery</td> 
+    <td>O</td>
+    <td>37229</td>
+    <td>Tib/per revasc w/ather</td> 
+    <td>.032984714</td>
+    <td>1</td>
+  </tr>
+  <tr>                                                      
+    <td></td>
+    <td>0.9524943020928156</td>
+    <td>1770585838</td> 
+    <td>INDIANAPOLIS</td>
+    <td>IN</td>
+    <td>Ophthalmology</td> 
+    <td>F</td>
+    <td>67040</td>
+    <td>Laser treatment of retina</td> 
+    <td>.0016373758</td>
+    <td>168.55654</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>0.9524943020928156</td>
+    <td>1770585838</td>
+    <td>INDIANAPOLIS</td> 
+    <td>IN</td>
+    <td>Ophthalmology</td>
+    <td>F</td> 
+    <td>67041</td>
+    <td>Vit for macular pucker</td>
+    <td>.00081366965</td> 
+    <td>128.00819</td>
+  </tr>
+  <tr>                                                                                                                                        
+    <td></td>
+    <td>0.9524943020928156</td>
+    <td>1760441760</td>
+    <td>EWING</td>
+    <td>NJ</td>
+    <td>Interventional Radiology</td>
+    <td>O</td>
+    <td>37229</td>
+    <td>Tib/per revasc w/ather</td>
+    <td>.031375704</td>
+    <td>1.0000002</td>
+  </tr>
+</table>
+
+All the entries in this table either had a high Submitted Charge vs. HCPCS Aggregate Charge ratio or they had a Beneficiary/Day Service Percentage greater than 3%. If you run the SQL query in Oracle, you can see that Anomaly Probability was directly correlated with how high either one of these two values was. 
+
+You may notice that an Opthalmologist (NPI 1770585838) from Indiana appears twice in this table. In fact, the Opthalmology-related procedures with HCPCS codes 67040 and 67041 had several physicians (NPIs 1023017902, 1043214034, 1962401869, 1730182361, 1770585838, 1669475281, 1639173131, etc.) from Indiana appear with high anomaly probabilities because they were charging so much more for these procedures compared to others in the state of Indiana. If you wish to further examine just the opthalmology-related procedures, run the following query: "select ANOM_SVM_2_20_PROB, NPI, NPPES_PROVIDER_CITY, NPPES_PROVIDER_STATE, PROVIDER_TYPE, PLACE_OF_SERVICE, HCPCS_CODE, HCPCS_DESCRIPTION, BENE_DAY_SRVC_PCT, SUBMITTED_CHRG_VS_HCPCS_AGGR from physician_anomaly where ANOM_SVM_2_20_PRED = 0 and (HCPCS_CODE = '67040' or HCPCS_CODE = '67041') order by ANOM_SVM_2_20_PROB desc;" The graphs titled "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina" and "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina" visually display these results as well. This was highly unusual and would definitely need further inspection.
+
+At this point, this is all the information that can be gleaned from public records. We have developed the model for finding anomalous data points. 
 However, more information would be needed to actually check why these providers show up as anomalous, such as financial documents for the individual providers. Unfortunately, that information is not available to the public at this point. So, while these data points are anomalous and merit inspection, it would be premature to say that they are definitely cases of fraud. As stated in the purpose statement, this goal of this project is to develop a model for pointing out anomalies that could then be analyzed and audited by an agency such as the CMS or the OIG (https://oig.hhs.gov/fraud/strike-force/). 
 
 #Inpatient Databases
@@ -380,13 +492,18 @@ This database consists of the following columns:
 The Inpatient databases were the only ones from the entire Medicare data set in which there were instances of Medicare paying more than what a provider charged them. This is very unusual because Medicare will almost always reimburse providers less than what the provider charged. 
 
 First let us look at the overall distribution of Medicare Payment to Charged Amount ratios across the entire database.
+
+<b>Distribution of Medicare Payments to Charge Amt Ratio</b>
 ![](./images/DistributionofMedicarePaymentstoChargeAmtRatio.jpg)
 
 We can clearly see just how anomalous it is for the ratio be greater than 1. In fact, there were 340 cases in which this occurred out of a total of 157747 (roughly 0.22%).
 
 In order to analyze this further, the distribution of these anomalies was examined on a geographic level.
+
+<b>Map of Zip Codes where Medicare Payment > Charge</b>
 ![](./images/Map_of_Zip_Codes_where_Medicare_Payment_Charge.jpg)
 
+<b>Boston and New York City</b>
 ![](./images/Boston_and_NYC.jpg)
 
 The above two figures display the geographic distribution of these particular anomalies. We can see that New York City and Boston have the most amount of procedures where Medicare overpaid.
@@ -408,13 +525,24 @@ Finally, add the Anomaly Detection, Apply, and Create Table nodes. Remeber to se
 ####Anomaly Detection Results
 Below are the results of this workflow. All graphs show the Medicare Payment to Charged Amount Ratio on the y-axis and the Anomaly SVM Probability on the x-axis. The first two graphs map out all records in the Inpatient database. The rest of the graphs show the most anomalous hospitals, several of which had no normal data points.
 
+<b>Overpayment Anomalies - Ratios + Discharges Included</b>
 ![](./images/OverpaymentAnomalies-RatiosDischargesIncluded.jpg)
+
+<b>Overpayment Anomalies - Medicare Pay to Charge Ratio Only</b>
 ![](./images/OverpaymentAnomalies-MedicarePaytoChargeRatioOnly.jpg)
 
 The below graphs are for specific hospitals and they will use the results of the first anomaly detection model from this section, which included all the payment ratios and the number of total discharges. We want our models to be as multidimensional as possible.
+
+<b>Overpayment Anomalies by Provider - Ratios + Discharges Included - BRONX-LEBANON HOSPITAL CENTER</b>
 ![](./images/OverpaymentAnomalies-BX.jpg)
+
+<b>Overpayment Anomalies by Provider - Ratios + Discharges Included - LINCOLN MEDICAL & MENTAL HEALTH CENTER</b>
 ![](./images/OverpaymentAnomalies-Linc.jpg)
+
+<b>Overpayment Anomalies by Provider - Ratios + Discharges Included - CARNEY HOSPITAL</b>
 ![](./images/OverpaymentAnomalies-Carney.jpg)
+
+<b>Overpayment Anomalies by Provider - Ratios + Discharges Included - BOSTON MEDICAL CENTER CORPORATION</b>
 ![](./images/OverpaymentAnomalies-Boston.jpg)
 
 There are many more hospitals that contain anomalous data points, but the above ones contained by far the most outliers. All of the results can be seen in the Inpatient.twb Tableau workbook on the page titled "Overpayment Anomalies by Provider - Ratios + Discharges Included".
@@ -461,14 +589,29 @@ SUBMITTED_CHRG_VS_DRG_AGGR is analagous to the SUBMITTED_CHRG_VS_HCPCS_AGGR from
 
 Below is the graph for all the records in the Inpatient database. This is taken from Inpatient.twb on the page title "Submitted Charge Outliers and DRG Discharge Percentage Outliers"
 
+<b>Submitted Charge Outliers and DRG Discharge Percentage Outliers</b>
 ![](./images/SubmittedChargeOutliersandDRGDischargePercentageOutliers.jpg)
 
 Finally, here are graphs pertaining to particularly anomalous procedures. The provider ID and HRR Description (geographic region) are labeled for some of the points. This is taken from the page titled "Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure" in Inpatient.twb.
 
+<b>Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 057 - DEGENERATIVE NERVOUS SYTEM DISORDERS W/O MCC</b>
+
 ![](./images/drg/01.jpg)
+
+<b>Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 189 - PULMONARY EDEMA & RESPIRATORY FAILURE</b>
+
 ![](./images/drg/02.jpg)
+
+<b>Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 251 - PERC CARDIOVASC PROC W/O CORONARY ARTERY STENT W/O MCC</b>
+
 ![](./images/drg/03.jpg)
+
+<b>Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 885 - PSYCHOSES</b>
+
 ![](./images/drg/04.jpg)
+
+<b>Submitted Charge Outliers and DRG Discharge Percentage Outliers by Procedure - 897 - ALCOHOL/DRUG ABUSE OR DEPENDENCE W/O REHABILITATION THERAPY W/O MCC</b>
+
 ![](./images/drg/05.jpg)
 
 There are a total of 100 different graphs here, but these were the ones with the most notable outliers. One of the limitations here is that for the Submitted Charge vs. DRG Aggregate calculations, the CMS aggregated by state instead of by metro area. For example, several of the outliers on the y-axis are for hospitals in Philadelphia. This may partially be attributed to the fact that Philadelphia is the most expensive city in the state of Pennsylvania. However, there are some metro areas that are very sparsely populated that have only a few discharges for a particular procedure, so it wouldn't make sense to use that data because it'd be so vulnerable to any outlier.
@@ -481,6 +624,8 @@ As stated before, more information would be needed to actually check why these p
 We have analyzed several different kinds of anomalies here. For both the Inpatient and Physician datasets, the possibility of healthcare providers overbilling was examined, along with the possibility of a provider billing Medicare for unnecessary procedures that are known to be expensive. In addition, we looked at cases where Medicare paid out more than what they were charged.
 
 For the Physician and Other Supplier dataset, Medicare was found to be extremely consistent with how they reimbursed physicians. They paid out 80% of the Medicare allowed amount for a given procedure. Since these payments were found to be very predictable, the next step was to analyze how the providers billed procedures. Only the relatively expensive (Medicare Allowed Amount >= $1000) and common (number of providers offering the procedure >= 100) procedures were looked at. Generally speaking, if a provider charged more than 6.5 times the median charged amount for a particular procedure in his or her state, it was almost guaranteed to be flagged as anomalous (from the graph titled "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - ALL"). From the same graph, if a provider was responsible for more than 1.8% of all the discharges in the nation for that particular procedure, then it was also flagged as anomalous. This model was meant to account for overbilling for procedures and conducting expensive procedures with high frequency. Note that there was still some middle ground between these two parameters (i.e. Bene_Day_Srvc_Pct = 0.5% and Submitted Chrg vs HCPCS Aggr = 5 was an anomalous data point). The procedures with HCPCS codes 67040, 67041, 37229, 78608, 78816, and 95951 had the most apparent cases of these outliers.
+
+Additionally, when sorting the data in the Physician Anomaly table in order of highest Anomaly Probability, it was readily apparent that the model selected the procedures with the highest relative frequency (BENE_DAY_SRVC_PCT) or relative charged amount (SUBMITTED_CHRG_VS_HCPCS_AGG) as the most likely to be anomalous. Also, from viewing the data in the Physician Anomaly table or by visually inspecting the graphs titled "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina" and "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina", several Indiana-based opthalmologists (with NPIs including 1023017902, 1043214034, 1962401869, 1730182361, 1770585838, 1669475281, 1639173131, etc.) were overbilling Medicare relative to others conducting the same procedure in Indiana. This was extremely unusual to see, and served as one example of how this particular anomaly detection model could assist Medicare fraud detection agencies.
 
 Now, the Inpatient dataset was unique in that it was the only one that had instances of Medicare reimbursing hospitals with an amount greater than what they were charged. These cases were especially prominent in the New York City and Boston metro areas. Upon further examination, it was revealed that out of the 340 instances of reimbursement exceeding the charged amount, the top 4 hospitals were either from Boston or New York City, and those 4 hospitals alone (Lincoln Medical & Mental Health Ctr - NYC, Bronx-Lebanon - NYC, Carney - Boston, St. Elizabeth's - Boston) accounted for 1/3 of these cases. Beyond that, it was difficult to determine why these particular hospitals had so many anomalous procedures and why they were so concentrated in the Northeast just by looking at public records.
 
