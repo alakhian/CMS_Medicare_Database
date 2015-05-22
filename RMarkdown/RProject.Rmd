@@ -17,22 +17,24 @@ These datasets are divided by into three main categories, according to the type 
 </ul>
 
 
-Generally speaking, all these databases are organized as follows:
+Generally speaking, all these databases contain the following information:
 <ul>
   <li>Name of the healthcare provider (hospital name, physician name, etc.)</li>
 
   <li>Geographic information on the healthcare provider</li>
 
   <li>Procedure/service provided to the Medicare beneficiary</li>
+  
+  <li>Number of times the provider conducted this procedure/service</li>
 
-  <li>Provider's average charge for this particular type of service</li>
+  <li>Provider's average charge for this particular type of procedure/service</li>
 
-  <li>Medicare's average payment for this particular type of service</li>
+  <li>Medicare's average payment for this particular type of procedure/service</li>
 </ul>
 
 #Purpose
 
-The purpose of this research is to analyze anomalous payment information in these datasets, with a primary focus on the Inpatient and the Physician and Other Supplier databases since they are the 2 largest ones.
+The purpose of this research is to analyze anomalous payment information in these datasets, with a primary focus on the Inpatient and the Physician and Other Supplier databases, since they are the two largest ones.
 
 According to [the Economist](http://www.economist.com/news/united-states/21603078-why-thieves-love-americas-health-care-system-272-billion-swindle), Medicare fraud adds about "$98 billion, or roughly 10%, to annual Medicare and Medicaid spending". We hope to develop a set of models that can be run on these datasets and point out anomalous data points for the purposes of fraud detection. Ideally, these anomaly detection models can be applied to future releases of Medicare datasets as well.
 
@@ -54,9 +56,11 @@ To download this database, click on the following [link](http://www.cms.gov/apps
 Extract the contents of the .zip file. The "Medicare-Physician-and-Other-Supplier-PUF-Methodology.pdf" document contains more detailed information on this database and the methodology used to aggregate the data. Rename the extension of the "Medicare-Physician-and-Other-Supplier-PUF-CY2012.txt" to  "Medicare-Physician-and-Other-Supplier-PUF-CY2012.csv". This will allow the text file to be in a format that can be imported into your Oracle database.
 
 Now, open up Oracle SQL Developer and connect. Go to the directory sql/ddl/ and open the "PHYSICIAN_AND_OTHER_SUPPLIER_B.sql" DDL script, and run it in Oracle. This will create a table called PHYSICIAN_AND_OTHER_SUPPLIER_B. Find that table in your connection, right click, and click on "Import Data" as seen in the screenshot below. 
+
 ![](./images/data_importing/01_phys_other_supplier_orcl.jpg)
 
 Find and open "Medicare-Physician-and-Other-Supplier-PUF-CY2012.csv". The Data Import Wizard window will come up. Set Format to "delimited" and set Delimiter to "tab". Click Next.
+
 ![](./images/data_importing/02_phys_other_supplier_orcl.jpg)
 
 Click Next until you get to Step 4 of 5, and then set Match By to "Position". Click Next once more, and then click Finish.
@@ -67,17 +71,21 @@ We will add some columns to this table later, but first we must import 1 more da
 To download this database, click on the following [link](http://www.cms.gov/apps/ama/license-2011.asp?file=http://download.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Downloads/Medicare-National-and-State-HCPCS-Aggregate-CY2012.zip), and click "Accept". If this does not work, go to http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Physician-and-Other-Supplier.html and click on the link that says "Medicare National and State/HCPCS Aggregate table, CY2012, Microsoft Excel (.xlsx)".
 
 Extract the contents of the .zip file. Open the "Medicare-National-and-State-HCPCS-Aggregate-CY2012.xlsx" Excel file. Go to the third page called "data", select the first row and delete it.
+
 ![](./images/data_importing/03_hcpcs_aggregate_excel.jpg)
 
 Now, it is possible that Oracle can import this Excel file as is, but Oracle SQL Developer was only able to import csv files on the computer that this research was conducted on. So, additional preprocessing is required. 
 
 First, highlight columns E-H and click Format Cells. For Category, select "Number". Uncheck the box that says "Use 1000 Separator (,)". Select the top row for the section that says "Negative numbers:". Click OK. Use the screenshot below if necessary.
+
 ![](./images/data_importing/04_hcpcs_aggregate_excel.jpg)
 
 Now, select columns I-AC (all the columns with '$' signs), and go to Format Cells. Select "Number" for Category, and uncheck the box that says "Use 1000 Separator (,)", as shown in the screenshot below. Click OK and save the file.
+
 ![](./images/data_importing/05_hcpcs_aggregate_excel.jpg)
 
 Make sure that you are still on the "data" page in the Excel workbook, and click Save As, and save this file as a .csv file. There will be 2 messages that come up. Click 'OK' then click 'Yes'. You can ignore the second warning message because the data does not get corrupted.
+
 ![](./images/data_importing/06_hcpcs_aggregate_excel.jpg)
 ![](./images/data_importing/07_hcpcs_aggregate_excel.jpg)
 
@@ -88,17 +96,17 @@ After the table has finished importing, go to the directory sql/ and open the "s
 
 ###Adding Calculated Columns to PHYSICIAN_AND_OTHER_SUPPLIER
 
-This section shows how to add the BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR columns to what will ultimately be the PHYSICIAN_AND_OTHER_SUPPLIER database. This involves some complicated SQL queries, and there is no easy way to do this except for creating and dropping two more tables.
+This section shows how to add the LINE_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR columns to what will ultimately be the PHYSICIAN_AND_OTHER_SUPPLIER database. This involves some complicated SQL queries, and there is no easy way to do this except for creating and dropping two more tables. To add these columns, simply run the "physician_and_other_supplier - single script.sql" script in the sql/ directory. 
 
-So run the following SQL scripts in succession:
+If for some reason you have connection issues and the above script does not run to completion (it can take a while), run the following SQL scripts in succession:
 <ol>
   <li>sql/ddl/PHYSICIAN_AND_OTHER_SUPPLIER_C.sql</li>
-  <li>sql/physicians - bene_day_srvc_pct.sql</li>
+  <li>sql/physicians - line_srvc_pct.sql</li>
   <li>sql/ddl/PHYSICIAN_AND_OTHER_SUPPLIER.sql</li>
   <li>sql/physicians - submitted_chrg_vs_hcpcs_aggr.sql</li>
 </ol>
 
-Finally, we have our 2 final databases pertaining to physician data, PHYSICIAN_AND_OTHER_SUPPLIER and PHYSICIAN_HCPCS_AGGREGATE.
+Now we have our 2 final databases pertaining to physician data, PHYSICIAN_AND_OTHER_SUPPLIER and PHYSICIAN_HCPCS_AGGREGATE.
 
 
 ##Physician Tables Column Descriptions
@@ -175,8 +183,8 @@ This database consists of the following columns:
   <li>STDEV_SUBMITTED_CHRG_AMT - Standard deviation of the charge amounts submitted by the provider. The standard deviation indicates the amount of variation from the average submitted charge amount that exists within a single provider, HCPCS service, and place of service.
   <li>AVERAGE_MEDICARE_PAYMENT_AMT - Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service.
   <li>STDEV_MEDICARE_PAYMENT_AMT - Standard deviation of the Medicare payment amount. The standard deviation indicates the amount of variation from the average Medicare payment amount that exists within a single provider, HCPCS service, and place of service.
-  <li>BENE_DAY_SRVC_PCT - The percentage of distinct Medicare beneficiary per day services that the provider conducted for this particular HCPCS service out of all beneficiary per day services for this particular HCPCS service. This is one of the calculated columns that was added to the table to check for outliers. If this value is high, that means that the provider did this HCPCS procedure in a much higher proportion relative to other providers.
-  <li>SUBMITTED_CHRG_VS_HCPCS_AGGR - The ratio of the submitted charge for this HCPCS procedure to the average amount charged for this HCPCS procedure aggregated by state, so as to adjust for cost of living differences. Ideally, this value should be close to 1. If the ratio is much greater than 1, then this provider could be overbilling for this procedure compared to other providers in the same area.
+  <li>LINE_SRVC_PCT - The percentage of services that this individual provider conducted for this particular HCPCS procedure out of all the services that were conducted nationally for this particular HCPCS procedure. This is one of the calculated columns that was added to the table to check for outliers. If this value is high, that means that the provider did this procedure in a much higher proportion relative to other providers.
+  <li>SUBMITTED_CHRG_VS_HCPCS_AGGR - The ratio of the submitted charge for this HCPCS procedure to the average amount charged for this HCPCS procedure aggregated by state, so as to adjust for cost of living differences. Ideally, this value should be close to 1. If the ratio is much greater than 1, then this provider could be overbilling for this procedure compared to other providers that conducted the same procedure in the same state.
 </ul>
 
 
@@ -221,6 +229,7 @@ This database consists of the following columns:
 The first point of interest is to determine whether Medicare is consistent with how they reimburse healthcare providers. In order to do this, we take the ratio of the amount Medicare pays (AVERAGE_MEDICARE_PAYMENT_AMT) to the amount allowed by Medicare for a procedure (AVERAGE_MEDICARE_ALLOWED_AMT).
 
 <b>Average Medicare Payment Amount vs Average Medicare Allowed Amount</b>
+
 ![](./images/Average_Medicare_Payment_Amount_vs_Average_Medicare_Allowed_Amount.jpg)
 
 As can be seen from the above figure, there is a very strong linear correlation between the Medicare paid amount and the Medicare allowed amount for each procedure, with virtually no outliers based on both the extremely low p-value as well as simple visual inspection. This indicates that Medicare is very consistent with how they reimburse healthcare providers based on the allowed amount for a particular procedure (which is based on the HCPCS code and location).
@@ -230,6 +239,7 @@ Since Medicare is very consistent with how they reimburse providers, it is possi
 ###Physician Anomaly Workflow
 
 This section describe the workflow that was used for anomaly detection. Below is a screenshot of the entire workflow.
+
 ![](./images/odm_workflows/01_physician_anom_workflow.jpg)
 
 The data source is the PHYSICIAN_AND_OTHER_SUPPLIER_TABLE. Next, is a Filter Rows node called "50 States + DC", which will filter out U.S. territories (Guam, Puerto Rico) because those contain too few data points to be useful. The filter can be replicated by copying the below text:
@@ -255,6 +265,7 @@ After that, there is another Filter Rows node called "HCPCS Filters", which will
 Read this section ONLY if you wish to change the parameters for filtering out certain procedures. As mentioned in the previous section, the filter is set for procedures that have a median Medicare allowed amount of at least $1000 and were conducted by at least 100 providers. Otherwise, skip to the next section to continue reading about the anomaly detection workflow.
 
 First, go to the sql/ directory and run "hcpcs filters.sql". This will print out a list of HCPCS Codes that match with at least 100 providers and have a median Medicare Allowed Payment Amount that is at least $1000. Basically, this query is filtering out the most expensive procedures that were still conducted by enough providers so as not to end up with false positives in the anomaly detection. You can change these parameters in the SQL script as desired. If you do change the parameters, copy and paste the output into a .txt file.
+
 ![](./images/data_importing/hcpcs_filter.jpg)
 
 Next, go to the HCPCS_Filter/src directory and open FilterHCPCS.java. Make sure to change the input path in line 17 to be the .txt file that you just created. Set the output path in line 19 to wherever you want. Compile and run the program. Copy and paste the text in the output file from the path that you specified into the "HCPCS Filters" node in the Physician Anomaly workflow.
@@ -262,69 +273,61 @@ Next, go to the HCPCS_Filter/src directory and open FilterHCPCS.java. Make sure 
 *******************************************************************************************************************
 
 For the Filter Columns node, the below setting were used. 
+
 ![](./images/odm_workflows/02_physician_anom_filter_column.jpg)
-This is where the importance of the two calculated columns, BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR comes into play. These are the two main attributes used by the Anomaly Detection node. The NPPES geographic information is filtered out because the state has already been accounted for in SUBMITTED_CHRG_VS_HCPCS_AGGR. The rest of the geographic information and other columns that were filtered out cause too much noise, and throw off the anomaly detection.
+
+This is where the importance of the two calculated columns, LINE_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR comes into play. These are the two main attributes used by the Anomaly Detection node. The NPPES geographic information is filtered out because the state has already been accounted for in SUBMITTED_CHRG_VS_HCPCS_AGGR. The rest of the geographic information and other columns that were filtered out cause too much noise, and throw off the anomaly detection.
 
 For the Anomaly Detection node, Case ID is set to "ID". Also, the outlier rate should be changed to 0.01 in Advanced Settings as seen below. The original setting of 0.10 is far too high.
+
 ![](./images/odm_workflows/03_physician_anom_settings.jpg)
 
 In the Additional Output tab of the Apply node, all the columns from the source table are added. Finally, this is exported into the table called PHYSICIAN_ANOMALY, which holds the results of this particular anomaly detection model.
 
 ##Anomaly Detection Results
 
-Before showing the results, it is important to understand the two columns BENE_DAY_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR. Also, keep in mind that each row in the Physician database is aggregated by provider (NPI), procedure (HCPCS code), and place of service (facility or non-facility). This will help in understanding the methodology for these two columns.
+Before showing the results, it is important to understand the two columns LINE_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR. Also, keep in mind that each row in the Physician database is aggregated by provider (NPI), procedure (HCPCS code), and place of service (facility or non-facility). This will help in understanding the methodology for these two columns. 
 
-###BENE_DAY_SRVC_PCT - Beneficiary Per Day Services Percentage
-For a given type of procedure and place of service, this is the percentage of all procedures that one provider conducted. For example, suppose that we wish to look at HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O'). Assume that in there were a total of 1000 beneficiary per day services (basically, the number of procedures). Now assume that a provider with NPI (identification number) 1003000522 conducted 100 beneficiary per day services for this particular procedure in a non-facility. Then, the BENE_DAY_SRVC_PCT for this particular record will be 100/1000 = 0.1. 
-Anytime, the BENE_DAY_SRVC_PCT for a certain procedure is unusually high, it will be flagged as an anomaly because it means that this provider conducted an usually high amount of services for this procedure relative to other providers. This does not necessarily mean that it is a case of fraud; it could just be an unusually large practice that sees lots of patients. However, it is worth inspecting, since the provider could billing Medicare for this procedure when it is not necessary because it is known to have a high reimbursement.
+###LINE_SRVC_PCT - Line Services Percentage
+Out of all of the services provided across the nation for a given type of procedure and place of service, this is the percentage that was conducted by just one provider. For example, suppose that we wish to look at HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O'). Assume that the LINE_SRVC_CNT (the number of times the procedure was done) for the entire nation was 1000. Now assume that a provider with NPI (identification number) 1003000522 has a LINE_SRVC_CNT of 100 for this particular procedure in a non-facility. Then, the LINE_SRVC_PCT for this particular record will be 100/1000 = 0.1. 
+
+Anytime the LINE_SRVC_PCT for a certain procedure is unusually high, it should be flagged as an anomaly because it means that this provider conducted an unusually high amount of services for this procedure relative to other providers. This does not necessarily mean that it is a case of fraud; it could just be an very large practice that sees lots of patients. However, it is worth inspecting, since the provider could be billing Medicare for this procedure when it is not necessary because it is known to have a high reimbursement.
 
 ###SUBMITTED_CHRG_VS_HCPCS_AGGR - Provider Submitted Charge vs HCPCS Aggregated Submitted Charge
-For a given procedure and place of service, this is the ratio of the Medicare submitted charge from one provider versus the median submitted charge for all providers in that same state that conducted this same procedure. Basically, it is designed to tell us whether a provider is overbilling (or underbilling) for a procedure relative to other providers.
-For example, suppose provider 1003000522 charged Medicare $1000 for HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O') setting. Assume that he is based in Florida. Also, assume that for all providers in Florida that conducted this same procedure in a non-facility setting, their median submitted charge to Medicare was $100. Then, the SUBMITTED_CHRG_VS_HCPCS_AGGR for this particular record will be $1000/$100 = 10.
+For a given procedure and place of service ('F' or 'O'), this is the ratio of the Medicare submitted charge from one provider versus the average submitted charge for all providers in that same state that conducted this same procedure. Basically, it is designed to tell us whether a provider is overbilling (or underbilling) for a procedure relative to other providers in the same state.
+
+For example, suppose provider 1003000522 charged Medicare $1000 for HCPCS Code 93010 (Electrocardiogram report) in a non-facility ('O') setting. Assume that he is based in Florida. Also, assume that for all providers in Florida that conducted this same procedure in a non-facility setting, their average submitted charge to Medicare was $100. Then, the SUBMITTED_CHRG_VS_HCPCS_AGGR for this particular record will be $1000/$100 = 10.
+
 To adjust for cost of living differences across the United States, this column was aggregated by state. 
 
 ###Anomaly Detection Results
 
-The following graphs display BENE_DAY_SRVC_PCT along the x-axis and SUBMITTED_CHRG_VS_HCPCS_AGGR along the y-axis. The anomaly predictions ('0' for anomaly, '1' for normal) are color coded. So anything that is high up on either axis should be flagged as an outlier and merits inspection. It was important to display both of these columns on each visualization because they are both accounted for in anomaly detection.
+Below are the results of this workflow. The first graph shows the Line Service Percentage vs the Anomaly SVM Probability. The second graph shows the SUBMITTED_CHRG_VS_HCPCS_AGGR vs the Anomaly SVM Probability. The main point of these two graphs is to illustrate that the anomaly detection model is indeed flagging the  outliers for both of these columns as being highly anomalous. Note that the anomaly predictions ('0' for anomaly, '1' for normal) are color coded. These visualizations are from pages 4-5 in Physicians.twb in the Tableau/ directory.
 
-The below graph maps out every record that was in PHYSICIAN_ANOMALY. As mentioned previously, it contains records for HCPCS Code-Place of Service combinations that matched up with more than 100 providers and had a Medicare allowed payment amount of at least $1000. Some of the NPI labels can be seen. This is from page 2 in Physicians.twb in the Tableau/ directory.
+<b>Line Service Percentage Anomalies</b>
 
-<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - ALL</b>
-![](./images/SubmittedChargeOutliersandHCPCSBeneficiaryDayPercentageOutliers-ALL.jpg)
+![](./images/LineServicePctAnomalies.jpg)
 
-The above graph is meant just to illustrate the general distribution of results. Below are several graphs that show results for specific procedures according to the HCPCS code and place of service. Only the procedures containing significant outliers are displayed. These visualizations are from page 3 in Physicians.twb in the Tableau/ directory. The NPI and state are labeled next to some of the outlying points
+<b>Individual Provider Submitted Charge vs HCPCS Aggregate Submitted Charge Anomalies</b>
 
-<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina</b>
+![](./images/SubmittedChargevsHCPCSAggregate.jpg)
 
-![](./images/hcpcs/01.jpg)
+So, from the above graphs, we can see that when LINE_SRVC_PCT > 0.02, basically every data point is an anomaly. Similarly, when SUBMITTED_CHRG_VS_HCPCS_AGGR > 4, nearly every data point is an anomaly. This helps to show that the anomaly detection model is doing what it's supposed to, and it gives us some threshold values for anomalous data. However, it is much more informative and visually intuitive to map out both the LINE_SRVC_PCT and SUBMITTED_CHRG_VS_HCPCS_AGGR onto one graph, which will be shown below.
 
-<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67041, Vit for macular pucker</b>
+The rest of the graphs in this section all display LINE_SRVC_PCT along the x-axis and SUBMITTED_CHRG_VS_HCPCS_AGGR along the y-axis. Anything that is high up on either axis should be flagged as an outlier and merits inspection. It was important to display both of these columns on each visualization because they are both accounted for in anomaly detection.
 
-![](./images/hcpcs/02.jpg)
+The below graph maps out every record that was in PHYSICIAN_ANOMALY. As mentioned previously, it contains records for HCPCS Code-Place of Service combinations that matched up with more than 100 providers and had a Medicare allowed payment amount of at least $1000 (62837 records passed this filter). Some of the NPI labels can be seen. This is from page 2 in Physicians.twb in the Tableau/ directory.
 
-<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 37229, Tib/per revasc w/ather</b>
+<b>Submitted Charge Outliers and HCPCS Line Service Percentage Outliers - ALL</b>
+![](./images/SubmittedChargeOutliersandHCPCSLineSrvcPercentageOutliers-ALL.jpg)
 
-![](./images/hcpcs/03.jpg)
+The above graph is just meant to illustrate the general distribution of results. Only 2.2% (1380/62837) of all the data in the Physician Anomaly table was considered anomalous (just a little bit higher than the outlier rate of 1% that we set in the Anomaly Detection workflow settings earlier). It may appear that the anomalies outnumber the normal records from the graph above, but the normal data points are clustered very densely together, whereas the anomalous data points have a much sparser distribution.
 
-<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 78608, Brain imaging (PET)</b>
-
-![](./images/hcpcs/04.jpg)
-
-<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 78816, Pet image w/ct full body</b>
-
-![](./images/hcpcs/05.jpg)
-
-<b>Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - O, 95951, EEG monitoring/video-record</b>
-
-![](./images/hcpcs/06.jpg)
-
-There are a total of 77 different graphs, but these were the ones with the most notable outliers. The first two graphs show providers that charge an unusually high amount for a procedure, and the last four show providers that conduct an unusually high number of a certain type of procedure.
-
-The Physician Anomaly database's anomalous data points can be inspected in Oracle with the following SQL query: "select ANOM_SVM_2_20_PROB, NPI, NPPES_PROVIDER_CITY, NPPES_PROVIDER_STATE, PROVIDER_TYPE, PLACE_OF_SERVICE, HCPCS_CODE, HCPCS_DESCRIPTION, BENE_DAY_SRVC_PCT, SUBMITTED_CHRG_VS_HCPCS_AGGR from physician_anomaly where ANOM_SVM_2_20_PRED = 0 order by ANOM_SVM_2_20_PROB desc;"
+Before we look at some visualizations for individual procedures, let us inspect the records with the highest probabilities of being anomalous in the Physician Anomaly database. The table below shows the top results of the following SQL query: "select ANOM_SVM_2_20_PROB, NPI, NPPES_PROVIDER_CITY, NPPES_PROVIDER_STATE, PROVIDER_TYPE, PLACE_OF_SERVICE, HCPCS_CODE, HCPCS_DESCRIPTION, LINE_SRVC_PCT, SUBMITTED_CHRG_VS_HCPCS_AGGR from physician_anomaly where ANOM_SVM_2_20_PRED = 0 order by ANOM_SVM_2_20_PROB desc;" You can see the full output of this query in the text file "Physician_anomalies_sorted.txt".
 
 Below is a table of the physicans with the highest probability of being anomalous:
 
-<b>Top 5 Physician Anomalies</b>
+<b>Top 7 Physician Anomalies</b>
 <table border="1" style="width:100%">                                                                       
   <th>
     <td>ANOM_SVM_2_20_PROB</td>
@@ -335,38 +338,12 @@ Below is a table of the physicans with the highest probability of being anomalou
     <td>PLACE_OF_SERVICE</td>
     <td>HCPCS_CODE</td>
     <td>HCPCS_DESCRIPTION</td>
-    <td>BENE_DAY_SRVC_PCT</td>
+    <td>LINE_SRVC_PCT</td>
     <td>SUBMITTED_CHRG_VS_HCPCS_AGGR</td>
   </th>
-  <tr>
-    <td></td>
-    <td>0.9524943020928156</td>
-    <td>1669475281</td> 
-    <td>MERRILLVILLE</td>
-    <td>IN</td>
-    <td>Ophthalmology</td> 
-    <td>F</td>
-    <td>67040</td>
-    <td>Laser treatment of retina</td> 
-    <td>.0016373758</td>
-    <td>46.265706</td>
-  </tr>
-  <tr>                                                                                                                                      
-    <td></td>
-    <td>0.9524943020928156</td>
-    <td>1679579700</td> 
-    <td>SAN ANTONIO</td>
-    <td>TX</td>
-    <td>Vascular Surgery</td> 
-    <td>O</td>
-    <td>37229</td>
-    <td>Tib/per revasc w/ather</td> 
-    <td>.032984714</td>
-    <td>1</td>
-  </tr>
   <tr>                                                      
     <td></td>
-    <td>0.9524943020928156</td>
+    <td>0.9524774674535944</td>
     <td>1770585838</td> 
     <td>INDIANAPOLIS</td>
     <td>IN</td>
@@ -374,43 +351,125 @@ Below is a table of the physicans with the highest probability of being anomalou
     <td>F</td>
     <td>67040</td>
     <td>Laser treatment of retina</td> 
-    <td>.0016373758</td>
-    <td>168.55654</td>
+    <td>.0014634146</td>
+    <td>7.9133275</td>
   </tr>
   <tr>
     <td></td>
-    <td>0.9524943020928156</td>
-    <td>1770585838</td>
-    <td>INDIANAPOLIS</td> 
+    <td>0.9524774674535944</td>
+    <td>1609052679</td> 
+    <td>INDIANAPOLIS</td>
     <td>IN</td>
-    <td>Ophthalmology</td>
+    <td>Ambulatory Surgical Center</td> 
+    <td>F</td>
+    <td>67040</td>
+    <td>Laser treatment of retina</td> 
+    <td>.003902439</td>
+    <td>15.720185</td>
+  </tr>
+  <tr>                                                                                                                                      
+    <td></td>
+    <td>0.9524774674535944</td>
+    <td>1730280728</td> 
+    <td>MIAMI LAKES</td>
+    <td>FL</td>
+    <td>Physician Assistant</td> 
+    <td>F</td>
+    <td>27130</td>
+    <td>Total hip arthroplasty</td> 
+    <td>.000077746391</td>
+    <td>11.271328</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>0.9524774674535944</td>
+    <td>1790721769</td>
+    <td>SAN FRANCISCO</td> 
+    <td>CA</td>
+    <td>Ambulatory Surgical Center</td>
     <td>F</td> 
-    <td>67041</td>
-    <td>Vit for macular pucker</td>
-    <td>.00081366965</td> 
-    <td>128.00819</td>
+    <td>27446</td>
+    <td>Revision of knee joint</td>
+    <td>.0018767286</td> 
+    <td>10.87803</td>
   </tr>
   <tr>                                                                                                                                        
     <td></td>
-    <td>0.9524943020928156</td>
-    <td>1760441760</td>
-    <td>EWING</td>
-    <td>NJ</td>
-    <td>Interventional Radiology</td>
+    <td>0.9524774674535944</td>
+    <td>1871516864</td>
+    <td>WACO</td>
+    <td>TX</td>
+    <td>Orthopedic Surgery</td>
+    <td>F</td>
+    <td>27245</td>
+    <td>Treat thigh fracture</td>
+    <td>.00063040573</td>
+    <td>8.019416</td>
+  </tr>
+  <tr>                                                                                                                                        
+    <td></td>
+    <td>0.9524774674535944</td>
+    <td>1831196658</td>
+    <td>LEESBURG</td>
+    <td>FL</td>
+    <td>Diagnostic Radiology</td>
     <td>O</td>
-    <td>37229</td>
-    <td>Tib/per revasc w/ather</td>
-    <td>.031375704</td>
-    <td>1.0000002</td>
+    <td>78608</td>
+    <td>Brain imaging (PET)</td>
+    <td>.044064282</td>
+    <td>.74254671</td>
+  </tr>
+  <tr>                                                                                                                                        
+    <td></td>
+    <td>0.9524774674535944</td>
+    <td>1538162151</td>
+    <td>MERRILLVILLE</td>
+    <td>IN</td>
+    <td>Ophthalmology</td>
+    <td>F</td>
+    <td>67040</td>
+    <td>Laser treatment of retina</td>
+    <td>.046944653</td>
+    <td>.10760976</td>
   </tr>
 </table>
 
-All the entries in this table either had a high Submitted Charge vs. HCPCS Aggregate Charge ratio or they had a Beneficiary/Day Service Percentage greater than 3%. If you run the SQL query in Oracle, you can see that Anomaly Probability was directly correlated with how high either one of these two values was. 
 
-You may notice that an Opthalmologist (NPI 1770585838) from Indiana appears twice in this table. In fact, the Opthalmology-related procedures with HCPCS codes 67040 and 67041 had several physicians (NPIs 1023017902, 1043214034, 1962401869, 1730182361, 1770585838, 1669475281, 1639173131, etc.) from Indiana appear with high anomaly probabilities because they were charging so much more for these procedures compared to others in the state of Indiana. If you wish to further examine just the opthalmology-related procedures, run the following query: "select ANOM_SVM_2_20_PROB, NPI, NPPES_PROVIDER_CITY, NPPES_PROVIDER_STATE, PROVIDER_TYPE, PLACE_OF_SERVICE, HCPCS_CODE, HCPCS_DESCRIPTION, BENE_DAY_SRVC_PCT, SUBMITTED_CHRG_VS_HCPCS_AGGR from physician_anomaly where ANOM_SVM_2_20_PRED = 0 and (HCPCS_CODE = '67040' or HCPCS_CODE = '67041') order by ANOM_SVM_2_20_PROB desc;" The graphs titled "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina" and "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina" visually display these results as well. This was highly unusual and would definitely need further inspection.
+All the entries in this table either had a high Submitted Charge vs. HCPCS Aggregate Charge ratio (greater than 4) or they had a Beneficiary/Day Service Percentage greater than 2%. If you view all of the results of this SQL query in Oracle, you can see that Anomaly Probability was directly correlated with how high either one of these two values was.
 
-At this point, this is all the information that can be gleaned from public records. We have developed the model for finding anomalous data points. 
-However, more information would be needed to actually check why these providers show up as anomalous, such as financial documents for the individual providers. Unfortunately, that information is not available to the public at this point. So, while these data points are anomalous and merit inspection, it would be premature to say that they are definitely cases of fraud. As stated in the purpose statement, this goal of this project is to develop a model for pointing out anomalies that could then be analyzed and audited by an agency such as the CMS or the OIG (https://oig.hhs.gov/fraud/strike-force/). 
+To visualize some of the above results, below are several graphs that show anomalies for specific procedures according to the HCPCS code and place of service. Only the procedures containing significant outliers are displayed (note that many more are excluded because there are simply too many to display all of them here). These visualizations are from page 3 in Physicians.twb in the Tableau/ directory. The NPI and state are labeled next to some of the outlying points
+
+<b>Submitted Charge Outliers and HCPCS Line Service Percentage Outliers by Procedure - F, 67040, Laser treatment of retina</b>
+
+![](./images/hcpcs/F-67040.jpg)
+
+This particular graph merits special consideration. It helps us to address the fact that three of the top most anomalous records were procedures that occurred in Indiana with the HCPCS code 67040. Notice the provider on the bottom far right with NPI 1538162151, who was responsible for 10% of all Laser Treatments of Retina in the nation.
+
+![](./images/Indiana.jpg)
+
+Now, from the above screenshot, take a look at that physician (the highlighted one with NPI #1538162151) compared to the other 9 physicians who conducted the same exact procedure in the state of Indiana. You'll notice that provider #1538162151 had a LINE_SRVC_CNT of 1103, which was by far the highest amount, and they only charged Medicare an average amount of $32.62, whereas the rest of the providers had a much lower LINE_SRVC_CNT (ranging from 11-40) and a much higher average charge (roughly ranging from $1300-$11000). Since provider #1538162151 had such a high number of procedures, he ended up dragging down the aggregated average submitted charge in Indiana to $695.03 (taken from the PHYSICIAN_HCPCS_AGGREGATE table), which in turn drove up the SUBMITTED_CHRG_VS_HCPCS_AGGR ratio for all the other Indiana providers doing this procedure. Clearly, there is something very unusual going on here. It doesn't make sense for this one provider to be doing this procedure so much more frequently at a such a lower price compared to his peers. This is just one prominent example of how the anomaly detection model used here can help analyze potential cases of fraud.
+
+Some other anomalous procedures are shown below.
+
+<b>Submitted Charge Outliers and HCPCS Line Service Percentage Outliers by Procedure - F, 27130, Total hip arthroplasty</b>
+
+![](./images/hcpcs/F-27130.jpg)
+
+<b>Submitted Charge Outliers and HCPCS Line Service Percentage Outliers by Procedure - F, 27446, Revision of knee joint</b>
+
+![](./images/hcpcs/F-27446.jpg)
+
+<b>Submitted Charge Outliers and HCPCS Line Service Percentage Outliers by Procedure - F, 27245, Treat thigh fracture</b>
+
+![](./images/hcpcs/F-27245.jpg)
+
+<b>Submitted Charge Outliers and HCPCS Line Service Percentage Outliers by Procedure - O, 78608, Brain imaging (PET)</b>
+
+![](./images/hcpcs/O-78608.jpg)
+
+There are a total of 77 different graphs on page 3 of Physicians.twb, but these were the ones with the most notable outliers.
+
+At this point, this is all the information that can be gleaned from public records. We have developed the model for finding anomalous data points, and we closely analyzed some highly unusual data from the procedure with HCPCS code 67040 as an example. However, more information would be needed to actually check why these providers show up as anomalous, such as financial documents for the individual providers. Unfortunately, that information is not available to the public at this point. So, while these data points are anomalous and merit inspection, it would be premature to say that they are definitely cases of fraud. As stated in the purpose statement, this goal of this project is to develop a model for pointing out anomalies that could then be analyzed and audited by an agency such as the CMS or the OIG (https://oig.hhs.gov/fraud/strike-force/). 
 
 #Inpatient Databases
 
@@ -583,7 +642,7 @@ Also, note that here there was no need to filter out the expensive procedures th
 
 The following graphs display DISCHARGE_PCT along the x-axis and SUBMITTED_CHRG_VS_DRG_AGGR along the y-axis. The anomaly predictions ('0' for anomaly, '1' for normal) are color coded. We are most interested in anything that is high up on either axis, which should merit inspection.
 
-DISCHARGE_PCT is analagous to the BENE_DAY_SRVC_PCT from the Physician database. Suppose there were 1000 discharges across the nation for a particular DRG procedure "638 - DIABETES W CC". Then suppose a provider with ID 220024 had 100 discharges for this same procedure. The DISCHARGE_PCT for this record would then be 100/1000 = 0.1.
+DISCHARGE_PCT is analagous to the LINE_SRVC_PCT from the Physician database. Suppose there were 1000 discharges across the nation for a particular DRG procedure "638 - DIABETES W CC". Then suppose a provider with ID 220024 had 100 discharges for this same procedure. The DISCHARGE_PCT for this record would then be 100/1000 = 0.1.
 
 SUBMITTED_CHRG_VS_DRG_AGGR is analagous to the SUBMITTED_CHRG_VS_HCPCS_AGGR from the Physician database. The charged amount for a procedure done by an individual provider is compared to the average charged amount for all occurrences of that same procedure in the same state as the provider.
 
@@ -623,9 +682,9 @@ As stated before, more information would be needed to actually check why these p
 #Conclusion
 We have analyzed several different kinds of anomalies here. For both the Inpatient and Physician datasets, the possibility of healthcare providers overbilling was examined, along with the possibility of a provider billing Medicare for unnecessary procedures that are known to be expensive. In addition, we looked at cases where Medicare paid out more than what they were charged.
 
-For the Physician and Other Supplier dataset, Medicare was found to be extremely consistent with how they reimbursed physicians. They paid out 80% of the Medicare allowed amount for a given procedure. Since these payments were found to be very predictable, the next step was to analyze how the providers billed procedures. Only the relatively expensive (Medicare Allowed Amount >= $1000) and common (number of providers offering the procedure >= 100) procedures were looked at. Generally speaking, if a provider charged more than 6.5 times the median charged amount for a particular procedure in his or her state, it was almost guaranteed to be flagged as anomalous (from the graph titled "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - ALL"). From the same graph, if a provider was responsible for more than 1.8% of all the discharges in the nation for that particular procedure, then it was also flagged as anomalous. This model was meant to account for overbilling for procedures and conducting expensive procedures with high frequency. Note that there was still some middle ground between these two parameters (i.e. Bene_Day_Srvc_Pct = 0.5% and Submitted Chrg vs HCPCS Aggr = 5 was an anomalous data point). The procedures with HCPCS codes 67040, 67041, 37229, 78608, 78816, and 95951 had the most apparent cases of these outliers.
+For the Physician and Other Supplier dataset, Medicare was found to be extremely consistent with how they reimbursed physicians. They paid out 80% of the Medicare allowed amount for a given procedure. Since these payments were found to be very predictable, the next step was to analyze how the providers billed procedures. Only the relatively expensive (Medicare Allowed Amount >= $1000) and common (number of providers offering the procedure >= 100) procedures were looked at. Generally speaking, if a provider charged more than 4 times the average charged amount for a particular procedure in his or her state, it was almost guaranteed to be flagged as anomalous (from the graph titled "Submitted Charge Outliers and HCPCS Line Service Percentage Outliers - ALL"). From the same graph, if a provider was responsible for more than 2% of all the discharges in the nation for that particular procedure, then it was also almost always flagged as anomalous. This model was meant to account for overbilling for procedures and conducting expensive procedures with high frequency. Note that there was still some middle ground between these two parameters (i.e. Line_Srvc_Pct = 1% and Submitted Chrg vs HCPCS Aggr = 2 was an anomalous data point). The procedures with Place of Service-HCPCS codes combinations F-67040, F-27130, F-27446, F-27245, and O-78608 had some of the most apparent cases of these outliers.
 
-Additionally, when sorting the data in the Physician Anomaly table in order of highest Anomaly Probability, it was readily apparent that the model selected the procedures with the highest relative frequency (BENE_DAY_SRVC_PCT) or relative charged amount (SUBMITTED_CHRG_VS_HCPCS_AGG) as the most likely to be anomalous. Also, from viewing the data in the Physician Anomaly table or by visually inspecting the graphs titled "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina" and "Submitted Charge Outliers and HCPCS Beneficiary/Day Percentage Outliers - by Procedure - F, 67040, Laser treatment of retina", several Indiana-based opthalmologists (with NPIs including 1023017902, 1043214034, 1962401869, 1730182361, 1770585838, 1669475281, 1639173131, etc.) were overbilling Medicare relative to others conducting the same procedure in Indiana. This was extremely unusual to see, and served as one example of how this particular anomaly detection model could assist Medicare fraud detection agencies.
+Additionally, when sorting the data in the Physician Anomaly table in order of highest Anomaly Probability, it was readily apparent that the model selected the procedures with the highest relative frequency (LINE_SRVC_PCT) or relative charged amount (SUBMITTED_CHRG_VS_HCPCS_AGG) as the most likely to be anomalous. Also, from viewing the data in the Physician Anomaly table or by visually inspecting the graphs titled "Submitted Charge Outliers and HCPCS Line Service Percentage Outliers by Procedure - F, 67040, Laser treatment of retina", there was one Indiana-based ophthalmologist with NPI 1538162151 who was billing at an extremely low price of $32.62 but conducted the procedure over 1000 times. Meanwhile, all of his peers in Indiana doing the same procedure all billed Medicare at over $1000 but conducted the procedure with much less frequency. That particular provider was probably the most extreme outlier in the entire dataset. Another extreme case was a Physician Assistant in Florida with NPI 1730280728 who charged more than 11 times the state average amount for HCPCS code 27130 ("Submitted Charge Outliers and HCPCS Line Service Percentage Outliers by Procedure - F, 27130, Total hip arthroplasty"). There were several other physicians that appeared for either overbilling (NPIs 1790721769, 1871516864) or conducting procedures with extremely high frequency (NPIs 1033145487, 1043276900) In total, there were 145 records where a provider had a 90% or greater probability of being anomalous.
 
 Now, the Inpatient dataset was unique in that it was the only one that had instances of Medicare reimbursing hospitals with an amount greater than what they were charged. These cases were especially prominent in the New York City and Boston metro areas. Upon further examination, it was revealed that out of the 340 instances of reimbursement exceeding the charged amount, the top 4 hospitals were either from Boston or New York City, and those 4 hospitals alone (Lincoln Medical & Mental Health Ctr - NYC, Bronx-Lebanon - NYC, Carney - Boston, St. Elizabeth's - Boston) accounted for 1/3 of these cases. Beyond that, it was difficult to determine why these particular hospitals had so many anomalous procedures and why they were so concentrated in the Northeast just by looking at public records.
 

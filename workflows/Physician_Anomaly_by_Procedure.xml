@@ -13,68 +13,68 @@
                     <TopN/>
                 </Method>
             </CacheSettings>
-            <SQLExpression>"N$10081" as (select /*+ inline */ "PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_STREET2", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."PLACE_OF_SERVICE", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."LINE_SRVC_CNT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_STREET1", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."MEDICARE_PARTICIPATION_INDICAT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."AVERAGE_MEDICARE_ALLOWED_AMT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_MI", 
+            <SQLExpression>"N$10081" as (select /*+ inline */ "PHYSICIAN_AND_OTHER_SUPPLIER"."AVERAGE_MEDICARE_ALLOWED_AMT", 
 "PHYSICIAN_AND_OTHER_SUPPLIER"."AVERAGE_MEDICARE_PAYMENT_AMT", 
 "PHYSICIAN_AND_OTHER_SUPPLIER"."AVERAGE_SUBMITTED_CHRG_AMT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_GENDER", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_CREDENTIALS", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_LAST_ORG_NAME", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."BENE_DAY_SRVC_PCT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."STDEV_MEDICARE_ALLOWED_AMT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_ENTITY_CODE", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."STDEV_MEDICARE_PAYMENT_AMT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."HCPCS_CODE", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_COUNTRY", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."ID", 
 "PHYSICIAN_AND_OTHER_SUPPLIER"."BENE_DAY_SRVC_CNT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPI", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_STATE", 
 "PHYSICIAN_AND_OTHER_SUPPLIER"."BENE_UNIQUE_CNT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."PROVIDER_TYPE", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."SUBMITTED_CHRG_VS_HCPCS_AGGR", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."HCPCS_CODE", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."HCPCS_DESCRIPTION", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."ID", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."LINE_SRVC_CNT", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."MEDICARE_PARTICIPATION_INDICAT", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPI", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_CREDENTIALS", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_ENTITY_CODE", 
 "PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_CITY", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_COUNTRY", 
 "PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_FIRST_NAME", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_GENDER", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_LAST_ORG_NAME", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_MI", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_STATE", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_STREET1", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_STREET2", 
 "PHYSICIAN_AND_OTHER_SUPPLIER"."NPPES_PROVIDER_ZIP", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."PLACE_OF_SERVICE", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."PROVIDER_TYPE", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."STDEV_MEDICARE_ALLOWED_AMT", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."STDEV_MEDICARE_PAYMENT_AMT", 
 "PHYSICIAN_AND_OTHER_SUPPLIER"."STDEV_SUBMITTED_CHRG_AMT", 
-"PHYSICIAN_AND_OTHER_SUPPLIER"."HCPCS_DESCRIPTION" 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."SUBMITTED_CHRG_VS_HCPCS_AGGR", 
+"PHYSICIAN_AND_OTHER_SUPPLIER"."LINE_SRVC_PCT" 
 from "CS370_ASL456"."PHYSICIAN_AND_OTHER_SUPPLIER"  )</SQLExpression>
             <Attributes>
-                <Attribute Name="NPPES_PROVIDER_STREET2" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="PLACE_OF_SERVICE" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="LINE_SRVC_CNT" DataType="NUMBER" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_STREET1" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="MEDICARE_PARTICIPATION_INDICAT" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="AVERAGE_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_MI" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="AVERAGE_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="AVERAGE_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_GENDER" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="NPPES_CREDENTIALS" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_LAST_ORG_NAME" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
-                <Attribute Name="STDEV_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
-                <Attribute Name="NPPES_ENTITY_CODE" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="STDEV_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
-                <Attribute Name="HCPCS_CODE" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_COUNTRY" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
                 <Attribute Name="BENE_DAY_SRVC_CNT" DataType="NUMBER" Status="Valid"/>
-                <Attribute Name="NPI" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_STATE" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="BENE_UNIQUE_CNT" DataType="NUMBER" Status="Valid"/>
-                <Attribute Name="PROVIDER_TYPE" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_CITY" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_FIRST_NAME" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="NPPES_PROVIDER_ZIP" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="STDEV_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="HCPCS_CODE" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="HCPCS_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="LINE_SRVC_CNT" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="MEDICARE_PARTICIPATION_INDICAT" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPI" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_CREDENTIALS" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_ENTITY_CODE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_CITY" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_COUNTRY" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_FIRST_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_GENDER" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_LAST_ORG_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_MI" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_STATE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_STREET1" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_STREET2" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NPPES_PROVIDER_ZIP" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="PLACE_OF_SERVICE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="PROVIDER_TYPE" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="STDEV_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="STDEV_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="STDEV_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="LINE_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
             </Attributes>
             <SourceTable Schema="" Name="PHYSICIAN_AND_OTHER_SUPPLIER"/>
         </DataSource>
@@ -92,6 +92,7 @@ from "CS370_ASL456"."PHYSICIAN_AND_OTHER_SUPPLIER"  )</SQLExpression>
             </CacheSettings>
             <SQLExpression>"N$10041" AS ( SELECT /*+ inline */  "ANOM_SVM_2_20_PRED" ,
  "ANOM_SVM_2_20_PROB" ,
+ "LINE_SRVC_PCT" ,
  "NPPES_PROVIDER_STREET2" ,
  "PLACE_OF_SERVICE" ,
  "LINE_SRVC_CNT" ,
@@ -104,7 +105,6 @@ from "CS370_ASL456"."PHYSICIAN_AND_OTHER_SUPPLIER"  )</SQLExpression>
  "NPPES_PROVIDER_GENDER" ,
  "NPPES_CREDENTIALS" ,
  "NPPES_PROVIDER_LAST_ORG_NAME" ,
- "BENE_DAY_SRVC_PCT" ,
  "STDEV_MEDICARE_ALLOWED_AMT" ,
  "NPPES_ENTITY_CODE" ,
  "STDEV_MEDICARE_PAYMENT_AMT" ,
@@ -125,6 +125,7 @@ from "CS370_ASL456"."PHYSICIAN_AND_OTHER_SUPPLIER"  )</SQLExpression>
             <DBAttributes>
                 <DBAttribute Key="No" Index="No" Name="ANOM_SVM_2_20_PRED" DataType="NUMBER" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="ANOM_SVM_2_20_PROB" DataType="BINARY_DOUBLE" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="LINE_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="NPPES_PROVIDER_STREET2" DataType="VARCHAR2" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="PLACE_OF_SERVICE" DataType="VARCHAR2" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="LINE_SRVC_CNT" DataType="NUMBER" Status="Valid"/>
@@ -137,7 +138,6 @@ from "CS370_ASL456"."PHYSICIAN_AND_OTHER_SUPPLIER"  )</SQLExpression>
                 <DBAttribute Key="No" Index="No" Name="NPPES_PROVIDER_GENDER" DataType="VARCHAR2" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="NPPES_CREDENTIALS" DataType="VARCHAR2" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="NPPES_PROVIDER_LAST_ORG_NAME" DataType="VARCHAR2" Status="Valid"/>
-                <DBAttribute Key="No" Index="No" Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="STDEV_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="NPPES_ENTITY_CODE" DataType="VARCHAR2" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="STDEV_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
@@ -157,8 +157,8 @@ from "CS370_ASL456"."PHYSICIAN_AND_OTHER_SUPPLIER"  )</SQLExpression>
                 <DBAttribute Key="No" Index="No" Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
             </DBAttributes>
         </CreateTable>
-        <ColumnFilter Id="10054" Name="Filter Columns 1" Status="Complete">
-            <Icon XCOORD="305" YCOORD="429"></Icon>
+        <ColumnFilter Id="10086" Name="Filter Columns" Status="Complete">
+            <Icon XCOORD="305" YCOORD="426"></Icon>
             <Messages/>
             <Parallelism Enable="false">
                 <SystemDetermined/>
@@ -169,9 +169,9 @@ from "CS370_ASL456"."PHYSICIAN_AND_OTHER_SUPPLIER"  )</SQLExpression>
                     <TopN/>
                 </Method>
             </CacheSettings>
-            <SQLExpression>"N$10054" as (SELECT /*+ inline */
-"BENE_DAY_SRVC_PCT",
+            <SQLExpression>"N$10086" as (SELECT /*+ inline */
 "ID",
+"LINE_SRVC_PCT",
 "SUBMITTED_CHRG_VS_HCPCS_AGGR"
 FROM {INPUT_SOURCE}
  )</SQLExpression>
@@ -184,12 +184,12 @@ FROM {INPUT_SOURCE}
                 <Attribute AutomaticFiltering="false" Output="No" Name="AVERAGE_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="AVERAGE_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="BENE_DAY_SRVC_CNT" DataType="NUMBER" Status="Valid"/>
-                <Attribute AutomaticFiltering="false" Output="Yes" Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="BENE_UNIQUE_CNT" DataType="NUMBER" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="HCPCS_CODE" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="HCPCS_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="Yes" Name="ID" DataType="NUMBER" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="LINE_SRVC_CNT" DataType="NUMBER" Status="Valid"/>
+                <Attribute AutomaticFiltering="false" Output="Yes" Name="LINE_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="MEDICARE_PARTICIPATION_INDICAT" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="NPI" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="No" Name="NPPES_CREDENTIALS" DataType="VARCHAR2" Status="Valid"/>
@@ -211,14 +211,13 @@ FROM {INPUT_SOURCE}
                 <Attribute AutomaticFiltering="false" Output="No" Name="STDEV_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute AutomaticFiltering="false" Output="Yes" Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
             </ColumnFilterAttributes>
-            <ColumnFilterResults DataQualityOutput="ODMR$16_07_37_593892YDGZMRD" GenerateImportanceOutput="false">
+            <ColumnFilterResults DataQualityOutput="ODMR$23_04_36_254130NCLRVSD" GenerateImportanceOutput="false">
                 <Attribute Name="AVERAGE_MEDICARE_ALLOWED_AMT"/>
                 <Attribute Name="AVERAGE_MEDICARE_PAYMENT_AMT">
                     <Reason Type="UNIQUE_LIMIT"/>
                 </Attribute>
                 <Attribute Name="AVERAGE_SUBMITTED_CHRG_AMT"/>
                 <Attribute Name="BENE_DAY_SRVC_CNT"/>
-                <Attribute Name="BENE_DAY_SRVC_PCT"/>
                 <Attribute Name="BENE_UNIQUE_CNT"/>
                 <Attribute Name="HCPCS_CODE"/>
                 <Attribute Name="HCPCS_DESCRIPTION"/>
@@ -226,6 +225,7 @@ FROM {INPUT_SOURCE}
                     <Reason Type="UNIQUE_LIMIT"/>
                 </Attribute>
                 <Attribute Name="LINE_SRVC_CNT"/>
+                <Attribute Name="LINE_SRVC_PCT"/>
                 <Attribute Name="MEDICARE_PARTICIPATION_INDICAT">
                     <Reason Type="CONSTANT_LIMIT"/>
                 </Attribute>
@@ -233,9 +233,7 @@ FROM {INPUT_SOURCE}
                     <Reason Type="UNIQUE_LIMIT"/>
                 </Attribute>
                 <Attribute Name="NPPES_CREDENTIALS"/>
-                <Attribute Name="NPPES_ENTITY_CODE">
-                    <Reason Type="CONSTANT_LIMIT"/>
-                </Attribute>
+                <Attribute Name="NPPES_ENTITY_CODE"/>
                 <Attribute Name="NPPES_PROVIDER_CITY"/>
                 <Attribute Name="NPPES_PROVIDER_COUNTRY">
                     <Reason Type="CONSTANT_LIMIT"/>
@@ -253,7 +251,9 @@ FROM {INPUT_SOURCE}
                 <Attribute Name="STDEV_MEDICARE_ALLOWED_AMT"/>
                 <Attribute Name="STDEV_MEDICARE_PAYMENT_AMT"/>
                 <Attribute Name="STDEV_SUBMITTED_CHRG_AMT"/>
-                <Attribute Name="SUBMITTED_CHRG_VS_HCPCS_AGGR"/>
+                <Attribute Name="SUBMITTED_CHRG_VS_HCPCS_AGGR">
+                    <Reason Type="UNIQUE_LIMIT"/>
+                </Attribute>
             </ColumnFilterResults>
         </ColumnFilter>
         <RowFilter Id="10028" Name="50 States + DC" Status="Complete">
@@ -281,7 +281,6 @@ FROM {INPUT_SOURCE}
 , "NPPES_PROVIDER_GENDER"
 , "NPPES_CREDENTIALS"
 , "NPPES_PROVIDER_LAST_ORG_NAME"
-, "BENE_DAY_SRVC_PCT"
 , "STDEV_MEDICARE_ALLOWED_AMT"
 , "NPPES_ENTITY_CODE"
 , "STDEV_MEDICARE_PAYMENT_AMT"
@@ -299,6 +298,7 @@ FROM {INPUT_SOURCE}
 , "STDEV_SUBMITTED_CHRG_AMT"
 , "HCPCS_DESCRIPTION"
 , "SUBMITTED_CHRG_VS_HCPCS_AGGR"
+, "LINE_SRVC_PCT"
 
 FROM
 {INPUT_SOURCE}
@@ -326,7 +326,6 @@ WHERE
                 <Attribute Name="NPPES_PROVIDER_GENDER" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="NPPES_CREDENTIALS" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="NPPES_PROVIDER_LAST_ORG_NAME" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="STDEV_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="NPPES_ENTITY_CODE" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="STDEV_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
@@ -344,6 +343,7 @@ WHERE
                 <Attribute Name="STDEV_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="HCPCS_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="LINE_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
             </OutputColumns>
             <Filter>"NPPES_PROVIDER_STATE"  != 'XX'  Or
 "NPPES_PROVIDER_STATE"  != 'AA'  Or
@@ -381,7 +381,6 @@ WHERE
 , "NPPES_PROVIDER_GENDER"
 , "NPPES_CREDENTIALS"
 , "NPPES_PROVIDER_LAST_ORG_NAME"
-, "BENE_DAY_SRVC_PCT"
 , "STDEV_MEDICARE_ALLOWED_AMT"
 , "NPPES_ENTITY_CODE"
 , "STDEV_MEDICARE_PAYMENT_AMT"
@@ -399,6 +398,7 @@ WHERE
 , "STDEV_SUBMITTED_CHRG_AMT"
 , "HCPCS_DESCRIPTION"
 , "SUBMITTED_CHRG_VS_HCPCS_AGGR"
+, "LINE_SRVC_PCT"
 
 FROM
 {INPUT_SOURCE}
@@ -417,7 +417,6 @@ WHERE
                 <Attribute Name="NPPES_PROVIDER_GENDER" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="NPPES_CREDENTIALS" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="NPPES_PROVIDER_LAST_ORG_NAME" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="STDEV_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="NPPES_ENTITY_CODE" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="STDEV_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
@@ -435,6 +434,7 @@ WHERE
                 <Attribute Name="STDEV_SUBMITTED_CHRG_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="HCPCS_DESCRIPTION" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
+                <Attribute Name="LINE_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
             </OutputColumns>
             <Filter>("PLACE_OF_SERVICE" = 'F' and "HCPCS_CODE" in ('V2785','64561','33430','50360','33534','33426','33405','27134','44207','27487','55866','67113','22633','63081','0256T','67108','43644','22551','67042','33533','44204','27447','32480','23472','66172','67040','32663','27130','22612','67041','38724','0192T','44205','65755','44140','28296','66180','27245','27244','65756','27236','43281','61624','27125','66170','37215','29827','27446','35301','15732','26123','34802','25609')) or ("PLACE_OF_SERVICE" = 'O' and "HCPCS_CODE" in ('37225','37229','37205','J2505','35475','53850','77301','36475','36870','77373','95951','35476','36478','36247','36561','78608','78492','14301','78816','78815','67228','14061','78812'))</Filter>
         </RowFilter>
@@ -444,13 +444,13 @@ WHERE
             <Parallelism Enable="false">
                 <SystemDetermined/>
             </Parallelism>
-            <BuildDataSource SourceId="10054"/>
+            <BuildDataSource SourceId="10086"/>
             <CaseAttributes>
                 <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
             </CaseAttributes>
             <MiningAttributes AutoSpec="No">
-                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="No" Name="ID" DataType="NUMBER" Status="Valid"/>
+                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="LINE_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
             </MiningAttributes>
             <Stoplists>
@@ -831,12 +831,12 @@ WHERE
                 <Attribute Name="ID"/>
             </HeuristicSummaryResult>
             <Models>
-                <AnomalyDetectionModel Id="10047" Name="ANOM_SVM_2_20" Status="Complete" CreationDate="2015-05-16T16:07:57" Annotation="" UseForOutput="true">
+                <AnomalyDetectionModel Id="10047" Name="ANOM_SVM_2_20" Status="Complete" CreationDate="2015-05-21T23:06:14" Annotation="" UseForOutput="true">
                     <InputMiningData DataUsage="AUTO" MiningUsage="AUTO">
                         <MiningAttributes>
-                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                             <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="No" Name="ID" DataType="NUMBER" Status="Valid"/>
                             <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="SUBMITTED_CHRG_VS_HCPCS_AGGR" DataType="FLOAT" Status="Valid"/>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="LINE_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                         </MiningAttributes>
                         <HeuristicResult StatisticTable="ODMR$23_21_30_609212XTHQZVV"/>
                     </InputMiningData>
@@ -863,6 +863,7 @@ WHERE
             <SQLExpression>"N$10050" as (SELECT /*+ inline */
 PREDICTION("CS370_ASL456"."ANOM_SVM_2_20" USING *) "ANOM_SVM_2_20_PRED", 
 PREDICTION_PROBABILITY("CS370_ASL456"."ANOM_SVM_2_20" USING *) "ANOM_SVM_2_20_PROB", 
+"LINE_SRVC_PCT", 
 "NPPES_PROVIDER_STREET2", 
 "PLACE_OF_SERVICE", 
 "LINE_SRVC_CNT", 
@@ -875,7 +876,6 @@ PREDICTION_PROBABILITY("CS370_ASL456"."ANOM_SVM_2_20" USING *) "ANOM_SVM_2_20_PR
 "NPPES_PROVIDER_GENDER", 
 "NPPES_CREDENTIALS", 
 "NPPES_PROVIDER_LAST_ORG_NAME", 
-"BENE_DAY_SRVC_PCT", 
 "STDEV_MEDICARE_ALLOWED_AMT", 
 "NPPES_ENTITY_CODE", 
 "STDEV_MEDICARE_PAYMENT_AMT", 
@@ -895,6 +895,7 @@ PREDICTION_PROBABILITY("CS370_ASL456"."ANOM_SVM_2_20" USING *) "ANOM_SVM_2_20_PR
 "SUBMITTED_CHRG_VS_HCPCS_AGGR"
 FROM {INPUT_SOURCE} )</SQLExpression>
             <SupplementalAttributes AutoSpec="No">
+                <Attribute Name="LINE_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="NPPES_PROVIDER_STREET2" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="PLACE_OF_SERVICE" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="LINE_SRVC_CNT" DataType="NUMBER" Status="Valid"/>
@@ -907,7 +908,6 @@ FROM {INPUT_SOURCE} )</SQLExpression>
                 <Attribute Name="NPPES_PROVIDER_GENDER" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="NPPES_CREDENTIALS" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="NPPES_PROVIDER_LAST_ORG_NAME" DataType="VARCHAR2" Status="Valid"/>
-                <Attribute Name="BENE_DAY_SRVC_PCT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="STDEV_MEDICARE_ALLOWED_AMT" DataType="FLOAT" Status="Valid"/>
                 <Attribute Name="NPPES_ENTITY_CODE" DataType="VARCHAR2" Status="Valid"/>
                 <Attribute Name="STDEV_MEDICARE_PAYMENT_AMT" DataType="FLOAT" Status="Valid"/>
@@ -956,16 +956,6 @@ FROM {INPUT_SOURCE} )</SQLExpression>
                 <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
             </ConnectorGraphicsInfo>
         </Link>
-        <Link Id="10055" From="10052" To="10054" Name="Link" Label="From &quot;HCPCS Filters&quot; to &quot;Filter Columns 1&quot;">
-            <ConnectorGraphicsInfo>
-                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
-            </ConnectorGraphicsInfo>
-        </Link>
-        <Link Id="10056" From="10054" To="10048" Name="Link" Label="From &quot;Filter Columns 1&quot; to &quot;Anomaly Build 1&quot;">
-            <ConnectorGraphicsInfo>
-                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
-            </ConnectorGraphicsInfo>
-        </Link>
         <Link Id="10057" From="10052" To="10050" Name="Link" Label="From &quot;HCPCS Filters&quot; to &quot;Apply 1&quot;">
             <ConnectorGraphicsInfo>
                 <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
@@ -977,6 +967,16 @@ FROM {INPUT_SOURCE} )</SQLExpression>
             </ConnectorGraphicsInfo>
         </Link>
         <Link Id="10082" From="10081" To="10028" Name="Link" Label="From &quot;PHYSICIAN_AND_OTHER_SUPPLIER&quot; to &quot;50 States + DC&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10087" From="10052" To="10086" Name="Link" Label="From &quot;HCPCS Filters&quot; to &quot;Filter Columns&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10088" From="10086" To="10048" Name="Link" Label="From &quot;Filter Columns&quot; to &quot;Anomaly Build 1&quot;">
             <ConnectorGraphicsInfo>
                 <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
             </ConnectorGraphicsInfo>
